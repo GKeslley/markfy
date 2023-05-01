@@ -4,7 +4,7 @@ import Input from '../Form/Input';
 import Button from '../Reusable/Button';
 import styles from '../../Css/Login/LoginForm.module.css';
 import { ReactComponent as Wave } from '../../Assets/waves.svg';
-import useValidate from '../Hooks/Validate';
+import useValidate from '../../Hooks/Validate';
 
 const Login = () => {
   const nome = useValidate();
