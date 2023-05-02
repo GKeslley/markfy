@@ -1,0 +1,71 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { LOGIN_USER_POST, USER_GET, VALIDATE_TOKEN } from '../Api/api';
+import useFetch from './useFetch';
+
+export const GlobalContext = React.createContext();
+
+export const UserContext = ({ children }) => {
+  const navigate = useNavigate();
+  const { request, loading, error } = useFetch();
+  const [userData, setUserData] = React.useState(null);
+
+  const userLogin = async (email, password) => {
+    const { url, options } = LOGIN_USER_POST({
+      username: email,
+      password: password,
+    });
+    const register = await request(url, options);
+    if (register.response.ok) {
+      localStorage.setItem('token', register.json.token);
+      await getUser(localStorage.getItem('token'));
+      navigate('/');
+    }
+  };
+
+  const getUser = React.useCallback(
+    async (token) => {
+      const { url, options } = USER_GET(token);
+      const getUser = await request(url, options);
+      if (getUser.response.ok) {
+        setUserData(getUser.json);
+      }
+    },
+    [request],
+  );
+
+  const userLogout = React.useCallback(() => {
+    localStorage.removeItem('token');
+    setUserData(null);
+    navigate('/login');
+  }, [navigate]);
+
+  React.useEffect(() => {
+    const autoLogin = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const { url, options } = VALIDATE_TOKEN(token);
+          const validate = await request(url, options);
+          if (!validate.response.ok) throw new Error('Token inválido');
+          await getUser(token);
+        } catch (Error) {
+          userLogout();
+        }
+      } else {
+        navigate('/login');
+      }
+    };
+    autoLogin();
+  }, [request, userLogout, getUser, navigate]);
+
+  if (userData) {
+    console.log(userData);
+  }
+
+  return (
+    <GlobalContext.Provider value={{ userLogin, userData, loading, error }}>
+      {children}
+    </GlobalContext.Provider>
+  );
+};
