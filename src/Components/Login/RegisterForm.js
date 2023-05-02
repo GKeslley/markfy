@@ -4,12 +4,17 @@ import Input from '../Form/Input';
 import Button from '../Reusable/Button';
 import styles from '../../Css/Login/LoginForm.module.css';
 import { ReactComponent as Wave } from '../../Assets/waves.svg';
-import useValidate from '../../Hooks/Validate';
+import useValidate from '../../Hooks/useValidate';
+import useFetch from '../../Hooks/useFetch';
+import Error from '../Helper/Error';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const nome = useValidate();
   const email = useValidate('email');
   const password = useValidate('password');
+  const { request, data, error, loading } = useFetch();
+  const navigate = useNavigate();
 
   const sendValuesLogin = async (event) => {
     event.preventDefault();
@@ -19,12 +24,9 @@ const Login = () => {
         email: email.value,
         senha: password.value,
       });
-      try {
-        const response = await fetch(url, options);
-        const json = await response.json();
-        console.log(json);
-      } catch (Error) {
-        console.log(Error);
+      const register = await request(url, options);
+      if (register.response.ok) {
+        navigate('/');
       }
     }
   };
@@ -38,8 +40,13 @@ const Login = () => {
           <Input label="Nome" type="text" name="nome" {...nome} />
           <Input label="Email" type="email" name="email" {...email} />
           <Input label="Senha" type="password" name="senha" {...password} />
-          <Button>Confirmar</Button>
+          {loading ? (
+            <Button disabled="disabled">Carregando...</Button>
+          ) : (
+            <Button>Confirmar</Button>
+          )}
         </form>
+        {error && <Error>{error}</Error>}
       </div>
     </section>
   );
