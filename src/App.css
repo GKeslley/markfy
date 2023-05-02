@@ -23,3 +23,12 @@ img {
   display: block;
   max-width: 100%;
 }
+
+@keyframes animeLeft {
+  from {
+    transform: translateX(-60px);
+  }
+  to {
+    transform: initial;
+  }
+}
