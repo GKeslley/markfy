@@ -3,7 +3,6 @@ import { POST_USER } from '../../Api/api';
 import Input from '../Form/Input';
 import Button from '../Reusable/Button';
 import styles from '../../Css/Login/LoginForm.module.css';
-import { ReactComponent as Wave } from '../../Assets/waves.svg';
 import useValidate from '../../Hooks/useValidate';
 import useFetch from '../../Hooks/useFetch';
 import Error from '../Helper/Error';
@@ -13,7 +12,7 @@ const Login = () => {
   const nome = useValidate();
   const email = useValidate('email');
   const password = useValidate('password');
-  const { request, data, error, loading } = useFetch();
+  const { request, error, loading } = useFetch();
   const navigate = useNavigate();
 
   const sendValuesLogin = async (event) => {
@@ -32,23 +31,20 @@ const Login = () => {
   };
 
   return (
-    <section className={`${styles.registerBg}`}>
-      <Wave />
-      <div className={`${styles.formContent} container`}>
-        <h1 className="title">BEM VINDO</h1>
-        <form className={styles.form} onSubmit={sendValuesLogin}>
-          <Input label="Nome" type="text" name="nome" {...nome} />
-          <Input label="Email" type="email" name="email" {...email} />
-          <Input label="Senha" type="password" name="senha" {...password} />
-          {loading ? (
-            <Button disabled="disabled">Carregando...</Button>
-          ) : (
-            <Button>Confirmar</Button>
-          )}
-        </form>
-        {error && <Error>{error}</Error>}
-      </div>
-    </section>
+    <div className="animeLeft">
+      <h1 className="title">BEM VINDO</h1>
+      <form className={styles.form} onSubmit={sendValuesLogin}>
+        <Input label="Nome" type="text" name="nome" {...nome} />
+        <Input label="Email" type="email" name="email" {...email} />
+        <Input label="Senha" type="password" name="senha" {...password} />
+        {loading ? (
+          <Button disabled="disabled">Carregando...</Button>
+        ) : (
+          <Button>Confirmar</Button>
+        )}
+      </form>
+      {error && <Error>{error}</Error>}
+    </div>
   );
 };
 
