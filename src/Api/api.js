@@ -49,3 +49,26 @@ export const USER_GET = (token) => {
     },
   };
 };
+
+export const PRODUCT_POST = (formData, token) => {
+  return {
+    url: API_URL + '/api/produto',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      body: formData,
+    },
+  };
+};
+
+export const PRODUCTS_GET = ({ page, total, user }) => {
+  return {
+    url: `${API_URL}/api/produtos/?_page=${page}&_total=${total}$_user=${user}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
