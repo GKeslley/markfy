@@ -1,0 +1,51 @@
+.productForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 30rem;
+  min-width: 30rem;
+}
+
+.productForm input {
+  padding: 0.3rem 0.4rem;
+  font-size: 1rem;
+}
+
+.productForm textarea {
+  resize: none;
+  padding: 0.4rem;
+  min-height: 5rem;
+}
+
+.imgsContent {
+  max-width: 30rem;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  border: 2px dashed #a5a5a5;
+  max-height: 7rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.imgsContent span {
+  opacity: 0.3;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  display: block;
+}
+
+.imgsContent picture {
+  border: 1px solid black;
+  margin: 0.5rem;
+}
+
+.imgsContent img {
+  max-height: 5rem;
+}

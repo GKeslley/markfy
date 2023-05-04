@@ -1,0 +1,9 @@
+.contaContent {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  height: 100vh;
+}
+
+.contaContent form {
+  padding-top: 2rem;
+}

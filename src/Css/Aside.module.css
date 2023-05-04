@@ -1,0 +1,42 @@
+.aside {
+  background: #fff;
+  box-shadow: 2px 0 0 rgba(0, 0, 0, 0.171);
+  padding-top: 2rem;
+}
+
+.aside ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  gap: 1rem;
+}
+
+.aside a {
+  color: #636363;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  font-size: 1rem;
+}
+
+.aside a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+}
+
+.aside a:global(.active) {
+  color: red;
+}
+
+.aside a:global(.active)::after {
+  background: black;
+  animation: animation 0.5s forwards;
+}
+
+@keyframes animation {
+  to {
+    width: 100%;
+  }
+}
