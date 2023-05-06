@@ -13,7 +13,7 @@ const Input = ({ label, type, name, onChange, onBlur, error, value }) => {
         onBlur={onBlur}
         value={value}
       />
-      <Error>{error}</Error>
+      {error && <Error>{error}</Error>}
     </>
   );
 };
