@@ -72,3 +72,23 @@ export const PRODUCTS_GET = ({ page, total, user }) => {
     },
   };
 };
+
+export const PRODUCTS_GET_BY_CATEGORY = (category) => {
+  return {
+    url: `${API_URL}/api/produtos/${category}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
+
+export const PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY = ({ category, subcategory }) => {
+  return {
+    url: `${API_URL}/api/produtos/${category}/${subcategory}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
