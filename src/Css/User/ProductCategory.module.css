@@ -53,7 +53,7 @@
   justify-content: space-between;
 }
 
-.category:not(a):after {
+:global(.link_item)::after {
   content: '';
   display: inline-block;
   background-image: url('../../Assets/arrow.svg');
@@ -67,6 +67,7 @@
 :global(.category_subcategory) li a {
   display: block;
   padding: 1.2rem;
+  width: 100%;
 }
 
 .categories :global(.category_subcategory) {

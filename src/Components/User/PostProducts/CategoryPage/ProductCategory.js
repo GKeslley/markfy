@@ -2,62 +2,9 @@ import React from 'react';
 import Category from './Category';
 import Subcategory from './Subcategory';
 import styles from '../../../../Css/User/ProductCategory.module.css';
+import { allCategories } from './allCategories';
 
-const categories = [
-  {
-    name: 'Imóveis',
-    subcategories: ['Apartamentos', 'Casas', 'Terrenos, sítios e fazendas'],
-    endpoint: 'imoveis',
-  },
-  {
-    name: 'Autos e peças',
-    subcategories: [
-      'Carros, vans e utilitários',
-      'Motos',
-      'Ônibus',
-      'Caminhões',
-      'Barcos e aeronaves',
-      'Peças e acessórios',
-    ],
-    endpoint: 'autos_pecas',
-  },
-  {
-    name: 'Para a sua casa',
-    subcategories: [
-      'Móveis',
-      'Eletrodomésticos',
-      'Materiais de construção',
-      'Utilidades domésticas',
-      'Decoração',
-    ],
-    endpoint: 'casa',
-  },
-  {
-    name: 'Eletrônicos',
-    subcategories: [
-      'Videogames',
-      'Computadores e acessórios',
-      'Celulares e telefones',
-      'Áudio, TV, vídeo',
-    ],
-    endpoint: 'eletronicos',
-  },
-  {
-    name: 'Agro e indústria',
-    subcategories: [],
-    endpoint: 'agro_industria',
-  },
-  {
-    name: 'Esportes e lazer',
-    subcategories: ['Esportes e ginástica', 'Ciclismo'],
-    endpoint: 'esportes_lazer',
-  },
-  {
-    name: 'Moda',
-    subcategories: ['Roupas e calçados', 'Bijouterias e acessórios'],
-    endpoint: 'moda',
-  },
-];
+const categories = allCategories();
 
 const ProductCategory = ({ setCategory, category, setGetSubcategory }) => {
   const [activeIndex, setActiveIndex] = React.useState(null);
@@ -80,7 +27,9 @@ const ProductCategory = ({ setCategory, category, setGetSubcategory }) => {
           {categories.map(({ name, subcategories }, i) => (
             <li
               key={name}
-              className={`${styles.category} ${activeIndex === i ? 'active' : ''}`}
+              className={`${styles.category} ${activeIndex === i ? 'active' : ''} ${
+                subcategories.length ? 'link_item' : ''
+              }`}
             >
               <div onClick={() => handleClick(i)}>
                 <Category name={name} subcategories={subcategories} />

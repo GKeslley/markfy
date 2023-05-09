@@ -7,13 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../Reusable/Button';
 import useFetch from '../../../Hooks/useFetch';
 import { PRODUCT_POST } from '../../../Api/api';
+import Error from '../../Helper/Error';
 
 const ProductForm = ({ category, getSubcategory }) => {
   const nome = useValidate();
   const descricao = useValidate();
   const preco = useValidate();
   const navigate = useNavigate();
-  const { request } = useFetch();
+  const { request, loading, error } = useFetch();
 
   const productCategory = category.endpoint;
   const productSubcategory = getSubcategory ? getSubcategory.endpoint : null;
@@ -106,15 +107,22 @@ const ProductForm = ({ category, getSubcategory }) => {
         />
 
         <div className={styles.imgsContent}>
-          {preview.length < 1 && <span>Imagens</span>}
-          {preview.length > 0 &&
+          {preview.length < 1 ? (
+            <span>Imagens</span>
+          ) : (
             preview.map(({ url, raw }) => (
               <picture key={raw.name}>
                 <img src={url} alt={raw.name} />
               </picture>
-            ))}
+            ))
+          )}
         </div>
-        <Button>Enviar</Button>
+        {loading ? (
+          <Button disabled="disabled">Carregando...</Button>
+        ) : (
+          <Button>Enviar</Button>
+        )}
+        {error && <Error>{error}</Error>}
       </form>
     </div>
   );
