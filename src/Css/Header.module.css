@@ -4,17 +4,89 @@
 }
 
 .header nav {
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  height: 4rem;
+  color: #272727;
+  padding-top: 1rem;
   align-items: center;
+  white-space: nowrap;
 }
 
-.header ul,
-.header li {
+.headerContent .headerItem {
   display: flex;
+  flex: 1;
+  width: 100%;
+  gap: 2rem;
+  grid-column: 1/-1;
+}
+
+.headerContent {
+  display: grid;
+  grid-template-areas:
+    'logo input input sections'
+    'nav nav none null';
+  color: #272727;
   gap: 1rem;
+}
+
+.headerContent .headerItem input {
+  width: 100%;
+  border: none;
+  padding: 0.5rem;
+  border: 1px solid #272727;
+}
+
+.headerContent ul,
+.headerContent li {
+  display: flex;
+  gap: 2rem;
   align-items: center;
+  grid-column: 1/-1;
+}
+
+.header :global(.user) {
+  border: 1px solid #272727;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+
+.logo a,
+.sections {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo p {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.logo {
+  grid-area: logo;
+}
+
+.input {
+  grid-area: input;
+}
+
+.sectionsContent {
+  justify-content: end;
+  grid-area: sections;
+}
+
+svg {
+  fill: #272727;
+}
+
+.nav {
+  grid-area: nav;
+  background: #272727;
+  color: #fff;
+}
+
+.nav a {
+  color: #fff;
+}
+
+.nav li {
+  padding: 10px;
 }
