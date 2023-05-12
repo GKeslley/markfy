@@ -1,25 +1,15 @@
 import React from 'react';
-import { PRODUCTS_GET } from '../../Api/api';
-import useFetch from '../../Hooks/useFetch';
+import Slide from '../Reusable/Slide';
+import Imagem1 from '../../Assets/Slide/img1.jpeg';
+import Imagem2 from '../../Assets/Slide/img2.jpg';
+import Imagem3 from '../../Assets/Slide/img3.jpeg';
 
 const Products = () => {
-  const { request } = useFetch();
-  const [productsData, setProductsData] = React.useState(null);
-
-  React.useEffect(() => {
-    const allProducts = async () => {
-      const { url, options } = PRODUCTS_GET({ page: 1, total: 8, user: '' });
-      const response = await request(url, options);
-      if (response.response.ok) {
-        setProductsData(response.json);
-      }
-    };
-
-    allProducts();
-  }, [request]);
-  console.log(productsData);
-
-  return <div>Products</div>;
+  return (
+    <div>
+      <Slide imgs={[Imagem3, Imagem1, Imagem2, Imagem3, Imagem1]} />
+    </div>
+  );
 };
 
 export default Products;
