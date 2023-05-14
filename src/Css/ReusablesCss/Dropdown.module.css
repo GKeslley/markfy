@@ -1,16 +1,20 @@
 .dropdownContent {
   position: relative;
+  z-index: 10;
 }
 
 .dropdown {
-  display: none !important;
-  padding: 1rem;
+  display: none;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   flex-direction: column;
   position: absolute;
   margin-top: 10px;
   background: #272727;
   top: 25px;
   white-space: nowrap;
+  gap: 1rem;
+  animation: show-up 0.3s forwards;
 }
 
 .dropdown::before {
@@ -19,6 +23,7 @@
   position: absolute;
   top: -8px;
   width: 0px;
+  left: 0;
   height: 0px;
   border-bottom: 8px solid #272727;
   border-left: 8px solid transparent;
@@ -28,7 +33,13 @@
 .dropdown li {
   width: 100%;
   white-space: nowrap;
-  display: block !important;
+  display: block;
+  padding: 0;
+}
+
+.dropdown li p {
+  padding: 0 1rem 1rem 1rem;
+  cursor: pointer;
 }
 
 .dropdown li a {
@@ -38,21 +49,26 @@
 
 .dropdownContent:hover .dropdown,
 .dropdownContent:global(.active) .dropdown {
-  display: flex !important;
+  display: flex;
   max-width: 20rem;
   min-width: 20rem;
 }
 
 .subcategoriesContent {
-  display: none !important;
+  display: none;
+  animation: show-up 0.3s forwards;
+  background: #343434;
 }
 
 .dropdownItens {
   flex-direction: column;
 }
 
-.dropdownItens:global(.active) ul {
-  display: block !important;
+.dropdownItens:global(.active) .subcategoriesContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 10px 20px;
 }
 
 .dropdownItens p {
@@ -70,4 +86,13 @@
   width: 12px;
   height: 12px;
   justify-self: end;
+}
+
+@keyframes show-up {
+  from {
+    transform: translateY(30px);
+  }
+  to {
+    transform: initial;
+  }
 }

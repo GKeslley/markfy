@@ -28,7 +28,7 @@ const Dropdown = () => {
       <p>Categorias</p>
       <ul className={styles.dropdown}>
         {categories.map(({ name, subcategories, endpoint }, i) => (
-          <li onMouseOver={() => openSubcategories(i)} key={endpoint}>
+          <li onClick={() => openSubcategories(i)} key={endpoint}>
             {subcategories.length ? (
               <div
                 className={`${styles.dropdownItens} ${activeIndex === i ? 'active' : ''}`}
@@ -45,7 +45,9 @@ const Dropdown = () => {
                 </ul>
               </div>
             ) : (
-              <Link to={`produtos/${endpoint}`}>{name}</Link>
+              <Link style={{ padding: '0 1rem 1rem 1rem' }} to={`produtos/${endpoint}`}>
+                {name}
+              </Link>
             )}
           </li>
         ))}
