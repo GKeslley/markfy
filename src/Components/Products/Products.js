@@ -1,8 +1,8 @@
 import React from 'react';
 import Slide from '../Reusable/Slide';
-import Imagem1 from '../../Assets/Slide/img1.jpeg';
-import Imagem2 from '../../Assets/Slide/img2.jpg';
-import Imagem3 from '../../Assets/Slide/img3.jpeg';
+import Imagem1 from '../../Assets/Slide/capa1.png';
+import Imagem2 from '../../Assets/Slide/capa2.png';
+import Imagem3 from '../../Assets/Slide/capa3.png';
 
 const Products = () => {
   return (

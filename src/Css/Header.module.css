@@ -4,7 +4,6 @@
 }
 
 .header nav {
-  color: #272727;
   padding-top: 1rem;
   align-items: center;
   white-space: nowrap;
@@ -34,12 +33,14 @@
   border: 1px solid #272727;
 }
 
-.headerContent ul,
-.headerContent li {
+.sectionsContent,
+.sectionsContent li {
   display: flex;
   gap: 2rem;
   align-items: center;
   grid-column: 1/-1;
+  justify-content: end;
+  grid-area: sections;
 }
 
 .header :global(.user) {
@@ -68,18 +69,14 @@
   grid-area: input;
 }
 
-.sectionsContent {
-  justify-content: end;
-  grid-area: sections;
-}
-
 svg {
   fill: #272727;
 }
 
 .nav {
   grid-area: nav;
-  background: #272727;
+  background: #0e9162;
+  grid-column: 1/-1;
   color: #fff;
 }
 
