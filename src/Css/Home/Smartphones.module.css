@@ -1,0 +1,111 @@
+.carouselContent {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.carouselContent > p {
+  padding-bottom: 1.2rem;
+}
+
+.smartphones {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  gap: 1rem;
+  padding-bottom: 4rem;
+}
+
+.smartphones li {
+  width: 25%;
+  flex-shrink: 0;
+  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 4px;
+  min-height: 18rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.smartphones li:hover {
+  -webkit-box-shadow: 0 7px 16px 0 rgb(0 0 0 / 20%), 0 1px 3px 0 rgb(0 0 0 / 10%);
+  box-shadow: 0 7px 16px 0 rgb(0 0 0 / 20%), 0 1px 3px 0 rgb(0 0 0 / 10%);
+}
+
+.smartphones li picture {
+  display: block;
+  height: 180px;
+  border-bottom: 1px solid #e4e4e4;
+  margin-bottom: 1rem;
+}
+
+.smartphones li picture img {
+  height: 100%;
+  object-fit: contain;
+  padding: 7px;
+}
+
+.smartphones li p,
+.smartphones li span {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 20ch;
+}
+
+.smartphones li span {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.smartphones li p {
+  font-size: 0.8rem;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttonLeft svg {
+  rotate: 180deg;
+}
+
+.buttonRight,
+.buttonLeft {
+  position: absolute;
+  top: 40%;
+  display: flex;
+  align-self: center;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.buttonRight:hover,
+.buttonLeft:hover {
+  background: #e4e4e4;
+}
+
+.buttonRight {
+  right: 0;
+}
+
+.buttonLeft {
+  left: 0;
+}
+
+@media (min-width: 900px) {
+  .buttons {
+    display: none;
+  }
+
+  .carouselContent:hover .buttons {
+    display: flex;
+  }
+}
