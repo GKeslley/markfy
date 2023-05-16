@@ -65,7 +65,7 @@ export const PRODUCT_POST = (formData, token) => {
 
 export const PRODUCTS_GET = ({ page, total, user }) => {
   return {
-    url: `${API_URL}/api/produtos/?_page=${page}&_total=${total}$_user=${user}`,
+    url: `${API_URL}/api/produtos/?_page=${page}&_total=${total}&_user=${user}`,
     options: {
       method: 'GET',
       cache: 'no-store',
@@ -83,9 +83,11 @@ export const PRODUCTS_GET_BY_CATEGORY = (category) => {
   };
 };
 
-export const PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY = ({ category, subcategory }) => {
+export const PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY = (category, subcategory, user) => {
   return {
-    url: `${API_URL}/api/produtos/${category}/${subcategory}`,
+    url: `${API_URL}/api/produtos/${category}/${subcategory}${
+      user ? '?user=' + user : ''
+    }`,
     options: {
       method: 'GET',
       cache: 'no-store',

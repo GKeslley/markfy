@@ -1,15 +1,7 @@
 import React from 'react';
-import Slide from '../Reusable/Slide';
-import Imagem1 from '../../Assets/Slide/capa1.png';
-import Imagem2 from '../../Assets/Slide/capa2.png';
-import Imagem3 from '../../Assets/Slide/capa3.png';
 
 const Products = () => {
-  return (
-    <div>
-      <Slide imgs={[Imagem3, Imagem1, Imagem2, Imagem3, Imagem1]} />
-    </div>
-  );
+  return <h1>a</h1>;
 };
 
 export default Products;

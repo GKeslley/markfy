@@ -27,7 +27,6 @@ const Slide = ({ imgs }) => {
   const maxMove = (currentSlideIndex + 1) * 100;
 
   const passSlideFromButton = (index) => {
-    console.log(index);
     setCurrentSlideIndex(index);
   };
 
@@ -41,10 +40,7 @@ const Slide = ({ imgs }) => {
   const handleTouchEnd = (event) => {
     if (touchCoordinates.coord === 'right' && slideTransform % 100 !== 0) {
       setCurrentSlideIndex((prev) => prev + 1);
-      console.log('right2');
     } else if (touchCoordinates.coord === 'left' && slideTransform % 100 !== 0) {
-      console.log('left');
-
       setCurrentSlideIndex((prev) => prev - 1);
     }
   };
@@ -72,8 +68,6 @@ const Slide = ({ imgs }) => {
     }
   };
 
-  console.log(mouseOver);
-
   React.useEffect(() => {
     if (!mouseOver) {
       timeoutMoveSlide.current = setTimeout(() => {
@@ -88,12 +82,9 @@ const Slide = ({ imgs }) => {
     const transitionInfinite = setTimeout(() => {
       if (currentSlideIndex === imagesLength + 1) {
         SlideContentRef.current.style.transition = 'none';
-        console.log('MUDOU');
         setCurrentSlideIndex(1);
       } else if (currentSlideIndex === 0) {
         SlideContentRef.current.style.transition = 'none';
-        console.log('MUDOU 0');
-
         setCurrentSlideIndex(imagesLength);
       }
     }, 400);
