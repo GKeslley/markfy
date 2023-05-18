@@ -63,6 +63,16 @@ export const PRODUCT_POST = (formData, token) => {
   };
 };
 
+export const PRODUCT_GET = (slug) => {
+  return {
+    url: API_URL + `/api/produto/${slug}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
+
 export const PRODUCTS_GET = ({ page, total, user }) => {
   return {
     url: `${API_URL}/api/produtos/?_page=${page}&_total=${total}&_user=${user}`,
