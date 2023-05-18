@@ -1,0 +1,158 @@
+.productContent {
+  display: grid;
+  padding: 1rem 3rem;
+  gap: 2rem;
+  background: #fff;
+  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+}
+
+.productContent h2 {
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.productAndInfos {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+}
+
+.productAndInfos::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #dfdfdf;
+  grid-column: 1/-1;
+}
+
+.productImages {
+  display: grid;
+  grid-template-columns: 5rem max-content;
+}
+
+.productImages figure {
+  max-height: 31.2rem;
+  max-width: 15.6rem;
+  width: 15.6rem;
+}
+
+.productImages figure img {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.galeryImages {
+  grid-column: 1;
+  grid-row: 1;
+  flex-direction: column;
+  display: flex;
+  margin: 16px;
+  gap: 0.6rem;
+}
+
+.galeryImages picture {
+  border: 2px solid #2dd096;
+  border-radius: 6px;
+}
+
+.galeryImages picture:global(.active) {
+  border: 2px solid #0e9162;
+}
+
+.galeryImages picture img {
+  max-width: 44px;
+  width: 44px;
+  object-fit: contain;
+}
+
+.productInfos {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 1.5rem;
+}
+
+.productInfos .productName {
+  font-size: 1.5rem;
+  max-width: 30ch;
+  font-weight: 500;
+}
+
+.productInfos .productPrice {
+  display: flex;
+  flex-direction: column;
+}
+
+.productInfos .productPrice p {
+  font-size: 2rem;
+  max-width: 20ch;
+}
+
+.productInfos .productPrice span {
+  font-size: 0.8rem;
+  max-width: 20ch;
+  margin-left: 2px;
+  color: #0e9162;
+  font-weight: 600;
+}
+
+.productBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 40ch;
+}
+
+.productBtns button {
+  margin: 0;
+}
+
+.productBtns button:nth-child(2) {
+  background: transparent;
+  border: 2px solid #2dd096;
+  color: #2dd096;
+}
+
+.productBtns button:nth-child(2):hover {
+  background: #0e9162;
+  border: 2px solid #0e9162;
+  color: #fff;
+}
+
+.productDescription p {
+  white-space: break-spaces;
+  line-height: 1.5;
+  font-size: 1.1rem;
+}
+
+.productAsks .askSection {
+  display: flex;
+  gap: 1rem;
+}
+
+.productAsks h2 {
+  margin-bottom: 2rem;
+}
+
+.productAsks label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.productAsks .askSection input {
+  width: 80%;
+  border-radius: 6px;
+  border: 1px solid #272727;
+  padding: 0.8rem;
+}
+
+.productAsks .askSection button {
+  margin: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
