@@ -35,7 +35,7 @@ const Smartphones = ({ setDataProduct }) => {
 
   const selectProduct = (product) => {
     setDataProduct(product);
-    navigate(`produto/${product.id}`);
+    navigate(`produto/${product.categoria}/${product.id}`);
   };
 
   return (

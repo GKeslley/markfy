@@ -19,7 +19,7 @@ const App = () => {
           <Route path="login/*" element={<Login />}></Route>
           <Route path="conta/*" element={<Conta />}></Route>
           <Route
-            path="produto/:slug"
+            path="produto/:categoria/:slug"
             element={<Product dataProduct={dataProduct} />}
           ></Route>
         </Routes>
