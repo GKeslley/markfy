@@ -1,16 +1,21 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from '../../Css/Products/Product.module.css';
 import useFetch from '../../Hooks/useFetch';
 import { PRODUCT_GET } from '../../Api/api';
 import Button from '../Reusable/Button';
+import { GlobalContext } from '../../Hooks/UserContext';
+import UserProduct from './UserProduct';
 
 const Product = (props) => {
   const { slug } = useParams();
   const { request, data } = useFetch();
   const [imageActive, setImageActive] = React.useState(null);
   const [imagesGallery, setImagesGalery] = React.useState(null);
+  const { userData } = React.useContext(GlobalContext);
   const dataProduct = props.dataProduct ? props.dataProduct : data;
+
+  console.log(userData);
 
   const getAllImages = React.useCallback(() => {
     if (dataProduct) {
@@ -70,15 +75,14 @@ const Product = (props) => {
 
     setImagesGalery(changeImages);
     setImageActive(imagesGallery[+index]);
-    console.log(target);
   };
 
-  console.log(+dataProduct.preco);
+  console.log(data);
 
-  const parcela = +dataProduct.preco / 12;
-  const parcelaPrice = Number.isInteger(parcela)
-    ? parcela
-    : parcela.toFixed(2).replace('.', ',');
+  const portion = +dataProduct.preco / 12;
+  const portionPrice = Number.isInteger(portion)
+    ? portion
+    : portion.toFixed(2).replace('.', ',');
 
   return (
     <>
@@ -99,23 +103,16 @@ const Product = (props) => {
 
                 <div className={styles.galeryImages}>
                   {imagesGallery.map(({ src, titulo, index }, i) => (
-                    <>
-                      {
-                        <picture
-                          key={src}
-                          className={imageActive.index === i ? 'active' : ''}
-                        >
-                          <img
-                            src={src}
-                            alt={titulo}
-                            width={44}
-                            height={44}
-                            data-index={index}
-                            onMouseOver={handleChangeImage}
-                          />
-                        </picture>
-                      }
-                    </>
+                    <picture key={i} className={imageActive.index === i ? 'active' : ''}>
+                      <img
+                        src={src}
+                        alt={titulo}
+                        width={44}
+                        height={44}
+                        data-index={index}
+                        onMouseOver={handleChangeImage}
+                      />
+                    </picture>
                   ))}
                 </div>
               </div>
@@ -125,12 +122,14 @@ const Product = (props) => {
                 <li>Frete</li>
                 <li className={styles.productPrice}>
                   <p>R$ {dataProduct.preco}</p>
-                  <span>12x de R$ {parcelaPrice}</span>
+                  <span>12x de R$ {portionPrice}</span>
                 </li>
                 <li className={styles.productBtns}>
                   <Button>Comprar</Button>
                   <Button>Fazer Oferta</Button>
                 </li>
+
+                <UserProduct keyUser={dataProduct.usuario_id} />
               </ul>
             </article>
 
