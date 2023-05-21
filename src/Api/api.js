@@ -50,6 +50,16 @@ export const USER_GET = (token) => {
   };
 };
 
+export const USER_OTHER_GET = (key) => {
+  return {
+    url: API_URL + `/api/usuario/${key}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
+
 export const PRODUCT_POST = (formData, token) => {
   return {
     url: API_URL + '/api/produto',
