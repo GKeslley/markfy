@@ -1,0 +1,21 @@
+.userContent {
+  padding-top: 1.5rem;
+  border-top: 1px solid #dfdfdf;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.userContent li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.userContent p {
+  line-height: 1.8;
+}
+
+.userContent .data {
+  text-align: center;
+}
