@@ -12,10 +12,46 @@
   font-size: 0.9rem;
 }
 
-.userContent p {
-  line-height: 1.8;
+.userContent p:not(:last-child),
+a {
+  margin-bottom: 0.7rem;
 }
 
 .userContent .data {
   text-align: center;
+}
+
+.userName,
+.data,
+.address,
+.totalProducts {
+  display: flex;
+  align-items: center;
+}
+
+.userName::before,
+.data::before,
+.address::before,
+.totalProducts::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+.userName::before {
+  background: url('../../Assets/UserProduct/user.svg') no-repeat center center;
+}
+
+.data::before {
+  background: url('../../Assets/UserProduct/calendar.svg') no-repeat center center;
+}
+
+.address::before {
+  background: url('../../Assets/UserProduct/location.svg') no-repeat center center;
+}
+
+.totalProducts::before {
+  background: url('../../Assets/UserProduct/business.svg') no-repeat center center;
 }
