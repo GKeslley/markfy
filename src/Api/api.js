@@ -114,3 +114,17 @@ export const PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY = (category, subcategory, user
     },
   };
 };
+
+export const COMMENT_PRODUCT_POST = (body, token) => {
+  return {
+    url: API_URL + '/api/comentario',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+};
