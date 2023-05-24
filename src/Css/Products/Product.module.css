@@ -15,7 +15,8 @@
 
 .productAndInfos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
   gap: 2rem;
 }
 
@@ -130,8 +131,14 @@
 }
 
 .productAsks .askSection {
-  display: flex;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.productAsks .askSection p {
+  margin: 1.5rem 0;
 }
 
 .productAsks h2 {
@@ -142,17 +149,23 @@
   display: block;
   font-size: 1rem;
   margin-bottom: 1rem;
+  grid-column: 1/-1;
 }
 
 .productAsks .askSection input {
-  width: 80%;
   border-radius: 6px;
   border: 1px solid #272727;
   padding: 0.8rem;
+}
+
+.productAsks .askSection p {
+  grid-column: 1/-1;
 }
 
 .productAsks .askSection button {
   margin: 0;
   padding-left: 1rem;
   padding-right: 1rem;
+  grid-column: 2;
+  grid-row: 2;
 }

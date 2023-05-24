@@ -40,6 +40,7 @@ const useValidate = (type) => {
     value,
     onChange,
     error,
+    setValue,
     validate: () => validate(value),
     onBlur: () => validate(value),
   };
