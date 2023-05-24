@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../../Css/Products/UserProduct.module.css';
 import useFetch from '../../Hooks/useFetch';
 import { USER_OTHER_GET } from '../../Api/api';
+import { Link } from 'react-router-dom';
 
 const UserProduct = ({ keyUser }) => {
   const { request, data } = useFetch();
@@ -47,13 +48,20 @@ const UserProduct = ({ keyUser }) => {
   return (
     <>
       <ul className={styles.userContent}>
+        <span style={{ fontSize: '0.8rem' }}>Vendido por</span>
         <li>
           <div>
-            <p>{data.nome}</p>
-            <p>{`${data.endereco[0].cidade}, ${data.endereco[0].uf}`}</p>
+            <Link className={styles.userName} to={`/usuario/${keyUser}`}>
+              {data.nome}
+            </Link>
+            <p
+              className={styles.address}
+            >{`${data.endereco[0].cidade}, ${data.endereco[0].uf}`}</p>
           </div>
           <div>
-            <p>15 postagens</p>
+            <Link className={styles.totalProducts} to={`/usuario/${keyUser}`}>
+              {data.total_postagens} postagens
+            </Link>
             <div className={styles.data}>
               <span>{`No markfy desde: ${month}/${year}`}</span>
             </div>
