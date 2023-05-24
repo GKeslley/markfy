@@ -1,0 +1,22 @@
+.commentsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.commentAuthor {
+  display: flex;
+  justify-content: space-between;
+}
+
+.commentAuthor a,
+span {
+  margin: 0;
+  font-size: 0.8rem;
+}
