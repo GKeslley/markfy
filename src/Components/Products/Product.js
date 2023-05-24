@@ -1,21 +1,29 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styles from '../../Css/Products/Product.module.css';
 import useFetch from '../../Hooks/useFetch';
 import { PRODUCT_GET } from '../../Api/api';
 import Button from '../Reusable/Button';
 import { GlobalContext } from '../../Hooks/UserContext';
 import UserProduct from './UserProduct';
+import Comments from './Comments';
+import useValidate from '../../Hooks/useValidate';
+import Input from '../Form/Input';
 
 const Product = (props) => {
   const { slug } = useParams();
   const { request, data } = useFetch();
+
   const [imageActive, setImageActive] = React.useState(null);
   const [imagesGallery, setImagesGalery] = React.useState(null);
+  const [sendComment, setSendComment] = React.useState(false);
+  const [newComment, setNewComment] = React.useState([]);
+
   const { userData } = React.useContext(GlobalContext);
   const dataProduct = props.dataProduct ? props.dataProduct : data;
 
-  console.log(userData);
+  console.log(dataProduct);
+  const commentValue = useValidate(false);
 
   const getAllImages = React.useCallback(() => {
     if (dataProduct) {
@@ -77,12 +85,28 @@ const Product = (props) => {
     setImageActive(imagesGallery[+index]);
   };
 
-  console.log(data);
-
   const portion = +dataProduct.preco / 12;
   const portionPrice = Number.isInteger(portion)
     ? portion
     : portion.toFixed(2).replace('.', ',');
+
+  const sendNewComment = (event) => {
+    event.preventDefault();
+    setSendComment(true);
+
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    setNewComment([
+      ...newComment,
+      {
+        comment_content: commentValue.value,
+        comment_date: day + '/' + month + '/' + year,
+      },
+    ]);
+  };
 
   return (
     <>
@@ -140,16 +164,31 @@ const Product = (props) => {
 
             <article className={styles.productAsks}>
               <h2>Perguntas e Respostas</h2>
-              <label htmlFor="ask">Pergunte ao vendedor</label>
-              <div className={styles.askSection}>
-                <input
+              <form className={styles.askSection} onSubmit={sendNewComment}>
+                <Input
                   type="text"
+                  label="Pergunte ao vendedor"
                   name="ask"
                   id="ask"
-                  placeholder="Escreva sua pergunta"
+                  {...commentValue}
                 />
-                <Button>Perguntar</Button>
-              </div>
+                {sendComment ? (
+                  <Button>Carregando...</Button>
+                ) : (
+                  <Button>Perguntar</Button>
+                )}
+                <p>Últimas perguntas feitas</p>
+              </form>
+              <Comments
+                userData={userData}
+                comment={commentValue}
+                allComments={dataProduct.comentarios}
+                authorPost={dataProduct.usuario_id}
+                slug={slug}
+                sendComment={sendComment}
+                setSendComment={setSendComment}
+                newComment={newComment}
+              />
             </article>
           </div>
         </section>
