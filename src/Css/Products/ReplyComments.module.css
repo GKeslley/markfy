@@ -1,0 +1,17 @@
+.replyContent input {
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 6px;
+  border: 1px solid #000;
+}
+
+.replyContent div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.replyContent button {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
