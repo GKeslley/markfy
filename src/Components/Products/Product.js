@@ -7,8 +7,6 @@ import Button from '../Reusable/Button';
 import { GlobalContext } from '../../Hooks/UserContext';
 import UserProduct from './UserProduct';
 import Comments from './Comments';
-import useValidate from '../../Hooks/useValidate';
-import Input from '../Form/Input';
 
 const Product = (props) => {
   const { slug } = useParams();
@@ -16,14 +14,11 @@ const Product = (props) => {
 
   const [imageActive, setImageActive] = React.useState(null);
   const [imagesGallery, setImagesGalery] = React.useState(null);
-  const [sendComment, setSendComment] = React.useState(false);
-  const [newComment, setNewComment] = React.useState([]);
 
   const { userData } = React.useContext(GlobalContext);
   const dataProduct = props.dataProduct ? props.dataProduct : data;
 
   console.log(dataProduct);
-  const commentValue = useValidate(false);
 
   const getAllImages = React.useCallback(() => {
     if (dataProduct) {
@@ -90,24 +85,6 @@ const Product = (props) => {
     ? portion
     : portion.toFixed(2).replace('.', ',');
 
-  const sendNewComment = (event) => {
-    event.preventDefault();
-    setSendComment(true);
-
-    const date = new Date();
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-
-    setNewComment([
-      ...newComment,
-      {
-        comment_content: commentValue.value,
-        comment_date: day + '/' + month + '/' + year,
-      },
-    ]);
-  };
-
   return (
     <>
       {dataProduct && imageActive && (
@@ -162,34 +139,12 @@ const Product = (props) => {
               <p>{dataProduct.descricao}</p>
             </article>
 
-            <article className={styles.productAsks}>
-              <h2>Perguntas e Respostas</h2>
-              <form className={styles.askSection} onSubmit={sendNewComment}>
-                <Input
-                  type="text"
-                  label="Pergunte ao vendedor"
-                  name="ask"
-                  id="ask"
-                  {...commentValue}
-                />
-                {sendComment ? (
-                  <Button>Carregando...</Button>
-                ) : (
-                  <Button>Perguntar</Button>
-                )}
-                <p>Últimas perguntas feitas</p>
-              </form>
-              <Comments
-                userData={userData}
-                comment={commentValue}
-                allComments={dataProduct.comentarios}
-                authorPost={dataProduct.usuario_id}
-                slug={slug}
-                sendComment={sendComment}
-                setSendComment={setSendComment}
-                newComment={newComment}
-              />
-            </article>
+            <Comments
+              userData={userData}
+              allComments={dataProduct.comentarios}
+              authorPost={dataProduct.usuario_id}
+              slug={slug}
+            />
           </div>
         </section>
       )}
