@@ -13,7 +13,7 @@
 }
 
 .userContent p:not(:last-child),
-a {
+.userContent a {
   margin-bottom: 0.7rem;
 }
 
@@ -54,4 +54,11 @@ a {
 
 .totalProducts::before {
   background: url('../../Assets/UserProduct/business.svg') no-repeat center center;
+}
+
+@media (max-width: 600px) {
+  .userContent li {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }

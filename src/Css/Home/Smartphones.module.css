@@ -17,6 +17,7 @@
 
 .smartphones li {
   width: 25%;
+  min-width: 13rem;
   flex-shrink: 0;
   box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);

@@ -1,7 +1,17 @@
 import React from 'react';
 import Error from '../Helper/Error';
 
-const Input = ({ label, type, name, placeholder, onChange, onBlur, error, value }) => {
+const Input = ({
+  label,
+  type,
+  className,
+  name,
+  placeholder,
+  onChange,
+  onBlur,
+  error,
+  value,
+}) => {
   return (
     <>
       {!placeholder && <label htmlFor={name}>{label}</label>}
@@ -9,6 +19,7 @@ const Input = ({ label, type, name, placeholder, onChange, onBlur, error, value 
         type={type}
         name={name}
         id={name}
+        className={className}
         placeholder={placeholder ? placeholder : ''}
         onChange={onChange}
         onBlur={onBlur}

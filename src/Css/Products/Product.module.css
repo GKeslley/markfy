@@ -1,5 +1,6 @@
 .productContent {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   padding: 1rem 3rem;
   gap: 2rem;
   background: #fff;
@@ -14,9 +15,10 @@
 }
 
 .productAndInfos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
+  display: flex;
+  flex-flow: wrap;
+  flex: 1;
+  justify-content: center;
   gap: 2rem;
 }
 
@@ -79,7 +81,6 @@
 
 .productInfos .productName {
   font-size: 1.5rem;
-  max-width: 30ch;
   font-weight: 500;
 }
 
@@ -90,12 +91,10 @@
 
 .productInfos .productPrice p {
   font-size: 2rem;
-  max-width: 20ch;
 }
 
 .productInfos .productPrice span {
   font-size: 0.8rem;
-  max-width: 20ch;
   margin-left: 2px;
   color: #0e9162;
   font-weight: 600;
@@ -105,7 +104,6 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 40ch;
 }
 
 .productBtns button {
@@ -128,4 +126,24 @@
   white-space: break-spaces;
   line-height: 1.5;
   font-size: 1.1rem;
+}
+
+@media (min-width: 63.75rem) {
+  .productBtns {
+    max-width: 40ch;
+  }
+
+  .productInfos .productPrice span,
+  .productInfos .productPrice p,
+  .productInfos .productName {
+    max-width: 30ch;
+  }
+}
+
+@media (max-width: 63.75rem) {
+  .productInfos .productName,
+  .productPrice span,
+  .productBtns {
+    max-width: none;
+  }
 }

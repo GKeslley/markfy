@@ -68,8 +68,9 @@ span {
 .commentContent p {
   display: flex;
   gap: 1rem;
-  width: max-content;
   transition: 0.2s;
+  white-space: break-spaces;
+  line-break: anywhere;
 }
 
 .comment:global(.none) {
@@ -101,4 +102,11 @@ span {
 
 .comment:hover .replyComment {
   display: block;
+}
+
+@media (max-width: 600px) {
+  .productAsks .askSection {
+    display: flex;
+    flex-direction: column;
+  }
 }

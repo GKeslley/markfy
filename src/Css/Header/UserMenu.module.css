@@ -1,0 +1,14 @@
+.sectionsContent,
+.sectionsContent li {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 830px) {
+  .sectionsContent {
+    grid-row: 1;
+    grid-column: 2;
+    justify-content: end;
+  }
+}
