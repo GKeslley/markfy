@@ -1,17 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from '../Css/Header.module.css';
 import { GlobalContext } from '../Hooks/UserContext';
-import { ReactComponent as Logo } from '../Assets/shoppingBagIcon.svg';
-import { ReactComponent as Cart } from '../Assets/cartIcon.svg';
-import { ReactComponent as User } from '../Assets/user-svgrepo-com.svg';
-import Dropdown from './Reusable/Dropdown';
+import Logo from './Header/Logo';
+import Input from './Form/Input';
+import UserMenu from './Header/UserMenu';
+import NavLinks from './Header/NavLinks';
+import MenuHamburger from './Header/MenuHamburger';
+import useMedia from '../Hooks/useMedia';
 
 const Header = () => {
   const globalContext = React.useContext(GlobalContext);
   const { userData } = globalContext;
   const nameUser = userData && userData['nome'];
   const { pathname } = window.location;
+
+  const mobileMatch = useMedia('(max-width: 830px)');
 
   return (
     <>
@@ -20,42 +23,20 @@ const Header = () => {
           <nav className="">
             <article className={styles.headerContent}>
               <div className={`${styles.headerItem} container`}>
-                <div className={styles.logo}>
-                  <Link to="/">
-                    <Logo />
-                    <p>Markfy</p>
-                  </Link>
-                </div>
-
-                <input className={styles.input} type="text" name="search" id="search" />
-
-                <ul className={styles.sectionsContent}>
-                  <li>
-                    <Link to="carrinho" className={styles.sections}>
-                      <p>Carrinho</p>
-                      <Cart />
-                    </Link>
-                  </li>
-
-                  <li>
-                    {nameUser ? (
-                      <Link to="/conta" className={`${styles.sections} user`}>
-                        <User />
-                        {nameUser}
-                      </Link>
-                    ) : (
-                      <Link to="/login">Login/Criar</Link>
-                    )}
-                  </li>
-                </ul>
+                <Logo />
+                <Input
+                  type="text"
+                  name="search"
+                  className={styles.input}
+                  placeholder="Procurar..."
+                />
+                {!mobileMatch ? (
+                  <UserMenu nameUser={nameUser} mobileMatch={mobileMatch} />
+                ) : (
+                  <MenuHamburger nameUser={nameUser} mobileMatch={mobileMatch} />
+                )}
               </div>
-              <ul className={styles.nav}>
-                <div className={`${styles.headerItem} container flexAlign`}>
-                  <Dropdown />
-                  <li>Meus anúncios</li>
-                  <li>Vender</li>
-                </div>
-              </ul>
+              {!mobileMatch && <NavLinks />}
             </article>
           </nav>
         </header>
