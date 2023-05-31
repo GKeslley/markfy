@@ -1,14 +1,40 @@
 .menuContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   background: white;
   width: 100%;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: visible;
   left: 0;
-  padding: 40px;
-  border: 10px solid #fb5;
-  box-shadow: 0 0 0 10px white;
+  padding-top: 40px;
   position: absolute;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  z-index: 2000;
+  border: 2px solid #e4e4e4;
+  animation: active 0.3s forwards;
+}
+
+@keyframes active {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: initial;
+  }
+}
+
+.menuContent::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -10px;
+  right: 98px;
+  width: 10px;
+  height: 10px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
 }
 
 .navMenu {
@@ -46,8 +72,50 @@
   transform: rotate(90deg);
 }
 
+.userMenu {
+  justify-self: start;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.userMenu a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: none !important;
+}
+
+.userMenu svg {
+  background: #e1e1e1;
+  width: 30px;
+  height: 30px;
+  padding: 0.4rem;
+  border-radius: 50%;
+  box-shadow: 0px 0px 2px 4px rgb(206, 206, 206);
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.navLinks li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.navLinks svg {
+  width: 20px;
+  height: 20px;
+  fill: #272727;
+}
+
 @media (max-width: 830px) {
-  .menu {
+  .navMenu {
     grid-row: 1;
     grid-column: 2;
     justify-self: end;
