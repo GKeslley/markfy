@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+.sectionsContent li a {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 830px) {
   .sectionsContent {
     grid-row: 1;

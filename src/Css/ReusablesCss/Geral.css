@@ -48,3 +48,10 @@
     transform: initial;
   }
 }
+
+@media (max-width: 830px) {
+  .container {
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+  }
+}

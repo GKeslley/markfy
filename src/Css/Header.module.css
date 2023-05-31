@@ -41,6 +41,10 @@ svg {
 }
 
 @media (max-width: 830px) {
+  .header {
+    padding-bottom: 1rem;
+  }
+
   .headerContent .headerItem {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
