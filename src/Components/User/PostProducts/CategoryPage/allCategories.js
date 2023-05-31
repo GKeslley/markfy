@@ -1,21 +1,38 @@
+import {
+  AiOutlineHeart,
+  AiOutlineCar,
+  AiOutlineHome,
+  AiOutlineMobile,
+} from 'react-icons/ai';
+import { BiLeaf, BiBaseball } from 'react-icons/bi';
+import { IoShirtOutline } from 'react-icons/io5';
+
 export const allCategories = () => {
   const categories = [
     {
-      name: 'Imóveis',
-      subcategories: ['Apartamentos', 'Casas', 'Terrenos, sítios e fazendas'],
-      endpoint: 'imoveis',
+      name: 'Saúde',
+      subcategories: [],
+      endpoint: 'saude',
+      img: {
+        src: <AiOutlineHeart />,
+        alt: 'Coração',
+      },
     },
     {
-      name: 'Autos e peças',
+      name: 'Auto peças',
       subcategories: [
         'Carros, vans e utilitários',
         'Motos',
         'Ônibus',
         'Caminhões',
         'Barcos e aeronaves',
-        'Peças e acessórios',
+        'Acessórios',
       ],
-      endpoint: 'autos_pecas',
+      endpoint: 'auto_pecas',
+      img: {
+        src: <AiOutlineCar />,
+        alt: 'Carro',
+      },
     },
     {
       name: 'Para a sua casa',
@@ -27,6 +44,10 @@ export const allCategories = () => {
         'Decoração',
       ],
       endpoint: 'casa',
+      img: {
+        src: <AiOutlineHome />,
+        alt: 'Casa',
+      },
     },
     {
       name: 'Eletrônicos',
@@ -37,21 +58,37 @@ export const allCategories = () => {
         'Áudio, TV, vídeo',
       ],
       endpoint: 'eletronicos',
+      img: {
+        src: <AiOutlineMobile />,
+        alt: 'Celular',
+      },
     },
     {
       name: 'Agro e indústria',
       subcategories: [],
       endpoint: 'agro_industria',
+      img: {
+        src: <BiLeaf />,
+        alt: 'Folha',
+      },
     },
     {
       name: 'Esportes e lazer',
       subcategories: ['Esportes e ginástica', 'Ciclismo'],
       endpoint: 'esportes_lazer',
+      img: {
+        src: <BiBaseball />,
+        alt: 'Bola de beisebol',
+      },
     },
     {
       name: 'Moda',
       subcategories: ['Roupas e calçados', 'Bijouterias e acessórios'],
       endpoint: 'moda',
+      img: {
+        src: <IoShirtOutline />,
+        alt: 'Camisa',
+      },
     },
   ];
   return categories;
