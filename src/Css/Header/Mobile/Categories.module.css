@@ -1,0 +1,35 @@
+.carouselContent {
+  width: 100%;
+  max-width: 900px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background: #e4e4e48c;
+}
+
+.inner {
+  display: flex;
+  gap: 1rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 14px;
+}
+
+.item p {
+  width: 100%;
+  pointer-events: none;
+}
+
+.item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.carousel {
+  cursor: grab;
+  overflow: hidden;
+}
