@@ -7,6 +7,8 @@ import Home from './Components/Home/Home';
 import { UserContext } from './Hooks/UserContext';
 import Conta from './Components/User/Conta';
 import Product from './Components/Products/Product';
+import UserPage from './Components/User/UserPage/UserPage';
+import Products from './Components/Products/Products';
 
 const App = () => {
   const [dataProduct, setDataProduct] = React.useState(null);
@@ -22,6 +24,7 @@ const App = () => {
             path="produto/:categoria/:slug"
             element={<Product dataProduct={dataProduct} />}
           ></Route>
+          <Route path="produtos/:categoria/*" element={<Products />}></Route>
         </Routes>
       </UserContext>
     </BrowserRouter>
