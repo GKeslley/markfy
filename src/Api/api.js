@@ -93,9 +93,17 @@ export const PRODUCTS_GET = ({ page, total, user }) => {
   };
 };
 
-export const PRODUCTS_GET_BY_CATEGORY = (category) => {
+export const PRODUCTS_GET_BY_CATEGORY = ({
+  category,
+  subcategory,
+  actualPage,
+  total,
+  user,
+}) => {
   return {
-    url: `${API_URL}/api/produtos/${category}`,
+    url: `${API_URL}/api/produtos/${category}/${
+      subcategory ? subcategory + '/' : ''
+    }?_page=${actualPage}&_total=9`,
     options: {
       method: 'GET',
       cache: 'no-store',
