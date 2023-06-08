@@ -97,13 +97,12 @@ export const PRODUCTS_GET_BY_CATEGORY = ({
   category,
   subcategory,
   actualPage,
-  total,
-  user,
+  order,
 }) => {
   return {
     url: `${API_URL}/api/produtos/${category}/${
       subcategory ? subcategory + '/' : ''
-    }?_page=${actualPage}&_total=9`,
+    }?_page=${actualPage}&_order=${order}`,
     options: {
       method: 'GET',
       cache: 'no-store',
