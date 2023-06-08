@@ -9,9 +9,19 @@ const usePagination = () => {
 
   const [actualPage, setActualPage] = React.useState(initialPage);
   const [totalPages, setTotalPages] = React.useState(1);
+  const [order, setOrder] = React.useState('');
 
+  if (order) {
+    paramsURL.set('_order', order);
+  } else {
+    paramsURL.delete('_order');
+  }
   paramsURL.set('_page', actualPage);
-  const newUrl = `${window.location.pathname}?${paramsURL.toString()}`;
+  let newUrl = `${window.location.pathname}?${paramsURL.toString()}`;
+
+  React.useEffect(() => {
+    setActualPage(1);
+  }, [order]);
 
   React.useEffect(() => {
     console.log('teste');
@@ -28,11 +38,14 @@ const usePagination = () => {
 
   return {
     actualPage,
+    setActualPage,
     setTotalPages,
     totalPages,
     newUrl,
     handlePageProx,
     handlePageAnt,
+    order,
+    setOrder,
   };
 };
 
