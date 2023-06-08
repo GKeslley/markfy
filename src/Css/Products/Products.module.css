@@ -1,0 +1,100 @@
+.productsBg {
+  display: grid;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.filter {
+  display: flex;
+  justify-self: right;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filter p {
+  font-size: 0.8rem;
+}
+
+.filter select {
+  background: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.filter select option {
+  color: red;
+}
+
+.products {
+  display: grid;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.products li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.products li:not(:last-child) {
+  border-bottom: 1px solid rgb(207, 207, 207);
+}
+
+.products .productInfos {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.products .productInfos * {
+  white-space: break-spaces;
+  line-break: anywhere;
+}
+
+.products .productInfos .price {
+  font-size: 1.3rem;
+}
+
+.products .productInfos .user {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.products .productInfos .portion {
+  font-size: 0.8rem;
+  color: #2dd096;
+  font-weight: 600;
+}
+
+.products li img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  max-height: 11rem;
+  min-height: 11rem;
+}
+
+.paginationBtns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.paginationBtns li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.paginationBtns .btnAnt,
+.paginationBtns .btnProx {
+  cursor: pointer;
+}
+
+.paginationBtns li svg {
+  margin-top: 2px;
+}
