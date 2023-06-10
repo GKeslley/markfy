@@ -12,6 +12,7 @@ import Products from './Components/Products/Products';
 
 const App = () => {
   const [dataProduct, setDataProduct] = React.useState(null);
+
   return (
     <BrowserRouter>
       <UserContext>
@@ -25,6 +26,7 @@ const App = () => {
             element={<Product dataProduct={dataProduct} />}
           ></Route>
           <Route path="produtos/:categoria/*" element={<Products />}></Route>
+          <Route path="produtos" element={<Products />}></Route>
         </Routes>
       </UserContext>
     </BrowserRouter>
