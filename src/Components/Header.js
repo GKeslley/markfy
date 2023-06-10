@@ -7,14 +7,22 @@ import UserMenu from './Header/UserMenu';
 import NavLinks from './Header/NavLinks';
 import MenuHamburger from './Header/MenuHamburger';
 import useMedia from '../Hooks/useMedia';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const globalContext = React.useContext(GlobalContext);
   const { userData } = globalContext;
   const nameUser = userData && userData['nome'];
   const { pathname } = window.location;
+  const navigate = useNavigate();
 
   const mobileMatch = useMedia('(max-width: 830px)');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const value = event.target.children['0'].value;
+    navigate('/produtos?q=' + value);
+  };
 
   return (
     <>
@@ -24,12 +32,14 @@ const Header = () => {
             <article className={styles.headerContent}>
               <div className={`${styles.headerItem} container`}>
                 <Logo />
-                <Input
-                  type="text"
-                  name="search"
-                  className={styles.input}
-                  placeholder="Procurar..."
-                />
+                <form action="" onSubmit={handleSubmit}>
+                  <Input
+                    type="text"
+                    name="search"
+                    className={styles.input}
+                    placeholder="Procurar..."
+                  />
+                </form>
                 {!mobileMatch ? (
                   <UserMenu nameUser={nameUser} mobileMatch={mobileMatch} />
                 ) : (
