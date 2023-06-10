@@ -1,13 +1,17 @@
 import React from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import useFetch from '../../Hooks/useFetch';
 import { PRODUCTS_GET_BY_CATEGORY } from '../../Api/api';
 import usePagination from '../../Hooks/usePagination';
 import styles from '../../Css/Products/Products.module.css';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import Select from '../Form/Select';
+import {
+  allCategories,
+  toEndpoint,
+} from '../User/PostProducts/CategoryPage/allCategories';
 
-const Products = () => {
+const Products = ({ searchProduct }) => {
   const {
     actualPage,
     totalPages,
@@ -23,27 +27,50 @@ const Products = () => {
 
   const params = useParams();
   const navigate = useNavigate();
+  const { search } = useLocation();
 
-  const category = params.categoria;
-  const subcategory = params['*'] ? params['*'] : null;
+  const paramsURL = new URLSearchParams(search);
+  const searchParam = paramsURL.get('q');
+  const categories = allCategories();
+
+  console.log(categories);
+
+  let category = params.categoria;
+  let subcategory = params['*'] ? params['*'] : null;
+
+  if (searchParam) {
+    for (let catValue of categories) {
+      for (let subValue of catValue.subcategories) {
+        if (subValue.toLowerCase().includes(searchParam.toLowerCase())) {
+          category = catValue.endpoint;
+          subcategory = toEndpoint(subValue);
+          break;
+        }
+      }
+    }
+  }
 
   React.useEffect(() => {
     const getProducts = async () => {
-      console.log(actualPage);
+      console.log(category, subcategory);
       const { url, options } = PRODUCTS_GET_BY_CATEGORY({
         category,
         subcategory,
         actualPage,
         order,
+        search: searchParam,
       });
       const { response, json } = await request(url, options);
       console.log(json);
       const total = response.headers.get('x-total-count');
       const totalItensPerPage = 9;
       const isInt = Number.isInteger(+total / 9);
-      setTotalPages(
-        isInt ? +total / totalItensPerPage : Math.floor(+total / totalItensPerPage) + 1,
-      );
+      setTotalPages({
+        pages: isInt
+          ? +total / totalItensPerPage
+          : Math.floor(+total / totalItensPerPage) + 1,
+        totalItens: total,
+      });
     };
 
     getProducts();
@@ -57,6 +84,7 @@ const Products = () => {
     newUrl,
     setTotalPages,
     order,
+    searchParam,
   ]);
 
   const handleSelectFilt = ({ target }) => {
@@ -74,13 +102,20 @@ const Products = () => {
 
   return (
     <section className={`${styles.productsBg} container`}>
-      <div className={styles.filter}>
-        <p>Ordenado por: </p>
-        <Select options={options} value={order} handleClick={handleSelectFilt} />
-      </div>
+      <ul className={styles.filter}>
+        <li className={styles.search}>
+          <h1>{searchParam ? searchParam : subcategory || category}</h1>
+          <p>{`${totalPages.totalItens} resultados`}</p>
+        </li>
+
+        <li className={styles.sort}>
+          <p>Ordenado por: </p>
+          <Select options={options} value={order} handleClick={handleSelectFilt} />
+        </li>
+      </ul>
       <ul className={styles.products}>
         {data &&
-          totalPages > 0 &&
+          totalPages.pages > 0 &&
           data.map(
             ({ id, slug, nome, preco, fotos, categoria, nome_usuario, usuario_id }) => {
               const portion = +preco.replace('.', '') / 12;
@@ -110,16 +145,16 @@ const Products = () => {
           )}
       </ul>
       <ul className={styles.paginationBtns}>
-        {actualPage <= totalPages && actualPage > 1 && totalPages > 0 && (
+        {actualPage <= totalPages.pages && actualPage > 1 && totalPages.pages > 0 && (
           <li className={styles.btnAnt} onClick={handlePageAnt}>
             <IoIosArrowBack />
             <p>Anterior</p>
           </li>
         )}
 
-        {totalPages > 0 && <li>{`${actualPage} de ${totalPages}`}</li>}
+        {totalPages.pages > 0 && <li>{`${actualPage} de ${totalPages.pages}`}</li>}
 
-        {actualPage !== totalPages && totalPages > 0 && (
+        {actualPage !== totalPages.pages && totalPages.pages > 0 && (
           <li className={styles.btnProx} onClick={handlePageProx}>
             <p>Próximo</p>
             <IoIosArrowForward />
