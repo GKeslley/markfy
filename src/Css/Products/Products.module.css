@@ -6,8 +6,8 @@
 
 .filter {
   display: flex;
-  justify-self: right;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 1rem;
   align-items: center;
 }
 
@@ -23,8 +23,17 @@
   cursor: pointer;
 }
 
-.filter select option {
-  color: red;
+.sort {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.search h1 {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
 }
 
 .products {
