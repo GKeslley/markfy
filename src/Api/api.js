@@ -98,15 +98,22 @@ export const PRODUCTS_GET_BY_CATEGORY = ({
   subcategory,
   actualPage,
   order,
+  search,
 }) => {
+  const categoryPath = category ? `${category}/` : '';
+  const subcategoryPath = subcategory ? subcategory + '/' : '';
+  const searchQuery = search && !categoryPath ? `&q=${search}` : '';
+
+  const url = `${API_URL}/api/produtos/${categoryPath}${subcategoryPath}?_page=${actualPage}${searchQuery}&_order=${order}`;
+
+  const options = {
+    method: 'GET',
+    cache: 'no-store',
+  };
+
   return {
-    url: `${API_URL}/api/produtos/${category}/${
-      subcategory ? subcategory + '/' : ''
-    }?_page=${actualPage}&_order=${order}`,
-    options: {
-      method: 'GET',
-      cache: 'no-store',
-    },
+    url,
+    options,
   };
 };
 
