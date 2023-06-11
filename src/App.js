@@ -9,6 +9,7 @@ import Conta from './Components/User/Conta';
 import Product from './Components/Products/Product';
 import UserPage from './Components/User/UserPage/UserPage';
 import Products from './Components/Products/Products';
+import Favorites from './Components/User/FavoriteProducts/Favorites';
 
 const App = () => {
   const [dataProduct, setDataProduct] = React.useState(null);
@@ -27,6 +28,7 @@ const App = () => {
           ></Route>
           <Route path="produtos/:categoria/*" element={<Products />}></Route>
           <Route path="produtos" element={<Products />}></Route>
+          <Route path="favoritos" element={<Favorites />}></Route>
         </Routes>
       </UserContext>
     </BrowserRouter>
