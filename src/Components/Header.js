@@ -10,8 +10,7 @@ import useMedia from '../Hooks/useMedia';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const globalContext = React.useContext(GlobalContext);
-  const { userData } = globalContext;
+  const { userData } = React.useContext(GlobalContext);
   const nameUser = userData && userData['nome'];
   const { pathname } = window.location;
   const navigate = useNavigate();
