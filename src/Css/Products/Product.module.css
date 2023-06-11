@@ -20,6 +20,7 @@
   flex: 1;
   justify-content: center;
   gap: 2rem;
+  position: relative;
 }
 
 .productAndInfos::after {
@@ -29,6 +30,23 @@
   height: 2px;
   background: #dfdfdf;
   grid-column: 1/-1;
+}
+
+.productLike {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+.productLike svg {
+  width: 32px;
+  height: 32px;
+  transition: 0.3s;
+}
+
+.productLike:hover svg {
+  fill: #e54;
 }
 
 .productImages {
