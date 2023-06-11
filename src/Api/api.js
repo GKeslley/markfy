@@ -142,3 +142,27 @@ export const COMMENT_PRODUCT_POST = (body, token) => {
     },
   };
 };
+
+export const LIKE_PRODUCT_POST = ({ body, token }) => {
+  return {
+    url: API_URL + '/api/curtir',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+};
+
+export const LIKE_PRODUCT_GET = ({ page, total, user }) => {
+  return {
+    url: `${API_URL}/api/curtidas/?_page=${page}&_total=${total}&_user=${user}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
