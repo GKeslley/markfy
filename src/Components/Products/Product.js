@@ -7,6 +7,7 @@ import Button from '../Reusable/Button';
 import { GlobalContext } from '../../Hooks/UserContext';
 import UserProduct from './UserProduct';
 import Comments from './Comments';
+import LikeProduct from './LikeProduct';
 
 const Product = (props) => {
   const { slug } = useParams();
@@ -87,10 +88,11 @@ const Product = (props) => {
 
   return (
     <>
-      {dataProduct && imageActive && (
+      {dataProduct && imageActive && userData && (
         <section className="container">
           <div className={styles.productContent}>
             <article className={styles.productAndInfos}>
+              <LikeProduct slug={slug} userID={userData.usuario_id} />
               <div className={styles.productImages}>
                 <figure>
                   <img
