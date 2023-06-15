@@ -68,6 +68,18 @@
   text-align: center;
 }
 
+.remove svg {
+  width: 24px;
+  height: 24px;
+  fill: #e54;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.remove svg:hover {
+  fill: rgb(235, 44, 23);
+}
+
 .user {
   display: flex;
   gap: 0.3rem;

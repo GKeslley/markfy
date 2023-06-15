@@ -3,9 +3,24 @@ import { GlobalContext } from '../../../Hooks/UserContext';
 import styles from '../../../Css/User/Favorites.module.css';
 import { BiStore } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import useFetch from '../../../Hooks/useFetch';
+import { LIKE_PRODUCT_DELETE } from '../../../Api/api';
+import { BiTrashAlt } from 'react-icons/bi';
 
 const Favorites = () => {
-  const { favoriteProducts } = React.useContext(GlobalContext);
+  const { favoriteProducts, getFavoriteProducts } = React.useContext(GlobalContext);
+  const { request } = useFetch();
+
+  const deleteLike = async (slug) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const { url, options } = LIKE_PRODUCT_DELETE({ slug, token });
+      const { response } = await request(url, options);
+      if (response.ok) {
+        getFavoriteProducts();
+      }
+    }
+  };
 
   if (!favoriteProducts) return null;
   return (
@@ -38,7 +53,9 @@ const Favorites = () => {
 
                   <p className={styles.price}>R$ {produtos.preco}</p>
                   <p className={styles.quantity}>1</p>
-                  <p className={styles.remove}>Tirar</p>
+                  <p onClick={() => deleteLike(produtos.slug)} className={styles.remove}>
+                    <BiTrashAlt />
+                  </p>
                 </div>
               </li>
             ))}

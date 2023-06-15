@@ -13,6 +13,19 @@ export const POST_USER = (body) => {
   };
 };
 
+export const UPDATE_USER = (body) => {
+  return {
+    url: API_URL + '/api/usuario',
+    options: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+};
+
 export const LOGIN_USER_POST = (body) => {
   return {
     url: API_URL + '/jwt-auth/v1/token',
@@ -162,6 +175,19 @@ export const LIKE_PRODUCT_GET = ({ page, total, user }) => {
     url: `${API_URL}/api/curtidas/?_page=${page}&_total=${total}&_user=${user}`,
     options: {
       method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
+
+export const LIKE_PRODUCT_DELETE = ({ slug, token }) => {
+  return {
+    url: `${API_URL}/api/curtida/${slug}`,
+    options: {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       cache: 'no-store',
     },
   };
