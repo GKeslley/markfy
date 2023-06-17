@@ -1,0 +1,33 @@
+.notification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 50px;
+  background: #2dd096;
+  color: #fff;
+  padding: 0.4rem;
+  max-width: 35rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid #0e9162;
+  animation: animation 0.3s forwards;
+}
+
+.notification svg {
+  fill: #fff;
+}
+
+@keyframes animation {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: initial;
+  }
+}
