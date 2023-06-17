@@ -3,26 +3,62 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import styles from '../../Css/Products/Product.module.css';
 import { GlobalContext } from '../../Hooks/UserContext';
 import useFetch from '../../Hooks/useFetch';
-import { LIKE_PRODUCT_POST } from '../../Api/api';
+import { LIKE_PRODUCT_GET, LIKE_PRODUCT_POST } from '../../Api/api';
+import RequestMessage from '../Reusable/RequestMessage';
+import useUnlikeProduct from '../../Hooks/useUnlikeProduct';
 
 const LikeProduct = ({ slug, userID }) => {
-  const { request } = useFetch();
+  const [isLiked, setIsLiked] = React.useState(false);
+  const [notification, setNotification] = React.useState(false);
   const { getFavoriteProducts } = React.useContext(GlobalContext);
 
+  const { request, loading } = useFetch();
+  const { unlikeProduct, loading: unlikeLoading } = useUnlikeProduct({
+    getFavoriteProducts,
+  });
+
+  const token = localStorage.getItem('token');
+
+  React.useEffect(() => {
+    const productIsLiked = async () => {
+      const { url, options } = LIKE_PRODUCT_GET({ slug, token });
+      const { response } = await request(url, options);
+      if (response.ok) {
+        setIsLiked(true);
+      }
+    };
+    productIsLiked();
+  }, [request, slug, token]);
+
   const saveProduct = async () => {
-    const token = localStorage.getItem('token');
-    const body = { slug, usuario_id: userID };
-    const { url, options } = LIKE_PRODUCT_POST({ body, token });
-    const { response } = await request(url, options);
-    if (response.ok) {
-      getFavoriteProducts();
+    if (!isLiked) {
+      const body = { slug, usuario_id: userID };
+      const { url, options } = LIKE_PRODUCT_POST({ body, token });
+      const { response, json } = await request(url, options);
+      console.log(response, json);
+      if (response.ok) {
+        getFavoriteProducts();
+        setIsLiked(true);
+        setNotification('Produto favoritado com sucesso');
+      }
+    } else {
+      await unlikeProduct(slug);
+      setIsLiked(false);
+      setNotification('Produto desfavoritado com sucesso');
     }
   };
 
   return (
     <>
-      <picture className={styles.productLike} title="Favoritar" onClick={saveProduct}>
-        <AiOutlineHeart />
+      {notification && (
+        <RequestMessage notification={notification} setNotification={setNotification} />
+      )}
+      <picture
+        className={`${styles.productLike} ${isLiked ? 'active' : ''}`}
+        title="Favoritar"
+        onClick={saveProduct}
+      >
+        {unlikeLoading || loading ? <p>carregano</p> : <AiOutlineHeart />}
       </picture>
     </>
   );
