@@ -170,7 +170,7 @@ export const LIKE_PRODUCT_POST = ({ body, token }) => {
   };
 };
 
-export const LIKE_PRODUCT_GET = ({ page, total, user }) => {
+export const LIKE_PRODUCTS_GET = ({ page, total, user }) => {
   return {
     url: `${API_URL}/api/curtidas/?_page=${page}&_total=${total}&_user=${user}`,
     options: {
@@ -180,11 +180,24 @@ export const LIKE_PRODUCT_GET = ({ page, total, user }) => {
   };
 };
 
-export const LIKE_PRODUCT_DELETE = ({ slug, token }) => {
+export const UNLIKE_PRODUCT = ({ slug, token }) => {
   return {
     url: `${API_URL}/api/curtida/${slug}`,
     options: {
       method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      cache: 'no-store',
+    },
+  };
+};
+
+export const LIKE_PRODUCT_GET = ({ slug, token }) => {
+  return {
+    url: `${API_URL}/api/curtida/${slug}`,
+    options: {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
