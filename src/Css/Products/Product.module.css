@@ -45,7 +45,8 @@
   transition: 0.3s;
 }
 
-.productLike:hover svg {
+.productLike:hover svg,
+.productLike:global(.active) svg {
   fill: #e54;
 }
 

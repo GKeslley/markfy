@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LIKE_PRODUCT_GET, LOGIN_USER_POST, USER_GET, VALIDATE_TOKEN } from '../Api/api';
+import { LIKE_PRODUCTS_GET, LOGIN_USER_POST, USER_GET, VALIDATE_TOKEN } from '../Api/api';
 import useFetch from './useFetch';
 
 export const GlobalContext = React.createContext();
@@ -36,7 +36,7 @@ export const UserContext = ({ children }) => {
   );
 
   const getFavoriteProducts = React.useCallback(async () => {
-    const { url, options } = LIKE_PRODUCT_GET({ user: userData.usuario_id });
+    const { url, options } = LIKE_PRODUCTS_GET({ user: userData.usuario_id });
     const response = await request(url, options);
     if (response.response.ok) {
       setFavoriteProducts(response.json);

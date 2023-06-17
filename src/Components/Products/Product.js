@@ -10,75 +10,56 @@ import Comments from './Comments';
 import LikeProduct from './LikeProduct';
 
 const Product = (props) => {
+  const { request, data: dataProduct } = useFetch();
   const { slug } = useParams();
-  const { request, data } = useFetch();
-
-  const [imageActive, setImageActive] = React.useState(null);
-  const [imagesGallery, setImagesGalery] = React.useState(null);
-
   const { userData } = React.useContext(GlobalContext);
-  const dataProduct = props.dataProduct ? props.dataProduct : data;
+
+  const [getAllImages, setAllImages] = React.useState([]);
+  const [imageActive, setImageActive] = React.useState(null);
 
   console.log(dataProduct);
 
-  const getAllImages = React.useCallback(() => {
+  React.useEffect(() => {
     if (dataProduct) {
-      return dataProduct.fotos
-        .slice(1, dataProduct.fotos.length)
-        .reduce((acc, val, i) => {
-          acc[i] = { src: val.src, titulo: val.titulo, active: false, index: i + 1 };
+      setAllImages(() => {
+        return dataProduct.fotos.reduce((acc, val, i) => {
+          acc[i] = {
+            src: val.src,
+            titulo: val.titulo,
+            active: i === 0 ? true : false,
+            index: i,
+          };
           return acc;
         }, []);
-    }
-    return [];
-  }, [dataProduct]);
-
-  const getFirstImage = React.useCallback(() => {
-    if (dataProduct) {
-      const firstImage = dataProduct.fotos[0];
-      return {
-        src: firstImage.src,
-        titulo: firstImage.titulo,
-        active: true,
+      });
+      setImageActive({
         index: 0,
-      };
+        src: dataProduct.fotos[0].src,
+        titulo: dataProduct.fotos[0].titulo,
+      });
     }
-    return null;
   }, [dataProduct]);
 
-  const getImagesGallery = React.useCallback(() => {
-    if (dataProduct) {
-      setImagesGalery([getFirstImage(), ...getAllImages()]);
-    }
-  }, [dataProduct, getAllImages, getFirstImage]);
-
   React.useEffect(() => {
-    getImagesGallery();
-    setImageActive(getFirstImage());
-  }, [getImagesGallery, getFirstImage]);
-
-  React.useEffect(() => {
-    if (!props.dataProduct) {
-      const product = async () => {
-        const { url, options } = PRODUCT_GET(slug);
-        await request(url, options);
-      };
-      product();
-    }
-  }, [request, slug, props]);
+    const product = async () => {
+      const { url, options } = PRODUCT_GET(slug);
+      await request(url, options);
+    };
+    product();
+  }, [request, slug]);
 
   if (!dataProduct) return null;
 
   const handleChangeImage = ({ target }) => {
     const index = target.getAttribute('data-index');
-    const changeImages = imagesGallery.map((obj, i) => {
+    const changeImages = getAllImages.map((obj, i) => {
       obj.active = false;
-      imagesGallery[+index].active = true;
+      getAllImages[+index].active = true;
       return obj;
     });
 
-    setImagesGalery(changeImages);
-    setImageActive(imagesGallery[+index]);
+    setAllImages(changeImages);
+    setImageActive(getAllImages[+index]);
   };
 
   const portion = +dataProduct.preco / 12;
@@ -105,7 +86,7 @@ const Product = (props) => {
                 </figure>
 
                 <div className={styles.galeryImages}>
-                  {imagesGallery.map(({ src, titulo, index }, i) => (
+                  {getAllImages.map(({ src, titulo, index }, i) => (
                     <picture key={i} className={imageActive.index === i ? 'active' : ''}>
                       <img
                         src={src}

@@ -15,7 +15,7 @@ const Smartphones = ({ setDataProduct }) => {
       const { url, options } = PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY(
         'eletronicos',
         'celulares_e_telefones',
-        '@MarkfyjXe27jXe',
+        '@Markfyb894a46c',
       );
       console.log(url);
       const response = await request(url, options);
