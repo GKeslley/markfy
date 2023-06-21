@@ -1,0 +1,48 @@
+.userContent {
+  padding: 2rem 0;
+}
+
+.userContent ul {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.userContent ul li svg {
+  background: #e1e1e1;
+  width: 60px;
+  height: 60px;
+  padding: 0.4rem;
+  border-radius: 50%;
+  box-shadow: 0px 0px 2px 4px rgb(206, 206, 206);
+}
+
+.userInfos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.userInfos address,
+.date {
+  font-style: normal;
+  font-size: 0.8rem;
+}
+
+.date {
+  border-left: 1px solid rgb(165, 165, 165);
+  padding-left: 1rem;
+}
+
+.userData,
+.userInfos address {
+  display: flex;
+}
+
+.userInfos address {
+  gap: 0.2rem;
+}
+
+.userData {
+  gap: 1rem;
+}

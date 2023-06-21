@@ -11,6 +11,7 @@ const Input = ({
   onBlur,
   error,
   value,
+  inputMode,
 }) => {
   return (
     <>
@@ -24,6 +25,7 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         value={value}
+        inputMode={inputMode}
       />
       {error && <Error>{error}</Error>}
     </>

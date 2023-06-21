@@ -23,7 +23,7 @@
   gap: 1rem;
 }
 
-.headerContent .headerItem input {
+.headerItem input {
   width: 100%;
   border: none;
   padding: 0.5rem;
@@ -36,13 +36,14 @@
   border-radius: 4px;
 }
 
-svg {
-  fill: #272727;
-}
-
 @media (max-width: 830px) {
   .header {
     padding-bottom: 1rem;
+    background: #0e9162;
+  }
+
+  .header input::placeholder {
+    color: initial;
   }
 
   .headerContent .headerItem {
@@ -50,7 +51,7 @@ svg {
     gap: 1rem;
   }
 
-  .headerItem input {
+  .headerItem form {
     grid-column: 1/-1;
   }
 }

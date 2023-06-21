@@ -15,7 +15,21 @@ const useValidate = (type) => {
   const [value, setValue] = React.useState('');
   const [error, setError] = React.useState('');
 
+  const currencyBRL = (value) => {
+    const number = +value;
+    const formatter = number.toLocaleString('pt-BR', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    });
+    return formatter;
+  };
+
   const onChange = ({ target }) => {
+    if (target.inputMode === 'numeric') {
+      const formatNumber = target.value.replace(/[^0-9]/g, '');
+      const format = currencyBRL(+formatNumber);
+      target.value = 'R$ ' + format;
+    }
     setValue(target.value);
     if (error) {
       validate(value);

@@ -6,9 +6,11 @@ const NavLinks = ({ customMobileStyle }) => {
   return (
     <ul className={customMobileStyle ? customMobileStyle : styles.nav}>
       <div className="container flexAlign">
-        <Dropdown />
-        <li>Meus anúncios</li>
-        <li>Vender</li>
+        <li className={styles.navItem}>
+          <Dropdown />
+        </li>
+        <li className={styles.navItem}>Meus anúncios</li>
+        <li className={styles.navItem}>Vender</li>
       </div>
     </ul>
   );

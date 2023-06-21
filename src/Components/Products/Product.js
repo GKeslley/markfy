@@ -62,7 +62,7 @@ const Product = (props) => {
     setImageActive(getAllImages[+index]);
   };
 
-  const portion = +dataProduct.preco / 12;
+  const portion = +dataProduct.preco.replace(/\D/g, '') / 12;
   const portionPrice = Number.isInteger(portion)
     ? portion
     : portion.toFixed(2).replace('.', ',');
@@ -106,7 +106,7 @@ const Product = (props) => {
                 <li>Frete</li>
                 <li className={styles.productPrice}>
                   <p>R$ {dataProduct.preco}</p>
-                  <span>12x de R$ {portionPrice}</span>
+                  <span>12x de R$ {portionPrice} sem juros</span>
                 </li>
                 <li className={styles.productBtns}>
                   <Button>Comprar</Button>

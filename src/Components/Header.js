@@ -7,13 +7,17 @@ import UserMenu from './Header/UserMenu';
 import NavLinks from './Header/NavLinks';
 import MenuHamburger from './Header/MenuHamburger';
 import useMedia from '../Hooks/useMedia';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const { userData } = React.useContext(GlobalContext);
   const nameUser = userData && userData['nome'];
   const { pathname } = window.location;
   const navigate = useNavigate();
+  const { search } = useLocation();
+  const nameProduct = search.slice(search.indexOf('q'), search.indexOf('&')).split('q=');
+
+  console.log(nameProduct[1]);
 
   const mobileMatch = useMedia('(max-width: 830px)');
 

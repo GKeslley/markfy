@@ -10,11 +10,23 @@ import { PRODUCT_POST } from '../../../Api/api';
 import Error from '../../Helper/Error';
 
 const ProductForm = ({ category, getSubcategory }) => {
+  const [preview, setPreview] = React.useState([]);
+  const imgs = React.useRef();
+  const { request, loading, error } = useFetch();
+
   const nome = useValidate();
   const descricao = useValidate();
   const preco = useValidate();
+  preco.inputMode = 'numeric';
   const navigate = useNavigate();
-  const { request, loading, error } = useFetch();
+
+  React.useEffect(() => {
+    if (!category) {
+      navigate('../categoria');
+    }
+  }, [category, navigate]);
+
+  if (!category) return null;
 
   const productCategory = category.endpoint;
   const productSubcategory = getSubcategory ? getSubcategory.endpoint : null;
@@ -22,16 +34,13 @@ const ProductForm = ({ category, getSubcategory }) => {
   console.log(category);
   console.log(getSubcategory);
 
-  const imgs = React.useRef();
-  const [preview, setPreview] = React.useState([]);
-
   const formDataElements = () => {
     const formData = new FormData();
     const allImgs = imgs.current.files;
     if (nome.validate() && preco.validate() && descricao.validate()) {
       formData.append('nome', nome.value);
       formData.append('descricao', descricao.value);
-      formData.append('preco', preco.value);
+      formData.append('preco', preco.value.replace('R$ ', ''));
       formData.append('categoria', productCategory);
       formData.append('subcategoria', productSubcategory);
       for (let i = 0; i < allImgs.length; i++) {
@@ -94,7 +103,7 @@ const ProductForm = ({ category, getSubcategory }) => {
           disabled
         />
 
-        <Input label="Preço" type="number" name="preco" {...preco} />
+        <Input label="Preço" type="text" name="preco" {...preco} />
         <input
           type="file"
           multiple

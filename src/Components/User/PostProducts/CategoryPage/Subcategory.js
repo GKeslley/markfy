@@ -1,26 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-const toEndpoint = (str) => {
-  const map = {
-    á: 'a',
-    é: 'e',
-    í: 'i',
-    ó: 'o',
-    õ: 'o',
-    ú: 'u',
-    ñ: 'n',
-    ç: 'c',
-    ã: 'a',
-  };
-  return str
-    .toLowerCase()
-    .split('')
-    .map((char) => map[char] || char)
-    .join('')
-    .replace(/ /g, '_')
-    .replace(/,/g, '');
-};
+import { toEndpoint } from './allCategories';
 
 const Subcategory = ({ subcategories, setGetSubcategory }) => {
   const [activeIndex, setActiveIndex] = React.useState();

@@ -6,25 +6,29 @@ import {
   allCategories,
   toEndpoint,
 } from '../User/PostProducts/CategoryPage/allCategories';
+import { IoIosArrowForward } from 'react-icons/io';
 
 const Dropdown = () => {
+  const [activeIndex, setActiveIndex] = React.useState(null);
+
   const refDropdown = React.useRef();
   const categories = allCategories();
 
-  const [activeIndex, setActiveIndex] = React.useState(null);
-
   const activeDropdown = ({ target }) => {
-    target.parentElement.classList.add('active');
+    target.parentElement.classList.toggle('active');
   };
 
   const openSubcategories = (index) => {
     setActiveIndex(index);
   };
 
-  useOutsideClick(refDropdown, () => refDropdown.current.classList.remove('active'));
+  useOutsideClick(refDropdown, () => {
+    refDropdown.current.classList.remove('active');
+    setActiveIndex(null);
+  });
 
   return (
-    <li className={styles.dropdownContent} onClick={activeDropdown} ref={refDropdown}>
+    <div className={styles.dropdownContent} onClick={activeDropdown} ref={refDropdown}>
       <p>Categorias</p>
       <ul className={styles.dropdown}>
         {categories.map(({ name, subcategories, endpoint }, i) => (
@@ -33,7 +37,10 @@ const Dropdown = () => {
               <div
                 className={`${styles.dropdownItens} ${activeIndex === i ? 'active' : ''}`}
               >
-                <p>{name}</p>
+                <div className={styles.subcategorieName}>
+                  <p>{name}</p>
+                  <IoIosArrowForward fill="#fff" />
+                </div>
                 <ul className={styles.subcategoriesContent}>
                   {subcategories.map((title) => (
                     <li key={title}>
@@ -52,7 +59,7 @@ const Dropdown = () => {
           </li>
         ))}
       </ul>
-    </li>
+    </div>
   );
 };
 

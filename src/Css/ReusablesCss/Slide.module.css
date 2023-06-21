@@ -20,10 +20,15 @@
   overflow: hidden;
 }
 
+.slideItems li img {
+  background: #2dd096;
+  height: 240px;
+}
+
 img {
   display: block;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .points {
@@ -49,4 +54,15 @@ img {
   background: #fff;
   width: 8px;
   height: 8px;
+}
+
+.foto {
+  display: block;
+  background-image: url('../../Assets/Slide/foto.png');
+  background-position: center;
+  background: #2dd096;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 340px;
 }

@@ -40,7 +40,7 @@
 }
 
 .category div a {
-  display: inline-block;
+  display: grid;
   position: relative;
   z-index: 1;
   padding: 1.2em;
@@ -65,7 +65,7 @@
 
 .category > div,
 :global(.category_subcategory) li a {
-  display: block;
+  display: grid;
   padding: 1.2rem;
   width: 100%;
 }

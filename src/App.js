@@ -29,6 +29,7 @@ const App = () => {
           <Route path="produtos/:categoria/*" element={<Products />}></Route>
           <Route path="produtos" element={<Products />}></Route>
           <Route path="favoritos" element={<Favorites />}></Route>
+          <Route path="usuario/:user" element={<UserPage />}></Route>
         </Routes>
       </UserContext>
     </BrowserRouter>

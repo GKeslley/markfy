@@ -8,3 +8,15 @@
   font-size: 1.3rem;
   font-weight: 600;
 }
+
+.logo svg {
+  fill: #272727;
+}
+
+@media (max-width: 830px) {
+  .logo a,
+  .logo svg {
+    color: #fff;
+    fill: #fff;
+  }
+}
