@@ -1,82 +1,98 @@
-import React from 'react';
-import styles from '../../Css/ReusablesCss/Slide.module.css';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { debounce } from 'lodash';
+import styles from '../../Css/ReusablesCss/Slide.module.css';
 
 const Slide = ({ imgs }) => {
-  const [currentSlideIndex, setCurrentSlideIndex] = React.useState(1);
-  const [slideTransform, setTransform] = React.useState(100);
-  const [mouseOver, setMouseOver] = React.useState(false);
-  const [touchMoveEnabled, setTouchMoveEnabled] = React.useState(false);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [slideTransform, setSlideTransform] = useState(100);
+  const [mouseOver, setMouseOver] = useState(false);
+  const [touchMoveEnabled, setTouchMoveEnabled] = useState(false);
+  const [touchCoordinates, setTouchCoordinates] = useState(false);
 
-  const [touchCoordinates, setTouchCoordinates] = React.useState({
-    touchStartX: null,
-    touchMoveX: null,
-    coord: null,
-  });
-  const timeoutMoveSlide = React.useRef();
-  const SlideContentRef = React.useRef();
+  const timeoutMoveSlide = useRef();
+  const SlideContentRef = useRef();
 
-  const imagesSrc = imgs.reduce((acc, actual, i) => {
-    const obj = {};
-    obj['img'] = { src: actual, id: i };
-    acc[i] = obj;
-    return acc;
+  const imagesLength = imgs.length - 2;
+  const maxMove = (currentSlideIndex + 1) * 100;
+  const transformStyle = 'transform .3s ease, -webkit-transform .3s ease';
+
+  const imagesSrc = imgs.map((src, i) => ({ src, id: i }));
+
+  const passSlideFromButton = useCallback((index) => {
+    setCurrentSlideIndex(index);
   }, []);
 
-  const imagesLength = imagesSrc.slice(1, -1).length;
-  const maxMove = (currentSlideIndex + 1) * 100;
-
-  const passSlideFromButton = (index) => {
-    setCurrentSlideIndex(index);
-  };
-
-  const handleTouchStart = (event) => {
+  const handleTouchStart = useCallback((event) => {
+    event.preventDefault();
     setTouchMoveEnabled(true);
     const coord = event.touches[0].clientX;
-    setTouchCoordinates({ ...touchCoordinates, touchStartX: coord });
-    // outras ações que você deseja executar no onTouchStart
-  };
+    setTouchCoordinates({ touchStartX: coord, touchMoveX: null, coord: null });
+  }, []);
 
-  const handleTouchEnd = (event) => {
-    if (touchCoordinates.coord === 'right' && slideTransform % 100 !== 0) {
-      setCurrentSlideIndex((prev) => prev + 1);
-    } else if (touchCoordinates.coord === 'left' && slideTransform % 100 !== 0) {
-      setCurrentSlideIndex((prev) => prev - 1);
-    }
-  };
+  const handleTouchEnd = useCallback(
+    (event) => {
+      event.preventDefault();
+      SlideContentRef.current.style.transition = transformStyle;
 
-  const handleTouchMove = (event) => {
-    const coord = event.touches[0].clientX;
+      if (touchCoordinates.coord === 'right' && slideTransform % 100 !== 0) {
+        setCurrentSlideIndex((prev) => prev + 1);
+      } else if (touchCoordinates.coord === 'left' && slideTransform % 100 !== 0) {
+        setCurrentSlideIndex((prev) => prev - 1);
+      }
+      setTouchMoveEnabled(false);
+    },
+    [slideTransform, touchCoordinates],
+  );
 
-    setTouchCoordinates({
-      ...touchCoordinates,
-      touchMoveX: coord,
-      coord:
-        touchCoordinates.touchStartX < touchCoordinates.touchMoveX ? 'left' : 'right',
-    });
-
-    if (touchMoveEnabled && touchCoordinates.coord) {
-      if (touchCoordinates.coord === 'left') {
-        setTransform((prev) => prev - 1);
-      } else if (touchCoordinates.coord === 'right') {
-        setTransform((prev) => prev + 1);
+  const handleTouchMove = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (currentSlideIndex === 0 || currentSlideIndex >= imagesLength + 1) {
+        setCurrentSlideIndex(1);
       }
 
-      if (slideTransform >= maxMove) {
-        setTransform(maxMove);
-      }
-    }
-  };
+      const coord = event.touches[0].clientX;
+      SlideContentRef.current.style.transition = 'none 0s ease 0s';
+      const newCoordinates = {
+        touchStartX: touchCoordinates.touchStartX,
+        touchMoveX: coord,
+        coord: touchCoordinates.touchStartX < coord ? 'left' : 'right',
+      };
+      setTouchCoordinates(newCoordinates);
 
-  React.useEffect(() => {
-    if (!mouseOver) {
-      timeoutMoveSlide.current = setTimeout(() => {
-        setCurrentSlideIndex((prev) => {
-          if (prev < imagesLength + 1) {
-            return prev + 1;
-          } else return 0;
+      if (touchMoveEnabled && newCoordinates.coord) {
+        setSlideTransform((prev) => {
+          if (newCoordinates.coord === 'left') return prev - 1;
+          if (newCoordinates.coord === 'right') return prev + 1;
+          return prev;
         });
-      }, 3000);
+
+        if (slideTransform >= maxMove) {
+          setSlideTransform(maxMove);
+        }
+      }
+    },
+    [
+      slideTransform,
+      touchCoordinates,
+      touchMoveEnabled,
+      maxMove,
+      currentSlideIndex,
+      imagesLength,
+    ],
+  );
+
+  useEffect(() => {
+    const handleSlideTimeout = debounce(() => {
+      setCurrentSlideIndex((prev) => {
+        if (prev < imagesLength + 1) {
+          return prev + 1;
+        } else return 0;
+      });
+    }, 3000);
+
+    if (!mouseOver || touchMoveEnabled) {
+      timeoutMoveSlide.current = setTimeout(handleSlideTimeout, 3000);
     }
 
     const transitionInfinite = setTimeout(() => {
@@ -87,22 +103,22 @@ const Slide = ({ imgs }) => {
         SlideContentRef.current.style.transition = 'none';
         setCurrentSlideIndex(imagesLength);
       }
-    }, 400);
+    }, 300);
 
     const transitionAll = setTimeout(() => {
       if (currentSlideIndex !== imagesLength + 1 && currentSlideIndex !== 0) {
-        SlideContentRef.current.style.transition = '0.4s';
+        SlideContentRef.current.style.transition = transformStyle;
       }
     }, 100);
 
-    setTransform(currentSlideIndex * 100);
+    setSlideTransform(currentSlideIndex * 100);
 
     return () => {
       clearTimeout(timeoutMoveSlide.current);
       clearTimeout(transitionInfinite);
       clearTimeout(transitionAll);
     };
-  }, [currentSlideIndex, imagesLength, mouseOver]);
+  }, [currentSlideIndex, imagesLength, mouseOver, touchMoveEnabled]);
 
   return (
     <section
@@ -116,10 +132,11 @@ const Slide = ({ imgs }) => {
       onTouchEnd={handleTouchEnd}
     >
       <div className={styles.points}>
-        {imagesSrc.slice(1, -1).map(({ img }, i) => (
+        {imagesSrc.slice(1, -1).map(({ id }, i) => (
           <span
-            key={img.id}
+            key={id}
             onClick={() => passSlideFromButton(i + 1)}
+            onTouchStart={() => passSlideFromButton(i + 1)}
             className={currentSlideIndex === i + 1 ? 'active' : ''}
           ></span>
         ))}
@@ -130,21 +147,21 @@ const Slide = ({ imgs }) => {
         ref={SlideContentRef}
       >
         <li data-index="-1">
-          <img src={imagesSrc[0].img.src} alt="imagem" />
+          <img src={imagesSrc[0].src} alt="imagem" />
         </li>
 
-        {imagesSrc.slice(1, -1).map(({ img }, i) => (
+        {imagesSrc.slice(1, -1).map(({ id, src }, i) => (
           <li
-            key={img.id}
-            data-index={img.id}
-            className={currentSlideIndex === i ? 'active' : ''}
+            key={id}
+            data-index={id}
+            className={currentSlideIndex === i + 1 ? 'active' : ''}
           >
-            <img src={img.src} alt={img.src} />
+            <img src={src} alt={src} />
           </li>
         ))}
 
-        <li data-index={imagesSrc[imagesSrc.length - 1].img.id}>
-          <img src={imagesSrc[imagesSrc.length - 1].img.src} alt="imagem" />
+        <li data-index={imagesSrc[imagesSrc.length - 1].id}>
+          <img src={imagesSrc[imagesSrc.length - 1].src} alt="imagem" />
         </li>
       </ul>
     </section>
