@@ -86,24 +86,3 @@
   max-height: 11rem;
   min-height: 11rem;
 }
-
-.paginationBtns {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.paginationBtns li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.paginationBtns .btnAnt,
-.paginationBtns .btnProx {
-  cursor: pointer;
-}
-
-.paginationBtns li svg {
-  margin-top: 2px;
-}

@@ -24,7 +24,6 @@ const usePagination = () => {
   }, [order]);
 
   React.useEffect(() => {
-    console.log('teste');
     setActualPage(initialPage);
   }, [initialPage]);
 

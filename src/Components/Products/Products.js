@@ -4,12 +4,13 @@ import useFetch from '../../Hooks/useFetch';
 import { PRODUCTS_GET_BY_CATEGORY } from '../../Api/api';
 import usePagination from '../../Hooks/usePagination';
 import styles from '../../Css/Products/Products.module.css';
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+
 import Select from '../Form/Select';
 import {
   allCategories,
   toEndpoint,
 } from '../User/PostProducts/CategoryPage/allCategories';
+import Pagination from '../Reusable/Pagination';
 
 const Products = ({ searchProduct }) => {
   const {
@@ -64,7 +65,7 @@ const Products = ({ searchProduct }) => {
       console.log(json);
       const total = response.headers.get('x-total-count');
       const totalItensPerPage = 9;
-      const isInt = Number.isInteger(+total / 9);
+      const isInt = Number.isInteger(+total / totalItensPerPage);
       setTotalPages({
         pages: isInt
           ? +total / totalItensPerPage
@@ -72,7 +73,6 @@ const Products = ({ searchProduct }) => {
         totalItens: total,
       });
     };
-
     getProducts();
     navigate(newUrl);
   }, [
@@ -144,23 +144,12 @@ const Products = ({ searchProduct }) => {
             },
           )}
       </ul>
-      <ul className={styles.paginationBtns}>
-        {actualPage <= totalPages.pages && actualPage > 1 && totalPages.pages > 0 && (
-          <li className={styles.btnAnt} onClick={handlePageAnt}>
-            <IoIosArrowBack />
-            <p>Anterior</p>
-          </li>
-        )}
-
-        {totalPages.pages > 0 && <li>{`${actualPage} de ${totalPages.pages}`}</li>}
-
-        {actualPage !== totalPages.pages && totalPages.pages > 0 && (
-          <li className={styles.btnProx} onClick={handlePageProx}>
-            <p>Próximo</p>
-            <IoIosArrowForward />
-          </li>
-        )}
-      </ul>
+      <Pagination
+        handlePageAnt={handlePageAnt}
+        handlePageProx={handlePageProx}
+        totalPages={totalPages}
+        actualPage={actualPage}
+      />
     </section>
   );
 };

@@ -23,7 +23,6 @@ const Slide = ({ imgs }) => {
   }, []);
 
   const handleTouchStart = useCallback((event) => {
-    event.preventDefault();
     setTouchMoveEnabled(true);
     const coord = event.touches[0].clientX;
     setTouchCoordinates({ touchStartX: coord, touchMoveX: null, coord: null });
@@ -31,7 +30,6 @@ const Slide = ({ imgs }) => {
 
   const handleTouchEnd = useCallback(
     (event) => {
-      event.preventDefault();
       SlideContentRef.current.style.transition = transformStyle;
 
       if (touchCoordinates.coord === 'right' && slideTransform % 100 !== 0) {
@@ -46,7 +44,6 @@ const Slide = ({ imgs }) => {
 
   const handleTouchMove = useCallback(
     (event) => {
-      event.preventDefault();
       if (currentSlideIndex === 0 || currentSlideIndex >= imagesLength + 1) {
         setCurrentSlideIndex(1);
       }
@@ -68,6 +65,7 @@ const Slide = ({ imgs }) => {
         });
 
         if (slideTransform >= maxMove) {
+          console.log('aq');
           setSlideTransform(maxMove);
         }
       }
