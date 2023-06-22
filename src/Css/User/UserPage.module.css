@@ -46,3 +46,47 @@
 .userData {
   gap: 1rem;
 }
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.links::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #e1e1e1;
+  position: absolute;
+  display: block;
+  left: 0;
+  margin-top: 2rem;
+}
+
+.links li a {
+  position: relative;
+}
+
+.links li a:global(.active)::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #2dd096;
+  position: absolute;
+  display: block;
+  top: 0px;
+  z-index: 100;
+  margin-top: 2rem;
+}
+
+@media (max-width: 400px) {
+  .userData {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .date {
+    border-left: none;
+    padding-left: 0;
+  }
+}
