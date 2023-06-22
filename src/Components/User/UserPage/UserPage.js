@@ -1,38 +1,32 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, NavLink } from 'react-router-dom';
 import useFetch from '../../../Hooks/useFetch';
-import { PRODUCTS_GET, USER_OTHER_GET } from '../../../Api/api';
+import { USER_OTHER_GET } from '../../../Api/api';
 import { ReactComponent as UserImg } from '../../../Assets/user-svgrepo-com.svg';
 import styles from '../../../Css/User/UserPage.module.css';
+import ProductsForSale from './ProductsForSale';
+import ProductsSold from './ProductsSold';
 
 const UserPage = () => {
   const [user, setUser] = React.useState(null);
-  const [products, setProducts] = React.useState(null);
 
-  const userName = useLocation().pathname.split('/')[2].trim();
+  const username = useLocation().pathname.split('/')[2].trim();
   const { request } = useFetch();
 
   React.useEffect(() => {
     const getUser = async () => {
-      const endpointUser = USER_OTHER_GET(userName.replace('@', ''));
-      const endpointProducts = PRODUCTS_GET({ page: '1', total: '9', user: userName });
-
-      const dataUser = await request(endpointUser.url, endpointUser.options);
-
-      const dataProducts = await request(endpointProducts.url, endpointProducts.options);
-
+      const { url, options } = USER_OTHER_GET(username.replace('@', ''));
+      const dataUser = await request(url, options);
       setUser(dataUser.json);
-      setProducts(dataProducts.json);
     };
     getUser();
-  }, [request, userName]);
+  }, [request, username]);
 
   console.log(user);
-  console.log(products);
   if (!user) return null;
   return (
     <>
-      {Object.values(user).length && products.length && (
+      {Object.values(user).length && (
         <section className="container">
           <div className={styles.userContent}>
             <ul>
@@ -56,11 +50,21 @@ const UserPage = () => {
             </ul>
           </div>
 
-          <div>
-            <ul>
-              <li></li>
-            </ul>
-          </div>
+          <ul className={styles.links}>
+            <li>
+              <NavLink to="" end>
+                À venda
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="vendidos">Vendidos</NavLink>
+            </li>
+          </ul>
+
+          <Routes>
+            <Route path="/" element={<ProductsForSale username={username} />}></Route>
+            <Route path="vendidos" element={<ProductsSold />}></Route>
+          </Routes>
         </section>
       )}
     </>
