@@ -37,6 +37,7 @@
   right: 0;
   cursor: pointer;
   padding: 0.4rem;
+  z-index: 100;
 }
 
 .productLike svg {
@@ -164,5 +165,13 @@
   .productPrice span,
   .productBtns {
     max-width: none;
+  }
+
+  .productContent {
+    padding: 1rem 1.5rem;
+  }
+
+  .productInfos {
+    padding: 0;
   }
 }

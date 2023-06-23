@@ -1,0 +1,32 @@
+.carousel {
+  display: flex;
+  overflow: hidden;
+}
+
+.carouselContent {
+  display: flex;
+  height: 500px;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+.dragger {
+  display: flex;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.dragger picture {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dragger picture img {
+  width: 100%;
+  height: 100%;
+}
