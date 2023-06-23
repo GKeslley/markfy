@@ -2,22 +2,25 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import styles from '../../Css/Products/Product.module.css';
 import useFetch from '../../Hooks/useFetch';
+import useMedia from '../../Hooks/useMedia';
 import { PRODUCT_GET } from '../../Api/api';
 import Button from '../Reusable/Button';
 import { GlobalContext } from '../../Hooks/UserContext';
 import UserProduct from './UserProduct';
 import Comments from './Comments';
 import LikeProduct from './LikeProduct';
+import CarouselImages from './Mobile/CarouselImages';
 
-const Product = (props) => {
-  const { request, data: dataProduct } = useFetch();
-  const { slug } = useParams();
-  const { userData } = React.useContext(GlobalContext);
-
+const Product = () => {
   const [getAllImages, setAllImages] = React.useState([]);
   const [imageActive, setImageActive] = React.useState(null);
 
-  console.log(dataProduct);
+  const { request, data: dataProduct } = useFetch();
+  const { slug } = useParams();
+  const { userData } = React.useContext(GlobalContext);
+  const match = useMedia('(max-width: 830px)');
+
+  console.log(match);
 
   React.useEffect(() => {
     if (dataProduct) {
@@ -74,33 +77,39 @@ const Product = (props) => {
           <div className={styles.productContent}>
             <article className={styles.productAndInfos}>
               <LikeProduct slug={slug} userID={userData.usuario_id} />
-              <div className={styles.productImages}>
-                <figure>
-                  <img
-                    src={imageActive.src}
-                    alt={imageActive.titulo}
-                    data-index={imageActive.index}
-                    width={250}
-                    height={500}
-                  />
-                </figure>
+              {!match ? (
+                <div className={styles.productImages}>
+                  <figure>
+                    <img
+                      src={imageActive.src}
+                      alt={imageActive.titulo}
+                      data-index={imageActive.index}
+                      width={250}
+                      height={500}
+                    />
+                  </figure>
 
-                <div className={styles.galeryImages}>
-                  {getAllImages.map(({ src, titulo, index }, i) => (
-                    <picture key={i} className={imageActive.index === i ? 'active' : ''}>
-                      <img
-                        src={src}
-                        alt={titulo}
-                        width={44}
-                        height={44}
-                        data-index={index}
-                        onMouseOver={handleChangeImage}
-                      />
-                    </picture>
-                  ))}
+                  <div className={styles.galeryImages}>
+                    {getAllImages.map(({ src, titulo, index }, i) => (
+                      <picture
+                        key={i}
+                        className={imageActive.index === i ? 'active' : ''}
+                      >
+                        <img
+                          src={src}
+                          alt={titulo}
+                          width={44}
+                          height={44}
+                          data-index={index}
+                          onMouseOver={handleChangeImage}
+                        />
+                      </picture>
+                    ))}
+                  </div>
                 </div>
-              </div>
-
+              ) : (
+                <CarouselImages images={getAllImages} />
+              )}
               <ul className={styles.productInfos}>
                 <li className={styles.productName}>{dataProduct.nome}</li>
                 <li>Frete</li>
