@@ -1,0 +1,93 @@
+.categoriesHome {
+  padding-bottom: 2rem;
+}
+
+.categoriesHome-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.categoriesHome-element {
+  padding: 3rem 2rem;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.1);
+  max-width: 20rem;
+  min-width: 20rem;
+  max-height: 13rem;
+  min-height: 13rem;
+  position: relative;
+}
+
+.categoriesHome-element:first-child::before,
+.categoriesHome-element:last-child::before,
+.categoriesHome-element:nth-child(2)::before {
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  filter: grayscale(0.2);
+  transition: 0.3s;
+}
+
+.categoriesHome-element:first-child:hover::before,
+.categoriesHome-element:last-child:hover::before,
+.categoriesHome-element:hover:nth-child(2)::before {
+  filter: grayscale(0.8);
+}
+
+.categoriesHome-element:first-child::before {
+  background: url('../../Assets/shoe.png') no-repeat center center;
+  background-size: cover;
+}
+
+.categoriesHome-element:last-child::before {
+  background: url('../../Assets/stair.png') no-repeat center center;
+  background-size: cover;
+}
+
+.categoriesHome-element:nth-child(2)::before {
+  background: url('../../Assets/cream.png') no-repeat center center;
+  background-size: contain;
+}
+
+.categoriesHome-text span {
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+.categoriesHome-text b {
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+
+.categoriesHome-text p {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.categoriesHome-text a {
+  background: #689f38;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  align-self: self-start;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.categoriesHome-text a:hover {
+  background: #446b22;
+}
+
+.categoriesHome-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: absolute;
+  top: 40px;
+}

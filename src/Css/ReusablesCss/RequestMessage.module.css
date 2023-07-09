@@ -17,6 +17,7 @@
   border-radius: 4px;
   border: 1px solid #0e9162;
   animation: animation 0.3s forwards;
+  z-index: 300;
 }
 
 .notification svg {
@@ -29,5 +30,12 @@
   }
   to {
     transform: initial;
+  }
+}
+
+@media (max-width: 830px) {
+  .notification {
+    bottom: auto;
+    top: 0px;
   }
 }

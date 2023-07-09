@@ -145,7 +145,7 @@ const Slide = ({ imgs }) => {
         ref={SlideContentRef}
       >
         <li data-index="-1">
-          <img src={imagesSrc[0].src} alt="imagem" />
+          <img src={imagesSrc[0].src} alt="imagem" className="container" />
         </li>
 
         {imagesSrc.slice(1, -1).map(({ id, src }, i) => (
@@ -154,12 +154,16 @@ const Slide = ({ imgs }) => {
             data-index={id}
             className={currentSlideIndex === i + 1 ? 'active' : ''}
           >
-            <img src={src} alt={src} />
+            <img src={src} alt={src} className="container" />
           </li>
         ))}
 
         <li data-index={imagesSrc[imagesSrc.length - 1].id}>
-          <img src={imagesSrc[imagesSrc.length - 1].src} alt="imagem" />
+          <img
+            src={imagesSrc[imagesSrc.length - 1].src}
+            alt="imagem"
+            className="container"
+          />
         </li>
       </ul>
     </section>

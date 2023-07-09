@@ -1,17 +1,18 @@
 .dropdownContent {
   position: relative;
-  z-index: 10;
+  z-index: 200;
   padding: 10px;
 }
 
 .dropdown {
   display: none;
-  padding-top: 0.5rem;
+  padding-top: 1rem;
   padding-bottom: 0.5rem;
   flex-direction: column;
   position: absolute;
   margin-top: 10px;
   background: #272727;
+  color: #fff;
   top: 25px;
   white-space: nowrap;
   animation: show-up 0.3s forwards;

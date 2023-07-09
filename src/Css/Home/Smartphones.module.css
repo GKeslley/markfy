@@ -1,6 +1,5 @@
 .carouselContent {
   margin-top: 4rem;
-  margin-bottom: 4rem;
   position: relative;
 }
 
@@ -85,7 +84,7 @@
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   padding: 12px;
   cursor: pointer;
-  z-index: 100;
+  z-index: 90;
 }
 
 .buttonRight:hover,

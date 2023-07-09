@@ -52,9 +52,7 @@ const Dropdown = () => {
                 </ul>
               </div>
             ) : (
-              <Link style={{ padding: '0 1rem 1rem 1rem' }} to={`produtos/${endpoint}`}>
-                {name}
-              </Link>
+              <Link to={`produtos/${endpoint}`}>{name}</Link>
             )}
           </li>
         ))}

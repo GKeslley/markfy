@@ -11,7 +11,7 @@ const UserMenu = ({ nameUser, mobileMatch, customMobileStyle }) => {
 
       <li>
         {nameUser ? (
-          <Link to="/conta" className="user">
+          <Link to="/conta/perfil" className="user">
             <UserImg />
             {nameUser}
           </Link>

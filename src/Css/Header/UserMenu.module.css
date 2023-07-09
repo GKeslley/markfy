@@ -8,6 +8,7 @@
 .sectionsContent li a {
   display: flex;
   align-items: center;
+  color: #fff;
 }
 
 @media (max-width: 830px) {

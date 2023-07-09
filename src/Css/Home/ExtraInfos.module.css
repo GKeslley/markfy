@@ -1,0 +1,43 @@
+.extraInfos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #f0efef;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.extraInfosItem {
+  display: flex;
+  flex: 1 1 25%;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  max-width: max-content;
+}
+
+.extraInfosItem:nth-child(2n-1),
+.extraInfosItem:nth-child(2n) {
+  flex-basis: 50%;
+}
+
+.extraInfosItem > div {
+  flex-direction: row;
+  gap: 1rem;
+  display: flex;
+  place-content: center flex-start;
+  align-items: center;
+}
+
+.extraInfosItem svg {
+  width: 36px;
+  height: 36px;
+}
+
+.extraInfosItem-title {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
