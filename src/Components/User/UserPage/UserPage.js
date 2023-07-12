@@ -4,8 +4,8 @@ import useFetch from '../../../Hooks/useFetch';
 import { USER_OTHER_GET } from '../../../Api/api';
 import { ReactComponent as UserImg } from '../../../Assets/user-svgrepo-com.svg';
 import styles from '../../../Css/User/UserPage.module.css';
-import ProductsForSale from './ProductsForSale';
-import ProductsSold from './ProductsSold';
+import ProductsForSale from '../Account/ProductsForSale';
+import ProductsSold from '../Account/ProductsSold';
 
 const UserPage = () => {
   const [user, setUser] = React.useState(null);
