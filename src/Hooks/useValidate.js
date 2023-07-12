@@ -1,4 +1,5 @@
 import React from 'react';
+import useFormatter from './useFormatter';
 
 const types = {
   email: {
@@ -9,12 +10,20 @@ const types = {
     regex: /^.{6,}$/,
     message: 'A senha deve possuir no mínimo 6 caracteres',
   },
+  cep: {
+    regex: /^[0-9]{5}-[0-9]{3}$/,
+    message: 'Digite um cep válido',
+  },
+  phone: {
+    regex: /(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/,
+    message: 'Digite um número valido',
+  },
 };
 
 const useValidate = (type) => {
   const [value, setValue] = React.useState('');
   const [error, setError] = React.useState('');
-
+  const { formatValue } = useFormatter();
   const currencyBRL = (value) => {
     const number = +value;
     const formatter = number.toLocaleString('pt-BR', {
@@ -30,15 +39,14 @@ const useValidate = (type) => {
       const format = currencyBRL(+formatNumber);
       target.value = 'R$ ' + format;
     }
-    setValue(target.value);
+    setValue(formatValue({ format: type, value: target.value }));
     if (error) {
       validate(value);
     }
   };
-
   const validate = (value) => {
-    if (value === false) return true;
-    if (value.length === 0) {
+    if (type === false) return true;
+    if (value.length < 1) {
       setError('Preencha um valor');
       return false;
     } else if (types[type] && !types[type].regex.test(value)) {

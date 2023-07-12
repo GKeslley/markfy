@@ -11,6 +11,7 @@ export const UserContext = ({ children }) => {
   const [userData, setUserData] = React.useState(null);
   const [favoriteProducts, setFavoriteProducts] = React.useState(null);
 
+  console.log(userData);
   const userLogin = async (email, password) => {
     const { url, options } = LOGIN_USER_POST({
       username: email,
