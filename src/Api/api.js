@@ -13,13 +13,14 @@ export const POST_USER = (body) => {
   };
 };
 
-export const UPDATE_USER = (body) => {
+export const UPDATE_USER = ({ body, token }) => {
   return {
     url: API_URL + '/api/usuario',
     options: {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
       },
       body: JSON.stringify(body),
     },
@@ -170,6 +171,20 @@ export const LIKE_PRODUCT_POST = ({ body, token }) => {
   };
 };
 
+export const POST_USER_ADDRESS = ({ body, token }) => {
+  return {
+    url: API_URL + '/api/endereco',
+    options: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+};
+
 export const LIKE_PRODUCTS_GET = ({ page, total, user }) => {
   return {
     url: `${API_URL}/api/curtidas/?_page=${page}&_total=${total}&_user=${user}`,
@@ -202,6 +217,27 @@ export const LIKE_PRODUCT_GET = ({ slug, token }) => {
         Authorization: `Bearer ${token}`,
       },
       cache: 'no-store',
+    },
+  };
+};
+
+// FORM
+
+export const GET_STATES = () => {
+  return {
+    url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome',
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
+
+export const GET_CITIES = (state) => {
+  return {
+    url: `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios?orderBy=nome`,
+    options: {
+      method: 'GET',
     },
   };
 };
