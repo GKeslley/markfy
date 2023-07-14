@@ -1,6 +1,7 @@
 import React from 'react';
 import Error from '../Helper/Error';
 import styles from '../../Css/Form/Input.module.css';
+import RequiredInput from '../Reusable/RequiredInput';
 
 const Input = ({
   label,
@@ -14,12 +15,14 @@ const Input = ({
   value,
   inputMode,
   maxLength,
+  required,
 }) => {
   return (
     <>
       {!placeholder && (
         <label htmlFor={name} style={{ display: 'block', marginBottom: '0.5rem' }}>
           {label}
+          {required && <RequiredInput />}
         </label>
       )}
       <input
@@ -33,6 +36,7 @@ const Input = ({
         value={value}
         inputMode={inputMode}
         maxLength={maxLength}
+        required={required}
       />
       {error && <Error>{error}</Error>}
     </>
