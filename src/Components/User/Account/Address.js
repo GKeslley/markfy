@@ -116,14 +116,26 @@ const Address = ({ userData }) => {
     <div className={`${styles.address} container`}>
       <form onChange={handleChangeForm} onSubmit={handleSubmitForm}>
         <div>
-          <Input type="text" name="cep" label="CEP" {...cep} />
+          <Input type="text" name="cep" label="CEP" required={true} {...cep} />
         </div>
         <div className={styles['address-element']}>
           <div className={styles['address-element-input']}>
-            <Input type="text" name="endereco" label="Endereço" {...address} />
+            <Input
+              type="text"
+              name="endereco"
+              label="Endereço"
+              required={true}
+              {...address}
+            />
           </div>
           <div className={styles['address-element-input']}>
-            <Input type="number" name="numero" label="Número" {...numberHouse} />
+            <Input
+              type="number"
+              name="numero"
+              label="Número"
+              required={true}
+              {...numberHouse}
+            />
           </div>
           <div className={styles['address-element-input']}>
             <Input type="text" name="complemento" label="Complemento" {...complement} />
@@ -131,7 +143,13 @@ const Address = ({ userData }) => {
         </div>
         <div className={styles['address-element']}>
           <div className={styles['address-element-input']}>
-            <Input type="text" name="bairro" label="Bairro" {...neighborhood} />
+            <Input
+              type="text"
+              name="bairro"
+              label="Bairro"
+              required={true}
+              {...neighborhood}
+            />
           </div>
           <div className={styles['address-element-input']}>
             <SelectState

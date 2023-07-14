@@ -38,10 +38,12 @@ export const UserContext = ({ children }) => {
 
   const getFavoriteProducts = React.useCallback(async () => {
     const { url, options } = LIKE_PRODUCTS_GET({ user: userData.usuario_id });
-    const response = await request(url, options);
-    if (response.response.ok) {
-      setFavoriteProducts(response.json);
+    const { response, json } = await request(url, options);
+    if (!response.ok) {
+      setFavoriteProducts(false);
+      return response;
     }
+    setFavoriteProducts(json);
     return response;
   }, [request, userData]);
 

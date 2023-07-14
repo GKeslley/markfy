@@ -10,6 +10,7 @@ const Favorites = () => {
   const { favoriteProducts, getFavoriteProducts } = React.useContext(GlobalContext);
   const { unlikeProduct } = useUnlikeProduct({ getFavoriteProducts });
 
+  if (favoriteProducts === false) return <p>N tem itens</p>;
   if (!favoriteProducts) return null;
   return (
     <section className={`${styles.productsContent} container`}>

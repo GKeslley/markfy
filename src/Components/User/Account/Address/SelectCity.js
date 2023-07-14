@@ -2,6 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import { GET_CITIES } from '../../../../Api/api';
 import useFetch from '../../../../Hooks/useFetch';
+import RequiredInput from '../../../Reusable/RequiredInput';
 
 const SelectCity = ({ states, dataAddress, setDataAddress, selectStyle }) => {
   const [cities, setCities] = React.useState([]);
@@ -37,7 +38,10 @@ const SelectCity = ({ states, dataAddress, setDataAddress, selectStyle }) => {
 
   return (
     <div>
-      <p style={{ marginBottom: '0.5rem' }}>Cidade</p>
+      <div style={{ display: 'flex' }}>
+        <p style={{ marginBottom: '0.5rem' }}>Cidade</p>
+        <RequiredInput />
+      </div>
       <Select
         options={citiesArr}
         onChange={handleChange}

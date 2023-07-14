@@ -2,6 +2,7 @@ import React from 'react';
 import { GET_STATES } from '../../../../Api/api';
 import useFetch from '../../../../Hooks/useFetch';
 import Select from 'react-select';
+import RequiredInput from '../../../Reusable/RequiredInput';
 
 const SelectState = ({ setStates, states, dataAddress, setDataAddress, selectStyle }) => {
   const { request, loading } = useFetch();
@@ -29,7 +30,10 @@ const SelectState = ({ setStates, states, dataAddress, setDataAddress, selectSty
 
   return (
     <div>
-      <p style={{ marginBottom: '0.5rem' }}>Estado</p>
+      <div style={{ display: 'flex' }}>
+        <p style={{ marginBottom: '0.5rem' }}>Estado</p>
+        <RequiredInput />
+      </div>
       <Select
         options={statesArr}
         onChange={handleChange}
@@ -37,6 +41,7 @@ const SelectState = ({ setStates, states, dataAddress, setDataAddress, selectSty
         aria-label="Estado"
         value={{ value: dataAddress.uf, label: dataAddress.uf }}
         placeholder="Selecione seu Estado"
+        required={true}
         styles={{
           control: (baseStyles, state) => ({
             ...baseStyles,

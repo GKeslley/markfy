@@ -4,13 +4,13 @@ import { UNLIKE_PRODUCT } from '../Api/api';
 
 const useUnlikeProduct = ({ getFavoriteProducts }) => {
   const { request, loading, error } = useFetch();
-
   const unlikeProduct = React.useCallback(
     async (slug) => {
       const token = localStorage.getItem('token');
       if (token) {
         const { url, options } = UNLIKE_PRODUCT({ slug, token });
-        const { response } = await request(url, options);
+        const { response, json } = await request(url, options);
+        console.log(response, json);
         if (response.ok) {
           getFavoriteProducts();
         }

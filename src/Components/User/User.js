@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route, NavLink, Link } from 'react-router-dom';
 import Aside from '../Aside';
 import ProductForm from './PostProducts/ProductForm';
 import Settings from './Settings';
@@ -8,6 +8,9 @@ import ProductCategory from './PostProducts/CategoryPage/ProductCategory';
 import Profile from './Account/Profile';
 import Address from './Account/Address';
 import { GlobalContext } from '../../Hooks/UserContext';
+import { AiFillHome, AiFillProfile } from 'react-icons/ai';
+import { BsFillBagCheckFill } from 'react-icons/bs';
+import { IoSettingsSharp } from 'react-icons/io5';
 
 const User = () => {
   const { userData } = React.useContext(GlobalContext);
@@ -15,21 +18,32 @@ const User = () => {
   const [getSubcategory, setGetSubcategory] = React.useState(null);
 
   return (
-    <section className={styles.contaContent}>
+    <section className={styles.user}>
       <Aside>
-        <ul className="container">
+        <ul>
           <li>
-            <NavLink to="perfil">Minha conta</NavLink>
-            <ul>
-              <NavLink to="perfil">Perfil</NavLink>
-              <NavLink to="endereco">Endereço</NavLink>
-            </ul>
+            <NavLink to="perfil" className={styles['user-element']}>
+              <AiFillProfile />
+              <p>Perfil</p>
+            </NavLink>
           </li>
           <li>
-            <NavLink to="produto/categoria">Adicionar produto</NavLink>
+            <NavLink to="endereco">
+              <AiFillHome />
+              <p>Endereço</p>
+            </NavLink>
           </li>
           <li>
-            <NavLink to="configuracoes">Configurações</NavLink>
+            <NavLink to="produto/categoria">
+              <BsFillBagCheckFill />
+              <p>Adicionar produto</p>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="configuracoes">
+              <IoSettingsSharp />
+              <p>Configurações</p>
+            </NavLink>
           </li>
         </ul>
       </Aside>

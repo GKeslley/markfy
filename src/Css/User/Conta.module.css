@@ -1,5 +1,37 @@
-.contaContent {
+.user {
   display: grid;
   grid-template-columns: 0.3fr 1fr;
   height: 100vh;
+}
+
+.user a svg {
+  width: 24px;
+  height: 24px;
+  fill: #272727;
+  left: 1rem;
+}
+
+@media (max-width: 830px) {
+  .user {
+    grid-template-columns: 1fr;
+    height: 100%;
+  }
+
+  .user ul {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+    overflow-x: auto;
+  }
+
+  .user ul li {
+    min-width: 10rem;
+    max-width: 10rem;
+  }
+
+  .user a {
+    flex-direction: column;
+    border: none;
+  }
 }

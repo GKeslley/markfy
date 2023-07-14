@@ -11,10 +11,12 @@
 
 .address-element {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
 }
 
 .address-element .address-element-input {
-  width: 100%;
+  width: max-content;
+  flex-grow: 1;
 }

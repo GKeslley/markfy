@@ -11,6 +11,7 @@
 
 .profile-att-photo {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 1.5rem;
@@ -49,12 +50,14 @@
 
 .profile-form .profile-form-name-phone {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
 .profile-form .profile-form-name-phone div {
-  width: 100%;
+  width: max-content;
+  flex-grow: 1;
 }
 
 .profile-form label {

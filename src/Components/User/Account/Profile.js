@@ -82,13 +82,13 @@ const Profile = ({ userData }) => {
       >
         <div className={styles['profile-form-name-phone']}>
           <div className={styles['profile-form-element']}>
-            <Input type="text" name="name" label="Nome" {...name} />
+            <Input type="text" name="name" label="Nome" required={true} {...name} />
           </div>
           <div className={styles['profile-form-element']}>
             <Input type="tel" name="phone" label="Telefone celular" {...phone} />
           </div>
         </div>
-        <Input type="email" name="email" label="Email" {...email} />
+        <Input type="email" name="email" label="Email" {...email} required={true} />
         {loading ? (
           <button type="submit" className="button" disabled>
             Carregando...
