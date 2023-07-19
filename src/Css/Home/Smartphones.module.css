@@ -7,14 +7,20 @@
   padding-bottom: 1.2rem;
 }
 
-.smartphones {
+.skeleton {
+  display: flex;
+}
+
+.smartphones,
+.skeleton {
   scroll-behavior: smooth;
   overflow-x: hidden;
   gap: 1rem;
   padding-bottom: 4rem;
 }
 
-.smartphones li {
+.smartphones li,
+.skeleton span {
   width: 25%;
   min-width: 13rem;
   flex-shrink: 0;

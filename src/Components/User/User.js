@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, NavLink, Link } from 'react-router-dom';
+import { Routes, Route, NavLink, Link, useParams } from 'react-router-dom';
 import Aside from '../Aside';
 import ProductForm from './PostProducts/ProductForm';
 import Settings from './Settings';
@@ -16,6 +16,7 @@ const User = () => {
   const { userData } = React.useContext(GlobalContext);
   const [category, setCategory] = React.useState(null);
   const [getSubcategory, setGetSubcategory] = React.useState(null);
+  const params = useParams();
 
   return (
     <section className={styles.user}>
@@ -34,7 +35,10 @@ const User = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="produto/categoria">
+            <NavLink
+              to="produto/categoria"
+              className={`${params['*'].includes('produto/form') ? 'active' : ''}`}
+            >
               <BsFillBagCheckFill />
               <p>Adicionar produto</p>
             </NavLink>

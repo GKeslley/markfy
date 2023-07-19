@@ -2,10 +2,11 @@ import React from 'react';
 import { Routes, Route, useLocation, NavLink } from 'react-router-dom';
 import useFetch from '../../../Hooks/useFetch';
 import { USER_OTHER_GET } from '../../../Api/api';
-import { ReactComponent as UserImg } from '../../../Assets/user-svgrepo-com.svg';
+
 import styles from '../../../Css/User/UserPage.module.css';
 import ProductsForSale from '../Account/ProductsForSale';
 import ProductsSold from '../Account/ProductsSold';
+import ProfilePhoto from '../ProfilePhoto';
 
 const UserPage = () => {
   const [user, setUser] = React.useState(null);
@@ -31,9 +32,7 @@ const UserPage = () => {
           <div className={styles.userContent}>
             <ul>
               <li>
-                <picture>
-                  <UserImg />
-                </picture>
+                <ProfilePhoto img={user.foto_perfil} />
               </li>
               <li className={styles.userInfos}>
                 <p>{user.nome}</p>

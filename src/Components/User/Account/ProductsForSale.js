@@ -45,7 +45,7 @@ const ProductsForSale = ({ username }) => {
               <li key={slug}>
                 <Link to={`/produto/${categoria}/${slug}`}>
                   <picture>
-                    <img src={fotos[0].src} alt="Imagem de produto" />
+                    {fotos && <img src={fotos[0].src} alt="Imagem de produto" />}
                   </picture>
                   <span className={styles.price}>R$ {preco}</span>
                 </Link>

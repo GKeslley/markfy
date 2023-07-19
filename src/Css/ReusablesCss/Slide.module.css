@@ -11,6 +11,10 @@
   min-height: max-content;
 }
 
+.slideItems img {
+  object-fit: contain;
+}
+
 .slideItems li {
   display: flex;
   flex-shrink: 0;

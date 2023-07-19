@@ -4,6 +4,9 @@ import { PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY } from '../../Api/api';
 import styles from '../../Css/Home/Smartphones.module.css';
 import { ReactComponent as BtnCarousel } from '../../Assets/arrowCarousel.svg';
 import { useNavigate } from 'react-router-dom';
+import Image from '../Helper/Image';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const Smartphones = ({ setDataProduct }) => {
   const { request, data } = useFetch();
@@ -43,19 +46,22 @@ const Smartphones = ({ setDataProduct }) => {
       <div className={styles.carouselContent}>
         <p>GARANTA SEU NOVO SMARTPHONE</p>
         <ul className={`${styles.smartphones} flexAlign`} ref={carouselRef}>
-          {data &&
+          {data ? (
             data.map((product) => (
               <li
                 key={product.id + toString(Math.random())}
                 onClick={() => selectProduct(product)}
               >
                 <picture>
-                  <img src={product.fotos[0].src} alt={product.fotos[0].titulo} />
+                  <Image alt={product.fotos[0].titulo} src={product.fotos[0].src} />
                 </picture>
                 <span>R$ {product.preco}</span>
                 <p>{product.nome.slice(0, 30).trim()}...</p>
               </li>
-            ))}
+            ))
+          ) : (
+            <Skeleton count={4} containerClassName={styles.skeleton} />
+          )}
         </ul>
         <div className={styles.buttons}>
           <span className={styles.buttonLeft} onClick={handleLeftClick}>
