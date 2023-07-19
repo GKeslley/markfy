@@ -74,6 +74,19 @@ export const USER_OTHER_GET = (key) => {
   };
 };
 
+export const UPDATE_PROFILE_PHOTO = (formData, token) => {
+  return {
+    url: API_URL + '/api/usuario/perfil',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      body: formData,
+    },
+  };
+};
+
 export const PRODUCT_POST = (formData, token) => {
   return {
     url: API_URL + '/api/produto',
