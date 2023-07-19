@@ -1,0 +1,82 @@
+.profile-dialog-bg {
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 80;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-dialog {
+  display: grid;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 0 0 10px white;
+  position: relative;
+  min-width: 40vw;
+  max-width: 600px;
+  border-radius: 4px;
+}
+
+.profile-dialog-photo {
+  max-height: 16rem;
+  max-width: 16rem;
+  justify-self: center;
+  position: relative;
+}
+
+.profile-dialog-photo picture img {
+  display: block;
+  background: #e1e1e1;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 2px 4px rgb(206, 206, 206);
+  object-fit: cover;
+  position: absolute;
+  justify-content: center;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  z-index: 10;
+}
+
+.profile-dialog-full-photo {
+  opacity: 0.5;
+  height: 100%;
+}
+
+.profile-dialog-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.profile-dialog-text {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.profile-dialog-text div {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-dialog-text div span {
+  cursor: pointer;
+  padding: 0.5rem 0.5rem 0.5rem 0rem;
+}
+
+.profile-dialog-text div svg {
+  width: 15px;
+  height: 15px;
+}
