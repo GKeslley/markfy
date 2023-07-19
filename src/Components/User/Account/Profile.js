@@ -4,13 +4,15 @@ import useFetch from '../../../Hooks/useFetch';
 import { UPDATE_USER } from '../../../Api/api';
 import useValidate from '../../../Hooks/useValidate';
 import styles from '../../../Css/User/Profile.module.css';
-import { ReactComponent as UserImg } from '../../../Assets/user-svgrepo-com.svg';
 import RequestMessage from '../../Reusable/RequestMessage';
 import useFormatter from '../../../Hooks/useFormatter';
+import ProfilePhoto from '../ProfilePhoto';
+import ProfileAttPhoto from './ProfileAttPhoto';
 
 const Profile = ({ userData }) => {
   const [userInfos, setUserInfos] = React.useState(null);
   const [notification, setNotification] = React.useState(null);
+  const [preview, setPreview] = React.useState({ url: false, open: false });
   const { request, loading } = useFetch();
   const { formatValue } = useFormatter();
 
@@ -61,6 +63,13 @@ const Profile = ({ userData }) => {
     setUserInfos({ ...userInfos, [name]: name === 'phone' ? replaceValue : value });
   };
 
+  const imagesPreview = ({ target }) => {
+    const files = target.files;
+    const url = URL.createObjectURL(files[0]);
+    const name = files[0].name;
+    setPreview({ url, open: true, name, file: files[0] });
+  };
+
   return (
     <div className={`${styles.profile} container`}>
       {notification && (
@@ -68,12 +77,21 @@ const Profile = ({ userData }) => {
       )}
       <div className={styles['profile-att-photo']}>
         <div className={styles['profile-photo']}>
-          <picture>
-            <UserImg />
-          </picture>
-          <p>Atualize Uma Nova Foto</p>
+          <ProfilePhoto img={preview.url ? preview.url : userData.foto_perfil} />
+          <p>Carregue Uma Nova Foto</p>
         </div>
-        <button className="button">Atualizar</button>
+        {preview.open && <ProfileAttPhoto preview={preview} setPreview={setPreview} />}
+
+        <label htmlFor="file" className="button">
+          Selecionar
+        </label>
+        <input
+          type="file"
+          name="file"
+          id="file"
+          accept="image/*"
+          onChange={imagesPreview}
+        />
       </div>
       <form
         className={styles['profile-form']}
@@ -88,7 +106,9 @@ const Profile = ({ userData }) => {
             <Input type="tel" name="phone" label="Telefone celular" {...phone} />
           </div>
         </div>
-        <Input type="email" name="email" label="Email" {...email} required={true} />
+        <div className={styles['profile-form-element']}>
+          <Input type="email" name="email" label="Email" {...email} required={true} />
+        </div>
         {loading ? (
           <button type="submit" className="button" disabled>
             Carregando...
