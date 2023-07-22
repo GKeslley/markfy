@@ -112,3 +112,39 @@
 .productInfos picture {
   max-width: 3rem;
 }
+
+@media (max-width: 600px) {
+  .sections {
+    display: none;
+  }
+  .productInfos picture {
+    max-width: 5rem;
+  }
+
+  .productItems .productInfos {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    width: 100%;
+    text-align: start;
+  }
+
+  .remove,
+  .price {
+    width: max-content;
+    width: max-content;
+  }
+
+  .price {
+    font-weight: 600;
+  }
+
+  .remove {
+    justify-self: end;
+    margin-left: 1rem;
+  }
+
+  .remove svg {
+    width: 28px;
+    height: 28px;
+  }
+}

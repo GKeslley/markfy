@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { toEndpoint } from './allCategories';
 
 const Subcategory = ({ subcategories, setGetSubcategory }) => {
   const [activeIndex, setActiveIndex] = React.useState();
 
-  const handleClick = (index, name) => {
+  const handleClick = (index, name, endpoint) => {
     setActiveIndex(index);
     const clearName = () => {
-      const endpoint = toEndpoint(name);
       setGetSubcategory({ subcategory: name, endpoint });
     };
     clearName();
@@ -18,16 +16,16 @@ const Subcategory = ({ subcategories, setGetSubcategory }) => {
     <>
       <ul className="category_subcategory">
         {subcategories.length &&
-          subcategories.map((category, i) => (
+          subcategories.map(({ name, endpoint }, i) => (
             <li
-              key={category}
-              title={category}
+              key={name}
+              title={name}
               className={`category_subcategory_title ${
                 i === activeIndex ? 'active' : ''
               }`}
-              onClick={() => handleClick(i, category)}
+              onClick={() => handleClick(i, name, endpoint)}
             >
-              <Link to="../form">{category}</Link>
+              <Link to="../form">{name}</Link>
             </li>
           ))}
       </ul>

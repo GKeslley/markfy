@@ -74,7 +74,7 @@ const Address = ({ userData }) => {
   ]);
 
   React.useEffect(() => {
-    if (userData && userData.endereco[0]) {
+    if (userData && userData.endereco) {
       const { endereco } = userData;
       setDataAddress(() => {
         return Object.entries(formFields).reduce((acc, act) => {

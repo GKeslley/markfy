@@ -21,12 +21,12 @@ export const allCategories = () => {
     {
       name: 'Auto peças',
       subcategories: [
-        'Carros, vans e utilitários',
-        'Motos',
-        'Ônibus',
-        'Caminhões',
-        'Barcos e aeronaves',
-        'Acessórios',
+        { endpoint: '', name: 'Carros, vans e utilitários' },
+        { endpoint: '', name: 'Motos' },
+        { endpoint: '', name: 'Ônibus' },
+        { endpoint: '', name: 'Caminhões' },
+        { endpoint: '', name: 'Barcos e aeronaves' },
+        { endpoint: '', name: 'Acessórios' },
       ],
       endpoint: 'auto_pecas',
       img: {
@@ -37,11 +37,11 @@ export const allCategories = () => {
     {
       name: 'Para a sua casa',
       subcategories: [
-        'Móveis',
-        'Eletrodomésticos',
-        'Materiais de construção',
-        'Utilidades domésticas',
-        'Decoração',
+        { endpoint: '', name: 'Móveis' },
+        { endpoint: '', name: 'Eletrodomésticos' },
+        { endpoint: '', name: 'Materiais de construção' },
+        { endpoint: '', name: 'Utilidades domésticas' },
+        { endpoint: '', name: 'Decoração' },
       ],
       endpoint: 'casa',
       img: {
@@ -52,10 +52,10 @@ export const allCategories = () => {
     {
       name: 'Eletrônicos',
       subcategories: [
-        'Videogames',
-        'Computadores e acessórios',
-        'Celulares e telefones',
-        'Áudio, TV, vídeo',
+        { endpoint: '', name: 'Videogames' },
+        { endpoint: '', name: 'Computadores e acessórios' },
+        { endpoint: '', name: 'Celulares e telefones' },
+        { endpoint: '', name: 'Áudio, TV, vídeo' },
       ],
       endpoint: 'eletronicos',
       img: {
@@ -74,7 +74,10 @@ export const allCategories = () => {
     },
     {
       name: 'Esportes e lazer',
-      subcategories: ['Esportes e ginástica', 'Ciclismo'],
+      subcategories: [
+        { endpoint: '', name: 'Esportes e ginástica' },
+        { endpoint: '', name: 'Ciclismo' },
+      ],
       endpoint: 'esportes_lazer',
       img: {
         src: <BiBaseball />,
@@ -83,7 +86,10 @@ export const allCategories = () => {
     },
     {
       name: 'Moda',
-      subcategories: ['Roupas e calçados', 'Bijouterias e acessórios'],
+      subcategories: [
+        { endpoint: '', name: 'Roupas e calçados' },
+        { endpoint: '', name: 'Bijouterias e acessórios' },
+      ],
       endpoint: 'moda',
       img: {
         src: <IoShirtOutline />,
@@ -91,6 +97,13 @@ export const allCategories = () => {
       },
     },
   ];
+
+  categories.forEach(({ subcategories }) => {
+    subcategories.forEach((item) => {
+      item.endpoint = toEndpoint(item.name);
+    });
+  });
+
   return categories;
 };
 

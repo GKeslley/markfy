@@ -6,26 +6,27 @@ import styles from '../../Css/Login/LoginForm.module.css';
 import useValidate from '../../Hooks/useValidate';
 import useFetch from '../../Hooks/useFetch';
 import Error from '../Helper/Error';
-import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../../Hooks/UserContext';
 
 const Login = () => {
-  const nome = useValidate();
+  const name = useValidate();
   const email = useValidate('email');
   const password = useValidate('password');
+  const { userLogin } = React.useContext(GlobalContext);
+
   const { request, error, loading } = useFetch();
-  const navigate = useNavigate();
 
   const sendValuesLogin = async (event) => {
     event.preventDefault();
-    if (nome.validate() && email.validate() && password.validate()) {
+    if (name.validate() && email.validate() && password.validate()) {
       const { url, options } = POST_USER({
-        nome: nome.value,
+        nome: name.value,
         email: email.value,
         senha: password.value,
       });
-      const register = await request(url, options);
-      if (register.response.ok) {
-        navigate('/');
+      const { response } = await request(url, options);
+      if (response.ok) {
+        userLogin(email.value, password.value);
       }
     }
   };
@@ -34,7 +35,7 @@ const Login = () => {
     <div className="animeLeft">
       <h1 className="title">BEM VINDO</h1>
       <form className={styles.form} onSubmit={sendValuesLogin}>
-        <Input label="Nome" type="text" name="nome" {...nome} />
+        <Input label="Nome" type="text" name="nome" {...name} />
         <Input label="Email" type="email" name="email" {...email} />
         <Input label="Senha" type="password" name="senha" {...password} />
         {loading ? (

@@ -42,13 +42,15 @@ const Dropdown = () => {
                   <IoIosArrowForward fill="#fff" />
                 </div>
                 <ul className={styles.subcategoriesContent}>
-                  {subcategories.map((title) => (
-                    <li key={title}>
-                      <Link to={`produtos/${endpoint}/${toEndpoint(title)}`}>
-                        {title}
-                      </Link>
-                    </li>
-                  ))}
+                  {subcategories.map(
+                    ({ name: subcategorieName, endpoint: subcategorieEndpoint }) => (
+                      <li key={subcategorieName}>
+                        <Link to={`produtos/${endpoint}/${subcategorieEndpoint}`}>
+                          {subcategorieName}
+                        </Link>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </div>
             ) : (
