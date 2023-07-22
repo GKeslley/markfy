@@ -4,13 +4,11 @@ import useFetch from '../../Hooks/useFetch';
 import { PRODUCTS_GET_BY_CATEGORY } from '../../Api/api';
 import usePagination from '../../Hooks/usePagination';
 import styles from '../../Css/Products/Products.module.css';
-
 import Select from '../Form/Select';
-import {
-  allCategories,
-  toEndpoint,
-} from '../User/PostProducts/CategoryPage/allCategories';
+import { allCategories } from '../User/PostProducts/CategoryPage/allCategories';
 import Pagination from '../Reusable/Pagination';
+import Skeleton from 'react-loading-skeleton';
+import Image from '../Helper/Image';
 
 const Products = ({ searchProduct }) => {
   const {
@@ -34,19 +32,22 @@ const Products = ({ searchProduct }) => {
   const searchParam = paramsURL.get('q');
   const categories = allCategories();
 
-  console.log(categories);
-
   let category = params.categoria;
   let subcategory = params['*'] ? params['*'] : null;
+  let subcategoryName = '';
 
-  if (searchParam) {
-    for (let catValue of categories) {
-      for (let subValue of catValue.subcategories) {
-        if (subValue.toLowerCase().includes(searchParam.toLowerCase())) {
-          category = catValue.endpoint;
-          subcategory = toEndpoint(subValue);
-          break;
-        }
+  for (let catValue of categories) {
+    for (let subValue of catValue.subcategories) {
+      if (subValue.endpoint === subcategory) {
+        subcategoryName = subValue.name;
+      }
+      if (
+        searchParam &&
+        subValue.name.toLowerCase().includes(searchParam.toLowerCase())
+      ) {
+        category = catValue.endpoint;
+        subcategory = subValue.endpoint;
+        break;
       }
     }
   }
@@ -61,8 +62,7 @@ const Products = ({ searchProduct }) => {
         order,
         search: searchParam,
       });
-      const { response, json } = await request(url, options);
-      console.log(json);
+      const { response } = await request(url, options);
       const total = response.headers.get('x-total-count');
       const totalItensPerPage = 9;
       const isInt = Number.isInteger(+total / totalItensPerPage);
@@ -93,7 +93,6 @@ const Products = ({ searchProduct }) => {
     }
   };
 
-  if (!data) return null;
   const options = [
     { value: '', name: 'Mais recentes' },
     { value: 'ASC', name: 'Menor preço' },
@@ -104,8 +103,8 @@ const Products = ({ searchProduct }) => {
     <section className={`${styles.productsBg} container`}>
       <ul className={styles.filter}>
         <li className={styles.search}>
-          <h1>{searchParam ? searchParam : subcategory || category}</h1>
-          <p>{`${totalPages.totalItens} resultados`}</p>
+          <h1>{searchParam ? searchParam : subcategoryName || category}</h1>
+          <p>{`${totalPages.totalItens || 'Carregando'} resultados`}</p>
         </li>
 
         <li className={styles.sort}>
@@ -114,8 +113,7 @@ const Products = ({ searchProduct }) => {
         </li>
       </ul>
       <ul className={styles.products}>
-        {data &&
-          totalPages.pages > 0 &&
+        {data && totalPages.pages > 0 ? (
           data.map(
             ({ id, slug, nome, preco, fotos, categoria, nome_usuario, usuario_id }) => {
               const portion = +preco.replace('.', '') / 12;
@@ -126,7 +124,7 @@ const Products = ({ searchProduct }) => {
               return (
                 <li key={id}>
                   <picture>
-                    <img src={fotos[0].src} alt={fotos[0].titulo} />
+                    <Image alt={fotos[0].titulo} src={fotos[0].src} />
                   </picture>
                   <div className={styles.productInfos}>
                     <Link to={`/produto/${categoria}/${slug}`}>{nome}</Link>
@@ -142,7 +140,32 @@ const Products = ({ searchProduct }) => {
                 </li>
               );
             },
-          )}
+          )
+        ) : (
+          <div>
+            {Array(3)
+              .fill()
+              .map(() => (
+                <li className={styles.skeleton}>
+                  <picture>
+                    <Skeleton className={styles['skeleton-img']} />
+                  </picture>
+
+                  <div className={styles.productInfos}>
+                    <Skeleton containerClassName={styles['skeleton-link']} />
+                    <Skeleton containerClassName={styles['user']} />
+
+                    <p className={styles.price}>
+                      <Skeleton />
+                    </p>
+                    <span className={styles.portion}>
+                      <Skeleton />
+                    </span>
+                  </div>
+                </li>
+              ))}
+          </div>
+        )}
       </ul>
       <Pagination
         handlePageAnt={handlePageAnt}

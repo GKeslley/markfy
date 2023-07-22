@@ -30,7 +30,6 @@
 }
 
 .search h1 {
-  text-transform: capitalize;
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
@@ -38,7 +37,6 @@
 
 .products {
   display: grid;
-  justify-content: center;
   gap: 1rem;
 }
 
@@ -53,7 +51,8 @@
   border-bottom: 1px solid rgb(207, 207, 207);
 }
 
-.products .productInfos {
+.products .productInfos,
+.skeleton {
   display: flex;
   flex-direction: column;
   margin-top: 0.5rem;
@@ -64,7 +63,8 @@
   line-break: anywhere;
 }
 
-.products .productInfos .price {
+.products .productInfos .price,
+.skeleton-link {
   font-size: 1.3rem;
 }
 
@@ -79,10 +79,21 @@
   font-weight: 600;
 }
 
-.products li img {
+.products li img,
+.skeleton-img {
   height: 100%;
   width: 100%;
   object-fit: contain;
   max-height: 11rem;
   min-height: 11rem;
+  max-width: 11rem;
+  min-width: 11rem;
+}
+
+.skeleton-img {
+  flex: 1;
+}
+
+.skeleton-link {
+  max-width: 15rem;
 }
