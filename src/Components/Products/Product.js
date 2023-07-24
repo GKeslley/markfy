@@ -10,38 +10,37 @@ import UserProduct from './UserProduct';
 import Comments from './Comments';
 import LikeProduct from './LikeProduct';
 import CarouselImages from './Mobile/CarouselImages';
+import ProductSkeleton from '../Skeletons/ProductSkeleton';
 
 const Product = () => {
-  const [getAllImages, setAllImages] = React.useState([]);
-  const [imageActive, setImageActive] = React.useState(null);
-
+  const [allImages, setAllImages] = React.useState({
+    images: [],
+    activeImage: null,
+  });
   const { request, data: dataProduct } = useFetch();
   const { slug } = useParams();
   const { userData } = React.useContext(GlobalContext);
   const match = useMedia('(max-width: 830px)');
 
-  console.log(match);
+  const images = React.useCallback((arr) => {
+    const imagesData = arr.reduce((acc, val, i) => {
+      acc[i] = {
+        src: val.src,
+        titulo: val.titulo,
+        active: i === 0 ? true : false,
+        index: i,
+      };
+      return acc;
+    }, []);
+    return imagesData;
+  }, []);
 
   React.useEffect(() => {
     if (dataProduct) {
-      setAllImages(() => {
-        return dataProduct.fotos.reduce((acc, val, i) => {
-          acc[i] = {
-            src: val.src,
-            titulo: val.titulo,
-            active: i === 0 ? true : false,
-            index: i,
-          };
-          return acc;
-        }, []);
-      });
-      setImageActive({
-        index: 0,
-        src: dataProduct.fotos[0].src,
-        titulo: dataProduct.fotos[0].titulo,
-      });
+      const imagesProduct = images(dataProduct.fotos);
+      setAllImages({ images: imagesProduct, activeImage: imagesProduct[0] });
     }
-  }, [dataProduct]);
+  }, [dataProduct, images]);
 
   React.useEffect(() => {
     const product = async () => {
@@ -51,20 +50,21 @@ const Product = () => {
     product();
   }, [request, slug]);
 
-  if (!dataProduct) return null;
-
   const handleChangeImage = ({ target }) => {
     const index = target.getAttribute('data-index');
-    const changeImages = getAllImages.map((obj, i) => {
+    const changeImages = allImages.images.map((obj, i) => {
       obj.active = false;
-      getAllImages[+index].active = true;
+      allImages.images[+index].active = true;
       return obj;
     });
 
-    setAllImages(changeImages);
-    setImageActive(getAllImages[+index]);
+    setAllImages({ images: changeImages, activeImage: changeImages[+index] });
   };
 
+  if (!dataProduct || !userData || !allImages.activeImage) {
+    return <ProductSkeleton />;
+  }
+  console.log(allImages.activeImage);
   const portion = +dataProduct.preco.replace(/\D/g, '') / 12;
   const portionPrice = Number.isInteger(portion)
     ? portion
@@ -72,74 +72,72 @@ const Product = () => {
 
   return (
     <>
-      {dataProduct && imageActive && userData && (
-        <section className="container">
-          <div className={styles.productContent}>
-            <article className={styles.productAndInfos}>
-              <LikeProduct slug={slug} userID={userData.usuario_id} />
-              {!match ? (
-                <div className={styles.productImages}>
-                  <figure>
-                    <img
-                      src={imageActive.src}
-                      alt={imageActive.titulo}
-                      data-index={imageActive.index}
-                      width={250}
-                      height={500}
-                    />
-                  </figure>
+      <section className="container">
+        <div className={styles.productContent}>
+          <article className={styles.productAndInfos}>
+            <LikeProduct slug={slug} userID={userData.usuario_id} />
+            {!match ? (
+              <div className={styles.productImages}>
+                <figure>
+                  <img
+                    src={allImages.activeImage.src}
+                    alt={allImages.activeImage.titulo}
+                    data-index={allImages.activeImage.index}
+                    width={250}
+                    height={500}
+                  />
+                </figure>
 
-                  <div className={styles.galeryImages}>
-                    {getAllImages.map(({ src, titulo, index }, i) => (
-                      <picture
-                        key={i}
-                        className={imageActive.index === i ? 'active' : ''}
-                      >
-                        <img
-                          src={src}
-                          alt={titulo}
-                          width={44}
-                          height={44}
-                          data-index={index}
-                          onMouseOver={handleChangeImage}
-                        />
-                      </picture>
-                    ))}
-                  </div>
+                <div className={styles.galeryImages}>
+                  {allImages.images.map(({ src, titulo, index }, i) => (
+                    <picture
+                      key={i}
+                      className={allImages.activeImage.index === i ? 'active' : ''}
+                    >
+                      <img
+                        src={src}
+                        alt={titulo}
+                        width={44}
+                        height={44}
+                        data-index={index}
+                        onMouseOver={handleChangeImage}
+                      />
+                    </picture>
+                  ))}
                 </div>
-              ) : (
-                <CarouselImages images={getAllImages} />
-              )}
-              <ul className={styles.productInfos}>
-                <li className={styles.productName}>{dataProduct.nome}</li>
-                <li>Frete</li>
-                <li className={styles.productPrice}>
-                  <p>R$ {dataProduct.preco}</p>
-                  <span>12x de R$ {portionPrice} sem juros</span>
-                </li>
-                <li className={styles.productBtns}>
-                  <Button>Comprar</Button>
-                  <Button>Fazer Oferta</Button>
-                </li>
+              </div>
+            ) : (
+              <CarouselImages images={allImages.images} />
+            )}
+            <ul className={styles.productInfos}>
+              <li className={styles.productName}>{dataProduct.nome}</li>
+              <li>Frete</li>
+              <li className={styles.productPrice}>
+                <p>R$ {dataProduct.preco}</p>
+                <span>12x de R$ {portionPrice} sem juros</span>
+              </li>
+              <li className={styles.productBtns}>
+                <Button>Comprar</Button>
+                <Button>Fazer Oferta</Button>
+              </li>
 
-                <UserProduct keyUser={dataProduct.usuario_id} />
-              </ul>
-            </article>
+              <UserProduct keyUser={dataProduct.usuario_id} />
+            </ul>
+          </article>
 
-            <article className={styles.productDescription}>
-              <h2>Descrição</h2>
-              <p>{dataProduct.descricao}</p>
-            </article>
+          <article className={styles.productDescription}>
+            <h2>Descrição</h2>
+            <p>{dataProduct.descricao}</p>
+          </article>
 
-            <Comments
-              userData={userData}
-              allComments={dataProduct.comentarios}
-              authorPost={dataProduct.usuario_id}
-              slug={slug}
-            />
-          </div>
-        </section>
-      )}
+          <Comments
+            userData={userData}
+            allComments={dataProduct.comentarios}
+            authorPost={dataProduct.usuario_id}
+            slug={slug}
+          />
+        </div>
+      </section>
     </>
   );
 };
