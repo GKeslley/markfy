@@ -1,0 +1,64 @@
+.skeleton-text-p {
+  min-width: 2rem;
+  max-width: 2rem;
+}
+
+.skeleton-text-l {
+  min-width: 3rem;
+  max-width: 3rem;
+}
+
+.skeleton-text-m {
+  min-width: 5rem;
+  max-width: 5rem;
+}
+
+.skeleton-text-g,
+.skeleton-label {
+  min-width: 10rem;
+  max-width: 10rem !important;
+}
+
+.skeleton-label {
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-text-gg {
+  min-width: 20rem;
+  max-width: 20rem;
+}
+
+.skeleton-text-100 {
+  width: 100%;
+}
+
+.skeleton-btn {
+  padding: 0.5rem 3rem;
+}
+
+.skeleton-img {
+  display: block;
+}
+
+.skeleton-img-round {
+  min-width: 3.75rem;
+  max-width: 3.75rem;
+  max-height: 3.75rem;
+  min-height: 3.75rem;
+  border-radius: 50%;
+}
+
+.skeleton-image-p {
+  min-width: 3rem;
+  min-height: 5rem;
+}
+
+.skeleton-image-g {
+  min-height: 31.25rem;
+  min-width: 15rem;
+}
+
+.skeleton-input {
+  padding: 0.5rem;
+  min-width: 100%;
+}
