@@ -12,20 +12,15 @@ import Products from './Components/Products/Products';
 import Favorites from './Components/User/FavoriteProducts/Favorites';
 
 const App = () => {
-  const [dataProduct, setDataProduct] = React.useState(null);
-
   return (
     <BrowserRouter>
       <UserContext>
         <Header />
         <Routes>
-          <Route path="/" element={<Home setDataProduct={setDataProduct} />}></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="login/*" element={<Login />}></Route>
           <Route path="conta/*" element={<User />}></Route>
-          <Route
-            path="produto/:categoria/:slug"
-            element={<Product dataProduct={dataProduct} />}
-          ></Route>
+          <Route path="produto/:categoria/:slug" element={<Product />}></Route>
           <Route path="produtos/:categoria/*" element={<Products />}></Route>
           <Route path="produtos" element={<Products />}></Route>
           <Route path="favoritos" element={<Favorites />}></Route>

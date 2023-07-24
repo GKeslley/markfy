@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
 import useUnlikeProduct from '../../../Hooks/useUnlikeProduct';
 import useMedia from '../../../Hooks/useMedia';
+import FavoritesSkeleton from '../../Skeletons/FavoritesSkeleton';
 
 const Favorites = () => {
   const { favoriteProducts, getFavoriteProducts } = React.useContext(GlobalContext);
@@ -13,11 +14,11 @@ const Favorites = () => {
   const mobileMatch = useMedia('(max-width: 600px)');
 
   if (favoriteProducts === false) return <p>N tem itens</p>;
-  if (!favoriteProducts) return null;
+  if (!favoriteProducts) return <FavoritesSkeleton />;
   return (
     <section className={`${styles.productsContent} container`}>
       <h1>Favoritos</h1>
-      {favoriteProducts.length ? (
+      {favoriteProducts.length && (
         <div>
           <ul className={styles.sections}>
             <li>Produto</li>
@@ -75,8 +76,6 @@ const Favorites = () => {
             ))}
           </ul>
         </div>
-      ) : (
-        'Voce nao possui itens favoritos'
       )}
     </section>
   );

@@ -2,11 +2,11 @@ import React from 'react';
 import { Routes, Route, useLocation, NavLink } from 'react-router-dom';
 import useFetch from '../../../Hooks/useFetch';
 import { USER_OTHER_GET } from '../../../Api/api';
-
 import styles from '../../../Css/User/UserPage.module.css';
 import ProductsForSale from '../Account/ProductsForSale';
 import ProductsSold from '../Account/ProductsSold';
 import ProfilePhoto from '../ProfilePhoto';
+import UserPageSkeleton from '../../Skeletons/UserPageSkeleton';
 
 const UserPage = () => {
   const [user, setUser] = React.useState(null);
@@ -24,7 +24,7 @@ const UserPage = () => {
   }, [request, username]);
 
   console.log(user);
-  if (!user) return null;
+  if (!user) return <UserPageSkeleton />;
   return (
     <>
       {Object.values(user).length && (

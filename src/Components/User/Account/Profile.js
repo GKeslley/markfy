@@ -8,6 +8,7 @@ import RequestMessage from '../../Reusable/RequestMessage';
 import useFormatter from '../../../Hooks/useFormatter';
 import ProfilePhoto from '../ProfilePhoto';
 import ProfileAttPhoto from './ProfileAttPhoto';
+import ProfileSkeleton from '../../Skeletons/ProfileSkeleton';
 
 const Profile = ({ userData }) => {
   const [userInfos, setUserInfos] = React.useState(null);
@@ -43,8 +44,6 @@ const Profile = ({ userData }) => {
     }
   }, [userData, setNameValue, setPhoneValue, setEmailValue, formatValue]);
 
-  if (!userInfos) return null;
-
   const handleAttUser = async (event) => {
     event.preventDefault();
     if (name.validate() && email.validate() && phone.validate()) {
@@ -70,6 +69,7 @@ const Profile = ({ userData }) => {
     setPreview({ url, open: true, name, file: files[0] });
   };
 
+  if (!userInfos) return <ProfileSkeleton />;
   return (
     <div className={`${styles.profile} container`}>
       {notification && (

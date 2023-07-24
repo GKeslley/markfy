@@ -46,6 +46,10 @@
   margin-bottom: 1rem;
 }
 
+.smartphones li picture > div {
+  display: block;
+}
+
 .smartphones li picture img {
   height: 100%;
   object-fit: contain;

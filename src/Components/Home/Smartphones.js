@@ -3,15 +3,14 @@ import useFetch from '../../Hooks/useFetch';
 import { PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY } from '../../Api/api';
 import styles from '../../Css/Home/Smartphones.module.css';
 import { ReactComponent as BtnCarousel } from '../../Assets/arrowCarousel.svg';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Image from '../Helper/Image';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const Smartphones = ({ setDataProduct }) => {
+const Smartphones = () => {
   const { request, data } = useFetch();
   const carouselRef = React.useRef();
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     const getSmartphones = async () => {
@@ -20,9 +19,8 @@ const Smartphones = ({ setDataProduct }) => {
         'celulares_e_telefones',
         '@Markfyb894a46c',
       );
-      console.log(url);
-      const response = await request(url, options);
-      console.log(response);
+      console.log('REQUEST SMARTPHONES');
+      request(url, options);
     };
     getSmartphones();
   }, [request]);
@@ -36,11 +34,6 @@ const Smartphones = ({ setDataProduct }) => {
     carousel.scrollLeft += carousel.offsetWidth;
   };
 
-  const selectProduct = (product) => {
-    setDataProduct(product);
-    navigate(`produto/${product.categoria}/${product.id}`);
-  };
-
   return (
     <div className="container">
       <div className={styles.carouselContent}>
@@ -48,15 +41,14 @@ const Smartphones = ({ setDataProduct }) => {
         <ul className={`${styles.smartphones} flexAlign`} ref={carouselRef}>
           {data ? (
             data.map((product) => (
-              <li
-                key={product.id + toString(Math.random())}
-                onClick={() => selectProduct(product)}
-              >
-                <picture>
-                  <Image alt={product.fotos[0].titulo} src={product.fotos[0].src} />
-                </picture>
-                <span>R$ {product.preco}</span>
-                <p>{product.nome.slice(0, 30).trim()}...</p>
+              <li key={product.id + toString(Math.random())}>
+                <Link to={`produto/${product.categoria}/${product.id}`}>
+                  <picture>
+                    <Image alt={product.fotos[0].titulo} src={product.fotos[0].src} />
+                  </picture>
+                  <span>R$ {product.preco}</span>
+                  <p>{product.nome.slice(0, 30).trim()}...</p>
+                </Link>
               </li>
             ))
           ) : (

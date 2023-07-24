@@ -5,6 +5,7 @@ import styles from '../../../Css/User/ProductsForSale.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import usePagination from '../../../Hooks/usePagination';
 import Pagination from '../../Reusable/Pagination';
+import ProductsForSaleSkeleton from '../../Skeletons/ProductsForSaleSkeleton';
 
 const ProductsForSale = ({ username }) => {
   const { request, data } = useFetch();
@@ -35,31 +36,30 @@ const ProductsForSale = ({ username }) => {
     navigate(newUrl);
   }, [request, username, setTotalPages, navigate, newUrl, actualPage]);
 
+  if (!data) return <ProductsForSaleSkeleton />;
   return (
     <>
-      {data && (
-        <div className={styles.product}>
-          <h1>{totalPages.totalItens} Produtos</h1>
-          <ul className={styles.productsContent}>
-            {data.map(({ preco, fotos, slug, categoria }) => (
-              <li key={slug}>
-                <Link to={`/produto/${categoria}/${slug}`}>
-                  <picture>
-                    {fotos && <img src={fotos[0].src} alt="Imagem de produto" />}
-                  </picture>
-                  <span className={styles.price}>R$ {preco}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Pagination
-            handlePageAnt={handlePageAnt}
-            handlePageProx={handlePageProx}
-            totalPages={totalPages}
-            actualPage={actualPage}
-          />
-        </div>
-      )}
+      <div className={styles.product}>
+        <h1>{totalPages.totalItens} Produtos</h1>
+        <ul className={styles.productsContent}>
+          {data.map(({ preco, fotos, slug, categoria }) => (
+            <li key={slug}>
+              <Link to={`/produto/${categoria}/${slug}`}>
+                <picture>
+                  {fotos && <img src={fotos[0].src} alt="Imagem de produto" />}
+                </picture>
+                <span className={styles.price}>R$ {preco}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Pagination
+          handlePageAnt={handlePageAnt}
+          handlePageProx={handlePageProx}
+          totalPages={totalPages}
+          actualPage={actualPage}
+        />
+      </div>
     </>
   );
 };

@@ -7,12 +7,13 @@ import Smartphones from './Smartphones';
 import ExtraInfos from './ExtraInfos';
 import CategoriesHome from '../Header/CategoriesHome';
 
-const Home = ({ setDataProduct }) => {
+const Home = () => {
+  console.log('HOME');
   return (
     <div>
       <Slide imgs={[Imagem3, Imagem1, Imagem2, Imagem3, Imagem1]} />
       <ExtraInfos />
-      <Smartphones setDataProduct={setDataProduct} />
+      <Smartphones />
       <CategoriesHome />
     </div>
   );

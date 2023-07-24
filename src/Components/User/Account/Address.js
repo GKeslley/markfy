@@ -8,6 +8,7 @@ import styles from '../../../Css/User/Address.module.css';
 import Button from '../../Reusable/Button';
 import { POST_USER_ADDRESS } from '../../../Api/api';
 import useFetch from '../../../Hooks/useFetch';
+import AddressSkeleton from '../../Skeletons/AddressSkeleton';
 
 const formFields = {
   cep: '',
@@ -85,8 +86,6 @@ const Address = ({ userData }) => {
     }
   }, [setDefaultValues, userData]);
 
-  if (!userData) return null;
-
   const handleChangeForm = ({ target }) => {
     const { name, value } = target;
     setDataAddress({
@@ -111,7 +110,7 @@ const Address = ({ userData }) => {
     }
   };
 
-  console.log(dataAddress);
+  if (!userData) return <AddressSkeleton />;
   return (
     <div className={`${styles.address} container`}>
       <form onChange={handleChangeForm} onSubmit={handleSubmitForm}>
