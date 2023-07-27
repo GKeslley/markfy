@@ -9,15 +9,15 @@ import useFetch from '../../../Hooks/useFetch';
 import { PRODUCT_POST } from '../../../Api/api';
 import Error from '../../Helper/Error';
 
-const ProductForm = ({ category, getSubcategory }) => {
+const ProductForm = ({ category, subcategory }) => {
   const [preview, setPreview] = React.useState([]);
   const imgs = React.useRef();
   const { request, loading, error } = useFetch();
 
-  const nome = useValidate();
-  const descricao = useValidate();
-  const preco = useValidate();
-  preco.inputMode = 'numeric';
+  const name = useValidate();
+  const description = useValidate();
+  const price = useValidate();
+  price.inputMode = 'numeric';
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -29,18 +29,15 @@ const ProductForm = ({ category, getSubcategory }) => {
   if (!category) return null;
 
   const productCategory = category.endpoint;
-  const productSubcategory = getSubcategory ? getSubcategory.endpoint : null;
-
-  console.log(category);
-  console.log(getSubcategory);
+  const productSubcategory = subcategory ? subcategory.endpoint : null;
 
   const formDataElements = () => {
     const formData = new FormData();
     const allImgs = imgs.current.files;
-    if (nome.validate() && preco.validate() && descricao.validate()) {
-      formData.append('nome', nome.value);
-      formData.append('descricao', descricao.value);
-      formData.append('preco', preco.value.replace('R$ ', ''));
+    if (name.validate() && price.validate() && description.validate()) {
+      formData.append('nome', name.value);
+      formData.append('descricao', description.value);
+      formData.append('preco', price.value.replace('R$ ', ''));
       formData.append('categoria', productCategory);
       formData.append('subcategoria', productSubcategory);
       for (let i = 0; i < allImgs.length; i++) {
@@ -53,25 +50,11 @@ const ProductForm = ({ category, getSubcategory }) => {
   const sendFormProduct = async (event) => {
     event.preventDefault();
     const formData = formDataElements();
-    let response;
+    const token = localStorage.getItem('token');
+    const { url, options } = PRODUCT_POST(formData, token);
+    const { response } = await request(url, options);
 
-    try {
-      if (!productCategory) {
-        throw new Error('Selecione uma categoria para o produto!');
-      }
-      const token = localStorage.getItem('token');
-      const { url, options } = PRODUCT_POST(formData, token);
-      response = await request(url, options);
-      if (!response.response.ok) {
-        throw new Error('Não foi possível realizar esta ação, tente novamente!');
-      }
-    } catch (Error) {
-      response = null;
-      alert(Error);
-      return false;
-    }
-
-    if (response) {
+    if (response.ok) {
       alert('Produto postado com sucesso!');
       navigate('/');
     }
@@ -86,24 +69,22 @@ const ProductForm = ({ category, getSubcategory }) => {
     setPreview(arrFiles);
   };
 
-  console.log(preview);
-
   return (
-    <div className={`${styles.productContent} animeLeft container`}>
+    <div className={`${styles['product-content']} animeLeft container`}>
       <h1>Adicionar Produto</h1>
-      <form className={`${styles.productForm}`} onSubmit={sendFormProduct}>
-        <Input label="Nome" type="text" name="nome" {...nome} />
-        <TextArea label="Descrição" name="descricao" {...descricao} />
+      <form className={`${styles['product-form']}`} onSubmit={sendFormProduct}>
+        <Input label="Nome" type="text" name="nome" {...name} />
+        <TextArea label="Descrição" name="descricao" {...description} />
 
         <label htmlFor="categoria">Categoria</label>
         <input
           type="text"
-          value={getSubcategory ? getSubcategory.subcategory : category.name}
+          value={subcategory ? subcategory.subcategory : category.name}
           id="categoria"
           disabled
         />
 
-        <Input label="Preço" type="text" name="preco" {...preco} />
+        <Input label="Preço" type="text" name="preco" {...price} />
         <input
           type="file"
           multiple
@@ -115,7 +96,7 @@ const ProductForm = ({ category, getSubcategory }) => {
           required
         />
 
-        <div className={styles.imgsContent}>
+        <div className={styles['imgs-content']}>
           {preview.length < 1 ? (
             <span>Imagens</span>
           ) : (

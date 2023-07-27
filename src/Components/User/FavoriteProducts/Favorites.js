@@ -1,5 +1,5 @@
 import React from 'react';
-import { GlobalContext } from '../../../Hooks/UserContext';
+import { GlobalContext } from '../../../UserContext';
 import styles from '../../../Css/User/Favorites.module.css';
 import { BiStore } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { AiFillHeart } from 'react-icons/ai';
 import useUnlikeProduct from '../../../Hooks/useUnlikeProduct';
 import useMedia from '../../../Hooks/useMedia';
 import FavoritesSkeleton from '../../Skeletons/FavoritesSkeleton';
+import Image from '../../Helper/Image';
+import FavoriteProductMobile from './Mobile/FavoriteProductMobile';
 
 const Favorites = () => {
   const { favoriteProducts, getFavoriteProducts } = React.useContext(GlobalContext);
@@ -16,11 +18,11 @@ const Favorites = () => {
   if (favoriteProducts === false) return <p>N tem itens</p>;
   if (!favoriteProducts) return <FavoritesSkeleton />;
   return (
-    <section className={`${styles.productsContent} container`}>
+    <section className={`${styles['products-content']} container`}>
       <h1>Favoritos</h1>
       {favoriteProducts.length && (
         <div>
-          <ul className={styles.sections}>
+          <ul className={styles['product-section']}>
             <li>Produto</li>
             <li className={styles.price}>Preço</li>
             <li className={styles.remove}>Remover</li>
@@ -34,10 +36,13 @@ const Favorites = () => {
                 </Link>
 
                 {!mobileMatch ? (
-                  <div className={styles.productItems}>
-                    <div className={styles.productInfos}>
+                  <div className={styles['product-items']}>
+                    <div className={styles['product-infos']}>
                       <picture>
-                        <img src={produtos.fotos[0].src} alt={produtos.fotos[0].titulo} />
+                        <Image
+                          alt={produtos.fotos[0].titulo}
+                          src={produtos.fotos[0].src}
+                        />
                       </picture>
 
                       <p>{`${produtos.nome.slice(0, 40)}...`}</p>
@@ -52,25 +57,10 @@ const Favorites = () => {
                     </p>
                   </div>
                 ) : (
-                  <div className={styles.productItems}>
-                    <div className={styles.productInfos}>
-                      <picture>
-                        <img src={produtos.fotos[0].src} alt={produtos.fotos[0].titulo} />
-                      </picture>
-
-                      <div className={styles['product-infos-mobile']}>
-                        <p>{`${produtos.nome.slice(0, 40)}...`}</p>
-                        <p className={styles.price}>R$ {produtos.preco}</p>
-                      </div>
-
-                      <p
-                        onClick={() => unlikeProduct(produtos.slug)}
-                        className={styles.remove}
-                      >
-                        <AiFillHeart />
-                      </p>
-                    </div>
-                  </div>
+                  <FavoriteProductMobile
+                    produtos={produtos}
+                    unlikeProduct={unlikeProduct}
+                  />
                 )}
               </li>
             ))}

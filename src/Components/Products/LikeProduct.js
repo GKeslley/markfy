@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import styles from '../../Css/Products/Product.module.css';
-import { GlobalContext } from '../../Hooks/UserContext';
+import { GlobalContext } from '../../UserContext';
 import useFetch from '../../Hooks/useFetch';
 import { LIKE_PRODUCT_GET, LIKE_PRODUCT_POST } from '../../Api/api';
 import RequestMessage from '../Reusable/RequestMessage';
@@ -41,11 +41,11 @@ const LikeProduct = ({ slug, userID }) => {
         setIsLiked(true);
         setNotification('Produto favoritado com sucesso');
       }
-    } else {
-      await unlikeProduct(slug);
-      setIsLiked(false);
-      setNotification('Produto desfavoritado com sucesso');
+      return null;
     }
+    await unlikeProduct(slug);
+    setIsLiked(false);
+    setNotification('Produto desfavoritado com sucesso');
   };
 
   return (
@@ -54,7 +54,7 @@ const LikeProduct = ({ slug, userID }) => {
         <RequestMessage notification={notification} setNotification={setNotification} />
       )}
       <picture
-        className={`${styles.productLike} ${isLiked ? 'active' : ''}`}
+        className={`${styles['product-like']} ${isLiked ? 'active' : ''}`}
         title="Favoritar"
         onClick={saveProduct}
       >

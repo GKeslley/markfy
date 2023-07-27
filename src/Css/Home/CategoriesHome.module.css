@@ -1,15 +1,15 @@
-.categoriesHome {
+.categories-home {
   padding-bottom: 2rem;
 }
 
-.categoriesHome-content {
+.categories-home-content {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.categoriesHome-element {
+.categories-home-element {
   padding: 3rem 2rem;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 2px 0 rgba(0, 0, 0, 0.1);
   max-width: 20rem;
@@ -19,9 +19,9 @@
   position: relative;
 }
 
-.categoriesHome-element:first-child::before,
-.categoriesHome-element:last-child::before,
-.categoriesHome-element:nth-child(2)::before {
+.categories-home-element:first-child::before,
+.categories-home-element:last-child::before,
+.categories-home-element:nth-child(2)::before {
   content: '';
   top: 0;
   left: 0;
@@ -32,43 +32,43 @@
   transition: 0.3s;
 }
 
-.categoriesHome-element:first-child:hover::before,
-.categoriesHome-element:last-child:hover::before,
-.categoriesHome-element:hover:nth-child(2)::before {
+.categories-home-element:first-child:hover::before,
+.categories-home-element:last-child:hover::before,
+.categories-home-element:hover:nth-child(2)::before {
   filter: grayscale(0.8);
 }
 
-.categoriesHome-element:first-child::before {
+.categories-home-element:first-child::before {
   background: url('../../Assets/shoe.png') no-repeat center center;
   background-size: cover;
 }
 
-.categoriesHome-element:last-child::before {
+.categories-home-element:last-child::before {
   background: url('../../Assets/stair.png') no-repeat center center;
   background-size: cover;
 }
 
-.categoriesHome-element:nth-child(2)::before {
+.categories-home-element:nth-child(2)::before {
   background: url('../../Assets/cream.png') no-repeat center center;
   background-size: contain;
 }
 
-.categoriesHome-text span {
+.categories-home-text span {
   font-weight: 400;
   font-size: 0.9rem;
 }
 
-.categoriesHome-text b {
+.categories-home-text b {
   font-weight: 900;
   font-size: 1.3rem;
 }
 
-.categoriesHome-text p {
+.categories-home-text p {
   font-size: 0.9rem;
   font-weight: 500;
 }
 
-.categoriesHome-text a {
+.categories-home-text a {
   background: #689f38;
   border: none;
   padding: 0.5rem 1rem;
@@ -80,11 +80,11 @@
   transition: 0.3s;
 }
 
-.categoriesHome-text a:hover {
+.categories-home-text a:hover {
   background: #446b22;
 }
 
-.categoriesHome-text {
+.categories-home-text {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

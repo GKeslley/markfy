@@ -9,7 +9,7 @@ const ProductsForSaleSkeleton = () => {
       <h1>
         <Skeleton className={skeletonCss['skeleton-text-g']} />
       </h1>
-      <ul className={styles.productsContent}>
+      <ul className={styles['products-content']}>
         {Array(5)
           .fill()
           .map((e, i) => (

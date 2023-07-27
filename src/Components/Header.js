@@ -1,24 +1,19 @@
 import React from 'react';
 import styles from '../Css/Header.module.css';
-import { GlobalContext } from '../Hooks/UserContext';
+import { GlobalContext } from '../UserContext';
 import Logo from './Header/Logo';
 import Input from './Form/Input';
 import UserMenu from './Header/UserMenu';
 import NavLinks from './Header/NavLinks';
 import MenuHamburger from './Header/MenuHamburger';
 import useMedia from '../Hooks/useMedia';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const { userData } = React.useContext(GlobalContext);
-  const nameUser = userData && userData['nome'];
+  const username = userData && userData['nome'];
   const { pathname } = window.location;
   const navigate = useNavigate();
-  const { search } = useLocation();
-  const nameProduct = search.slice(search.indexOf('q'), search.indexOf('&')).split('q=');
-
-  console.log(nameProduct[1]);
-
   const mobileMatch = useMedia('(max-width: 830px)');
 
   const handleSubmit = (event) => {
@@ -31,11 +26,11 @@ const Header = () => {
     <>
       {!pathname.includes('login') && (
         <header className={`${styles.header}`}>
-          <nav className="">
-            <article className={styles.headerContent}>
-              <div className={`${styles.headerItem} container`}>
+          <nav>
+            <article className={styles['header-content']}>
+              <div className={`${styles['header-item']} container`}>
                 <Logo />
-                <form action="" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                   <Input
                     type="text"
                     name="search"
@@ -44,9 +39,9 @@ const Header = () => {
                   />
                 </form>
                 {!mobileMatch ? (
-                  <UserMenu nameUser={nameUser} mobileMatch={mobileMatch} />
+                  <UserMenu username={username} mobileMatch={mobileMatch} />
                 ) : (
-                  <MenuHamburger nameUser={nameUser} mobileMatch={mobileMatch} />
+                  <MenuHamburger username={username} mobileMatch={mobileMatch} />
                 )}
               </div>
               {!mobileMatch && <NavLinks />}

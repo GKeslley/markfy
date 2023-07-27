@@ -12,31 +12,30 @@ const UserPage = () => {
   const [user, setUser] = React.useState(null);
 
   const username = useLocation().pathname.split('/')[2].trim();
-  const { request } = useFetch();
+  const { request, data } = useFetch();
 
   React.useEffect(() => {
     const getUser = async () => {
       const { url, options } = USER_OTHER_GET(username.replace('@', ''));
-      const dataUser = await request(url, options);
-      setUser(dataUser.json);
+      const { json } = await request(url, options);
+      setUser(json);
     };
     getUser();
   }, [request, username]);
 
-  console.log(user);
-  if (!user) return <UserPageSkeleton />;
+  if (!data) return <UserPageSkeleton />;
   return (
     <>
       {Object.values(user).length && (
         <section className="container">
-          <div className={styles.userContent}>
+          <div className={styles['user-content']}>
             <ul>
               <li>
                 <ProfilePhoto img={user.foto_perfil} />
               </li>
-              <li className={styles.userInfos}>
+              <li className={styles['user-infos']}>
                 <p>{user.nome}</p>
-                <div className={styles.userData}>
+                <div className={styles['user-data']}>
                   <address>
                     <p>{user.endereco[0].cidade},</p>
                     <p>{user.endereco[0].uf}</p>

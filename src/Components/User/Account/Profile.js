@@ -9,6 +9,7 @@ import useFormatter from '../../../Hooks/useFormatter';
 import ProfilePhoto from '../ProfilePhoto';
 import ProfileAttPhoto from './ProfileAttPhoto';
 import ProfileSkeleton from '../../Skeletons/ProfileSkeleton';
+import Button from '../../Reusable/Button';
 
 const Profile = ({ userData }) => {
   const [userInfos, setUserInfos] = React.useState(null);
@@ -16,16 +17,6 @@ const Profile = ({ userData }) => {
   const [preview, setPreview] = React.useState({ url: false, open: false });
   const { request, loading } = useFetch();
   const { formatValue } = useFormatter();
-
-  React.useEffect(() => {
-    if (userData) {
-      setUserInfos({
-        name: userData.nome,
-        email: userData.email,
-        phone: userData.numero_celular,
-      });
-    }
-  }, [userData]);
 
   const name = useValidate();
   const email = useValidate('email');
@@ -36,20 +27,34 @@ const Profile = ({ userData }) => {
   const { setValue: setPhoneValue } = phone;
   const { setValue: setEmailValue } = email;
 
+  const setDefaultValues = React.useCallback(
+    (user) => {
+      const { nome, email, numero_celular } = user;
+      setNameValue(nome);
+      setPhoneValue(formatValue({ format: 'phone', value: numero_celular }));
+      setEmailValue(email);
+    },
+    [setNameValue, setPhoneValue, setEmailValue, formatValue],
+  );
+
   React.useEffect(() => {
     if (userData) {
-      setNameValue(userData.nome);
-      setPhoneValue(formatValue({ format: 'phone', value: userData.numero_celular }));
-      setEmailValue(userData.email);
+      const { nome, email, numero_celular } = userData;
+      setDefaultValues(userData);
+      setUserInfos({
+        name: nome,
+        email: email,
+        phone: numero_celular,
+      });
     }
-  }, [userData, setNameValue, setPhoneValue, setEmailValue, formatValue]);
+  }, [userData, setDefaultValues]);
 
   const handleAttUser = async (event) => {
     event.preventDefault();
     if (name.validate() && email.validate() && phone.validate()) {
       const token = localStorage.getItem('token');
       const { url, options } = UPDATE_USER({ body: userInfos, token });
-      const { response, json } = await request(url, options);
+      const { response } = await request(url, options);
       if (response.ok) {
         setNotification('Usuário atualizado com sucesso!');
       }
@@ -110,13 +115,11 @@ const Profile = ({ userData }) => {
           <Input type="email" name="email" label="Email" {...email} required={true} />
         </div>
         {loading ? (
-          <button type="submit" className="button" disabled>
+          <Button type="submit" disabled>
             Carregando...
-          </button>
+          </Button>
         ) : (
-          <button type="submit" className="button">
-            Atualizar Informações
-          </button>
+          <Button type="submit">Atualizar Informações</Button>
         )}
       </form>
     </div>

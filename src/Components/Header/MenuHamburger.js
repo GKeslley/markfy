@@ -1,15 +1,16 @@
 import React from 'react';
 import UserMenu from './UserMenu';
 import styles from '../../Css/Header/MenuHamburger.module.css';
-import CartMenu from './CartMenu';
+import FavoritesMenu from './FavoritesMenu';
 import Categories from './Mobile/Categories';
 import { RxDashboard } from 'react-icons/rx';
 import { AiOutlineTag } from 'react-icons/ai';
 import { BsBag } from 'react-icons/bs';
 import { RxGear } from 'react-icons/rx';
 import { RxHome } from 'react-icons/rx';
+import Button from '../Reusable/Button';
 
-const MenuHamburger = ({ nameUser, mobileMatch }) => {
+const MenuHamburger = ({ username, mobileMatch }) => {
   const [activeMenu, setActiveMenu] = React.useState(false);
   const body = document.body;
 
@@ -24,23 +25,19 @@ const MenuHamburger = ({ nameUser, mobileMatch }) => {
   }
 
   return (
-    <ul className={styles.navMenu}>
+    <ul className={styles['nav-menu']}>
       <li>
-        <button
-          className={`${styles.openMenu} ${activeMenu ? 'active' : ''}`}
+        <Button
+          className={`${styles['open-menu']} ${activeMenu ? 'active' : ''}`}
           onClick={handleOpenMenu}
         >
           Menu
-        </button>
+        </Button>
         {activeMenu && (
-          <div className={styles.menuContent}>
-            <UserMenu
-              nameUser={nameUser}
-              customMobileStyle={styles.userMenu}
-              mobileMatch={mobileMatch}
-            />
+          <div className={styles['menu-content']}>
+            <UserMenu username={username} mobileMatch={mobileMatch} />
             <Categories />
-            <ul className={styles.navLinks}>
+            <ul className={styles['nav-links']}>
               <li>
                 <RxHome />
                 <p>Início</p>
@@ -65,7 +62,7 @@ const MenuHamburger = ({ nameUser, mobileMatch }) => {
           </div>
         )}
       </li>
-      <CartMenu mobileMatch={mobileMatch} />
+      <FavoritesMenu mobileMatch={mobileMatch} />
     </ul>
   );
 };

@@ -6,11 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import usePagination from '../../../Hooks/usePagination';
 import Pagination from '../../Reusable/Pagination';
 import ProductsForSaleSkeleton from '../../Skeletons/ProductsForSaleSkeleton';
+import Image from '../../Helper/Image';
 
 const ProductsForSale = ({ username }) => {
   const { request, data } = useFetch();
-  const { actualPage, totalPages, setTotalPages, newUrl, handlePageAnt, handlePageProx } =
-    usePagination();
+  const { actualPage, setTotalItems, totalItems, maxPage } = usePagination(20);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -23,42 +23,29 @@ const ProductsForSale = ({ username }) => {
       const { response } = await request(url, options);
 
       const total = response.headers.get('x-total-count');
-      const totalItensPerPage = 20;
-      const isInt = Number.isInteger(+total / totalItensPerPage);
-      setTotalPages({
-        pages: isInt
-          ? +total / totalItensPerPage
-          : Math.floor(+total / totalItensPerPage) + 1,
-        totalItens: total,
-      });
+      setTotalItems(total);
     };
     getProducts();
-    navigate(newUrl);
-  }, [request, username, setTotalPages, navigate, newUrl, actualPage]);
+  }, [request, username, navigate, actualPage, setTotalItems]);
 
   if (!data) return <ProductsForSaleSkeleton />;
   return (
     <>
       <div className={styles.product}>
-        <h1>{totalPages.totalItens} Produtos</h1>
-        <ul className={styles.productsContent}>
+        <h1>{totalItems} Produtos</h1>
+        <ul className={styles['products-content']}>
           {data.map(({ preco, fotos, slug, categoria }) => (
             <li key={slug}>
               <Link to={`/produto/${categoria}/${slug}`}>
                 <picture>
-                  {fotos && <img src={fotos[0].src} alt="Imagem de produto" />}
+                  {fotos && <Image alt="Imagem de produto" src={fotos[0].src} />}
                 </picture>
                 <span className={styles.price}>R$ {preco}</span>
               </Link>
             </li>
           ))}
         </ul>
-        <Pagination
-          handlePageAnt={handlePageAnt}
-          handlePageProx={handlePageProx}
-          totalPages={totalPages}
-          actualPage={actualPage}
-        />
+        <Pagination maxPage={maxPage} actualPage={actualPage} />
       </div>
     </>
   );

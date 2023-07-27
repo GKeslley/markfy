@@ -5,12 +5,10 @@ import { ReactComponent as LogoImg } from '../../Assets/shoppingBagIcon.svg';
 
 const Logo = () => {
   return (
-    <div className={styles.logo}>
-      <Link to="/">
-        <LogoImg />
-        <p>MARKFY</p>
-      </Link>
-    </div>
+    <Link to="/" className={styles.logo}>
+      <LogoImg />
+      <p>MARKFY</p>
+    </Link>
   );
 };
 

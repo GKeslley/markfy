@@ -8,9 +8,9 @@ import ProtectedRoute from '../Helper/ProtectedRoute';
 
 const Login = () => {
   return (
-    <section className={styles.registerBg}>
+    <section className={styles['register-bg']}>
       <Wave />
-      <div className={`${styles.formContent} container`}>
+      <div className={`${styles['form-content']} container`}>
         <ProtectedRoute>
           <Routes>
             <Route path="/" element={<LoginForm />}></Route>

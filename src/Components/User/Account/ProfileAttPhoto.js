@@ -5,19 +5,18 @@ import { BsArrowLeft } from 'react-icons/bs';
 import useOutsideClick from '../../../Hooks/useOutsideClick';
 import { UPDATE_PROFILE_PHOTO } from '../../../Api/api';
 import useFetch from '../../../Hooks/useFetch';
+import Image from '../../Helper/Image';
 
 const ProfileAttPhoto = ({ preview, setPreview }) => {
   const { request, loading } = useFetch();
   const refDialog = React.useRef();
-  console.log(preview);
 
   const updateProfilePhoto = async () => {
     const token = localStorage.getItem('token');
     const formData = new FormData();
     formData.append(preview.name, preview.file);
     const { url, options } = UPDATE_PROFILE_PHOTO(formData, token);
-    const { response, json } = await request(url, options);
-    console.log(response, json);
+    const { response } = await request(url, options);
     if (response.ok) {
       setPreview({ ...preview, open: false });
     }
@@ -43,11 +42,11 @@ const ProfileAttPhoto = ({ preview, setPreview }) => {
         </div>
         <div className={styles['profile-dialog-photo']}>
           <picture className={styles['profile-dialog-att-photo']}>
-            <img src={preview.url} alt={preview.name} />
+            <Image alt={preview.name} src={preview.url} />
           </picture>
-          <img
-            src={preview.url}
+          <Image
             alt={preview.name}
+            src={preview.url}
             className={styles['profile-dialog-full-photo']}
           />
         </div>

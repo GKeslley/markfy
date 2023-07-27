@@ -1,3 +1,15 @@
+.skeleton-flex-column {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.skeleton-flex-row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5rem;
+}
+
 .skeleton-text-p {
   min-width: 2rem;
   max-width: 2rem;
@@ -56,6 +68,13 @@
 .skeleton-image-g {
   min-height: 31.25rem;
   min-width: 15rem;
+}
+
+.skeleton-image-static {
+  max-height: 11rem;
+  min-height: 11rem;
+  max-width: 11rem;
+  min-width: 11rem;
 }
 
 .skeleton-input {

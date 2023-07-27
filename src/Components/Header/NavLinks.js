@@ -2,16 +2,16 @@ import React from 'react';
 import Dropdown from '../Reusable/Dropdown';
 import styles from '../../Css/Header/NavLinks.module.css';
 
-const NavLinks = ({ customMobileStyle }) => {
+const NavLinks = () => {
   return (
-    <ul className={customMobileStyle ? customMobileStyle : styles.nav}>
-      <div className={`${styles.navElements}`}>
+    <ul className={styles.nav}>
+      <div className={`${styles['nav-elements']}`}>
         <div className="container flexAlign">
-          <li className={styles.navItem}>
+          <li>
             <Dropdown />
           </li>
-          <li className={styles.navItem}>Meus anúncios</li>
-          <li className={styles.navItem}>Vender</li>
+          <li>Meus anúncios</li>
+          <li>Vender</li>
         </div>
       </div>
     </ul>

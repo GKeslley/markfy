@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../../Css/Header/CartMenu.module.css';
+import styles from '../../Css/Header/FavoritesMenu.module.css';
 import { AiFillHeart } from 'react-icons/ai';
-import { GlobalContext } from '../../Hooks/UserContext';
+import { GlobalContext } from '../../UserContext';
 
-const CartMenu = ({ mobileMatch }) => {
+const FavoritesMenu = ({ mobileMatch }) => {
   const { favoriteProducts } = React.useContext(GlobalContext);
 
   return (
@@ -13,11 +13,11 @@ const CartMenu = ({ mobileMatch }) => {
         {!mobileMatch && <p>Favoritos</p>}
         <div className={styles.count}>
           <AiFillHeart />
-          <span>{favoriteProducts && favoriteProducts.length}</span>
+          <span>{favoriteProducts && (favoriteProducts.length || '0')}</span>
         </div>
       </Link>
     </>
   );
 };
 
-export default CartMenu;
+export default FavoritesMenu;

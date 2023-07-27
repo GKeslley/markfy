@@ -8,14 +8,13 @@ import ExtraInfos from './ExtraInfos';
 import CategoriesHome from '../Header/CategoriesHome';
 
 const Home = () => {
-  console.log('HOME');
   return (
-    <div>
+    <main>
       <Slide imgs={[Imagem3, Imagem1, Imagem2, Imagem3, Imagem1]} />
       <ExtraInfos />
       <Smartphones />
       <CategoriesHome />
-    </div>
+    </main>
   );
 };
 

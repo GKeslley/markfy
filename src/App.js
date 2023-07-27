@@ -4,7 +4,7 @@ import Login from './Components/Login/Login';
 import './Css/ReusablesCss/Geral.css';
 import Header from './Components/Header';
 import Home from './Components/Home/Home';
-import { UserContext } from './Hooks/UserContext';
+import { UserContext } from './UserContext';
 import User from './Components/User/User';
 import Product from './Components/Products/Product';
 import UserPage from './Components/User/UserPage/UserPage';

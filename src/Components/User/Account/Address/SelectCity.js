@@ -12,7 +12,6 @@ const SelectCity = ({ states, dataAddress, setDataAddress, selectStyle }) => {
   });
 
   React.useEffect(() => {
-    console.log('teste');
     if (states.length && dataState) {
       const getCities = async () => {
         const { sigla } = dataState;
@@ -25,7 +24,7 @@ const SelectCity = ({ states, dataAddress, setDataAddress, selectStyle }) => {
       getCities();
     }
   }, [dataState, setCities, states, request]);
-  console.log(dataAddress);
+
   if (!dataAddress) return null;
 
   const citiesArr = cities.map(({ nome }) => {

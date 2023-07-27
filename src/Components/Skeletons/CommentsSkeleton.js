@@ -5,11 +5,11 @@ import skeletonCss from '../../Css/Skeletons/Skeletons.module.css';
 
 const CommentsSkeleton = () => {
   return (
-    <article className={styles.productAsks}>
+    <article className={styles['product-asks']}>
       <h2>
         <Skeleton className={skeletonCss['skeleton-text-gg']} />
       </h2>
-      <form className={styles.askSection}>
+      <form className={styles['ask-section']}>
         <Skeleton className={skeletonCss['skeleton-input']} />
         <Skeleton className={skeletonCss['skeleton-btn']} />
 

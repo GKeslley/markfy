@@ -38,7 +38,6 @@ const UserProduct = ({ keyUser }) => {
     }
   };
 
-  console.log(data);
   if (!data) return null;
   const dateRegistered = data.data_registro.split(' ')[0].split('-');
 
@@ -47,11 +46,11 @@ const UserProduct = ({ keyUser }) => {
 
   return (
     <>
-      <ul className={styles.userContent}>
+      <ul className={styles['user-content']}>
         <span style={{ fontSize: '0.8rem' }}>Vendido por</span>
         <li>
           <div>
-            <Link className={styles.userName} to={`/usuario/${keyUser}`}>
+            <Link className={styles.username} to={`/usuario/${keyUser}`}>
               {data.nome}
             </Link>
             <p
@@ -59,7 +58,7 @@ const UserProduct = ({ keyUser }) => {
             >{`${data.endereco[0].cidade}, ${data.endereco[0].uf}`}</p>
           </div>
           <div>
-            <Link className={styles.totalProducts} to={`/usuario/${keyUser}`}>
+            <Link className={styles['total-products']} to={`/usuario/${keyUser}`}>
               {data.total_postagens} postagens
             </Link>
             <div className={styles.data}>

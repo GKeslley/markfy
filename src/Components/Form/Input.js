@@ -6,20 +6,20 @@ import RequiredInput from '../Reusable/RequiredInput';
 const Input = ({
   label,
   type,
-  className,
+  className = styles.input,
   name,
-  placeholder,
   onChange,
   onBlur,
   error,
   value,
+  placeholder,
   inputMode,
   maxLength,
   required,
 }) => {
   return (
     <>
-      {!placeholder && (
+      {label && (
         <label htmlFor={name} style={{ display: 'block', marginBottom: '0.5rem' }}>
           {label}
           {required && <RequiredInput />}
@@ -29,7 +29,7 @@ const Input = ({
         type={type}
         name={name}
         id={name}
-        className={`${styles.input} ${className}`}
+        className={className}
         placeholder={placeholder}
         onChange={onChange}
         onBlur={onBlur}

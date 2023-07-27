@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, NavLink, Link, useParams } from 'react-router-dom';
+import { Routes, Route, NavLink, useParams } from 'react-router-dom';
 import Aside from '../Aside';
 import ProductForm from './PostProducts/ProductForm';
 import Settings from './Settings';
@@ -7,7 +7,7 @@ import styles from '../../Css/User/Conta.module.css';
 import ProductCategory from './PostProducts/CategoryPage/ProductCategory';
 import Profile from './Account/Profile';
 import Address from './Account/Address';
-import { GlobalContext } from '../../Hooks/UserContext';
+import { GlobalContext } from '../../UserContext';
 import { AiFillHome, AiFillProfile } from 'react-icons/ai';
 import { BsFillBagCheckFill } from 'react-icons/bs';
 import { IoSettingsSharp } from 'react-icons/io5';
@@ -15,7 +15,7 @@ import { IoSettingsSharp } from 'react-icons/io5';
 const User = () => {
   const { userData } = React.useContext(GlobalContext);
   const [category, setCategory] = React.useState(null);
-  const [getSubcategory, setGetSubcategory] = React.useState(null);
+  const [subcategory, setSubcategory] = React.useState(null);
   const params = useParams();
 
   return (
@@ -61,13 +61,13 @@ const User = () => {
             <ProductCategory
               setCategory={setCategory}
               category={category}
-              setGetSubcategory={setGetSubcategory}
+              setSubcategory={setSubcategory}
             />
           }
         ></Route>
         <Route
           path="produto/form"
-          element={<ProductForm category={category} getSubcategory={getSubcategory} />}
+          element={<ProductForm category={category} subcategory={subcategory} />}
         ></Route>
         <Route path="configuracoes" element={<Settings />}></Route>
       </Routes>

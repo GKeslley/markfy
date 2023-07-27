@@ -4,7 +4,7 @@ import { FaGift, FaTruck, FaBroadcastTower } from 'react-icons/fa';
 import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 const ExtraInfos = () => {
   return (
-    <ul className={`container`}>
+    <ul className="container">
       <div className={styles.extraInfos}>
         <li className={styles.extraInfosItem}>
           <div>

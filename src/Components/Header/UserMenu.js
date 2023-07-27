@@ -2,18 +2,21 @@ import React from 'react';
 import styles from '../../Css/Header/UserMenu.module.css';
 import { Link } from 'react-router-dom';
 import { ReactComponent as UserImg } from '../../Assets/user-svgrepo-com.svg';
-import CartMenu from './CartMenu';
+import FavoritesMenu from './FavoritesMenu';
 
-const UserMenu = ({ nameUser, mobileMatch, customMobileStyle }) => {
+const UserMenu = ({ username, mobileMatch }) => {
   return (
-    <ul className={customMobileStyle ? customMobileStyle : styles.sectionsContent}>
-      <li>{!mobileMatch && <CartMenu mobileMatch={mobileMatch} />}</li>
-
+    <ul className={styles['user-menu-content']}>
+      {!mobileMatch && (
+        <li>
+          <FavoritesMenu mobileMatch={mobileMatch} />
+        </li>
+      )}
       <li>
-        {nameUser ? (
+        {username ? (
           <Link to="/conta/perfil" className="user">
             <UserImg />
-            {nameUser}
+            <p>{username}</p>
           </Link>
         ) : (
           <Link to="/login">Login/Criar</Link>

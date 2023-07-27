@@ -1,8 +1,8 @@
-.productContent {
+.product-content {
   padding-top: 2rem;
 }
 
-.productContent h1 {
+.product-content h1 {
   color: #272727;
   margin-bottom: 1.5rem;
   font-weight: 500;
@@ -10,7 +10,7 @@
   position: relative;
 }
 
-.productContent h1::before {
+.product-content h1::before {
   content: '';
   display: inline-block;
   background: #2dd096;
@@ -24,7 +24,7 @@
   z-index: -1;
 }
 
-.productForm {
+.product-form {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
@@ -32,23 +32,23 @@
   min-width: 30rem;
 }
 
-.productForm input {
+.product-form input {
   padding: 0.3rem 0.4rem;
   font-size: 1rem;
 }
 
-.productForm textarea {
+.product-form textarea {
   padding: 0.4rem;
   max-height: 100%;
   max-width: 100%;
   min-height: 5rem;
 }
 
-.productContent a {
+.product-content a {
   text-align: center;
 }
 
-.imgsContent {
+.imgs-content {
   max-width: 30rem;
   width: 100%;
   display: flex;
@@ -64,7 +64,7 @@
   position: relative;
 }
 
-.imgsContent span {
+.imgs-content span {
   opacity: 0.3;
   position: absolute;
   left: 50%;
@@ -73,11 +73,11 @@
   display: block;
 }
 
-.imgsContent picture {
+.imgs-content picture {
   border: 1px solid black;
   margin: 0.5rem;
 }
 
-.imgsContent img {
+.imgs-content img {
   max-height: 5rem;
 }

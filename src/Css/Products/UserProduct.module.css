@@ -1,4 +1,4 @@
-.userContent {
+.user-content {
   padding-top: 1.5rem;
   border-top: 1px solid #dfdfdf;
   display: flex;
@@ -6,33 +6,33 @@
   gap: 1rem;
 }
 
-.userContent li {
+.user-content li {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
 }
 
-.userContent p:not(:last-child),
-.userContent a {
+.user-content p:not(:last-child),
+.user-content a {
   margin-bottom: 0.7rem;
 }
 
-.userContent .data {
+.user-content .data {
   text-align: center;
 }
 
-.userName,
+.username,
 .data,
 .address,
-.totalProducts {
+.total-products {
   display: flex;
   align-items: center;
 }
 
-.userName::before,
+.username::before,
 .data::before,
 .address::before,
-.totalProducts::before {
+.total-products::before {
   content: '';
   display: inline-block;
   width: 16px;
@@ -40,7 +40,7 @@
   margin-right: 6px;
 }
 
-.userName::before {
+.username::before {
   background: url('../../Assets/UserProduct/user.svg') no-repeat center center;
 }
 
@@ -52,12 +52,12 @@
   background: url('../../Assets/UserProduct/location.svg') no-repeat center center;
 }
 
-.totalProducts::before {
+.total-products::before {
   background: url('../../Assets/UserProduct/business.svg') no-repeat center center;
 }
 
 @media (max-width: 600px) {
-  .userContent li {
+  .user-content li {
     flex-wrap: wrap;
     gap: 1rem;
   }

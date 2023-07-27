@@ -1,9 +1,9 @@
-.carouselContent {
+.smartphone-content {
   margin-top: 4rem;
   position: relative;
 }
 
-.carouselContent > p {
+.smartphone-content > p {
   padding-bottom: 1.2rem;
 }
 
@@ -79,12 +79,12 @@
   justify-content: space-between;
 }
 
-.buttonLeft svg {
+.button-left svg {
   rotate: 180deg;
 }
 
-.buttonRight,
-.buttonLeft {
+.button-right,
+.button-left {
   position: absolute;
   top: 40%;
   display: flex;
@@ -97,16 +97,16 @@
   z-index: 90;
 }
 
-.buttonRight:hover,
-.buttonLeft:hover {
+.button-right:hover,
+.button-left:hover {
   background: #e4e4e4;
 }
 
-.buttonRight {
+.button-right {
   right: 0;
 }
 
-.buttonLeft {
+.button-left {
   left: 0;
 }
 
@@ -115,7 +115,7 @@
     display: none;
   }
 
-  .carouselContent:hover .buttons {
+  .smartphone-content:hover .buttons {
     display: flex;
   }
 }

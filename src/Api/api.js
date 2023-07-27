@@ -144,7 +144,7 @@ export const PRODUCTS_GET_BY_CATEGORY = ({
   };
 };
 
-export const PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY = (category, subcategory, user) => {
+export const PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY = ({ category, subcategory, user }) => {
   return {
     url: `${API_URL}/api/produtos/${category}/${subcategory}${
       user ? '?user=' + user : ''

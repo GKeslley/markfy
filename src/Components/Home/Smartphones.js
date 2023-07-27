@@ -13,15 +13,17 @@ const Smartphones = () => {
   const carouselRef = React.useRef();
 
   React.useEffect(() => {
+    const fields = {
+      category: 'eletronicos',
+      subcategory: 'celulares_e_telefones',
+      user: '@Markfyb894a46c',
+    };
     const getSmartphones = async () => {
-      const { url, options } = PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY(
-        'eletronicos',
-        'celulares_e_telefones',
-        '@Markfyb894a46c',
-      );
+      const { url, options } = PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY(fields);
       console.log('REQUEST SMARTPHONES');
       request(url, options);
     };
+
     getSmartphones();
   }, [request]);
 
@@ -34,37 +36,34 @@ const Smartphones = () => {
     carousel.scrollLeft += carousel.offsetWidth;
   };
 
+  if (!data) return <Skeleton count={4} containerClassName={styles.skeleton} />;
   return (
-    <div className="container">
-      <div className={styles.carouselContent}>
+    <article className="container">
+      <div className={styles['smartphone-content']}>
         <p>GARANTA SEU NOVO SMARTPHONE</p>
         <ul className={`${styles.smartphones} flexAlign`} ref={carouselRef}>
-          {data ? (
-            data.map((product) => (
-              <li key={product.id + toString(Math.random())}>
-                <Link to={`produto/${product.categoria}/${product.id}`}>
-                  <picture>
-                    <Image alt={product.fotos[0].titulo} src={product.fotos[0].src} />
-                  </picture>
-                  <span>R$ {product.preco}</span>
-                  <p>{product.nome.slice(0, 30).trim()}...</p>
-                </Link>
-              </li>
-            ))
-          ) : (
-            <Skeleton count={4} containerClassName={styles.skeleton} />
-          )}
+          {data.map((product) => (
+            <li key={product.id + toString(Math.random())}>
+              <Link to={`produto/${product.categoria}/${product.id}`}>
+                <picture>
+                  <Image alt={product.fotos[0].titulo} src={product.fotos[0].src} />
+                </picture>
+                <span>R$ {product.preco}</span>
+                <p>{product.nome.slice(0, 30).trim()}...</p>
+              </Link>
+            </li>
+          ))}
         </ul>
         <div className={styles.buttons}>
-          <span className={styles.buttonLeft} onClick={handleLeftClick}>
+          <span className={styles['button-left']} onClick={handleLeftClick}>
             <BtnCarousel />
           </span>
-          <span className={styles.buttonRight} onClick={handleRightClick}>
+          <span className={styles['button-right']} onClick={handleRightClick}>
             <BtnCarousel />
           </span>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

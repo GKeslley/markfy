@@ -6,7 +6,7 @@ import styles from '../../Css/Login/LoginForm.module.css';
 import useValidate from '../../Hooks/useValidate';
 import useFetch from '../../Hooks/useFetch';
 import Error from '../Helper/Error';
-import { GlobalContext } from '../../Hooks/UserContext';
+import { GlobalContext } from '../../UserContext';
 
 const Login = () => {
   const name = useValidate();

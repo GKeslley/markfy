@@ -5,12 +5,13 @@ import useFetch from '../../Hooks/useFetch';
 import useMedia from '../../Hooks/useMedia';
 import { PRODUCT_GET } from '../../Api/api';
 import Button from '../Reusable/Button';
-import { GlobalContext } from '../../Hooks/UserContext';
+import { GlobalContext } from '../../UserContext';
 import UserProduct from './UserProduct';
 import Comments from './Comments';
 import LikeProduct from './LikeProduct';
 import CarouselImages from './Mobile/CarouselImages';
 import ProductSkeleton from '../Skeletons/ProductSkeleton';
+import Image from '../Helper/Image';
 
 const Product = () => {
   const [allImages, setAllImages] = React.useState({
@@ -35,12 +36,10 @@ const Product = () => {
     return imagesData;
   }, []);
 
-  React.useEffect(() => {
-    if (dataProduct) {
-      const imagesProduct = images(dataProduct.fotos);
-      setAllImages({ images: imagesProduct, activeImage: imagesProduct[0] });
-    }
-  }, [dataProduct, images]);
+  if (dataProduct && !allImages.images.length) {
+    const imagesProduct = images(dataProduct.fotos);
+    setAllImages({ images: imagesProduct, activeImage: imagesProduct[0] });
+  }
 
   React.useEffect(() => {
     const product = async () => {
@@ -73,30 +72,30 @@ const Product = () => {
   return (
     <>
       <section className="container">
-        <div className={styles.productContent}>
-          <article className={styles.productAndInfos}>
+        <div className={styles['product-content']}>
+          <article className={styles['product-infos']}>
             <LikeProduct slug={slug} userID={userData.usuario_id} />
             {!match ? (
-              <div className={styles.productImages}>
+              <div className={styles['product-images']}>
                 <figure>
-                  <img
-                    src={allImages.activeImage.src}
+                  <Image
                     alt={allImages.activeImage.titulo}
+                    src={allImages.activeImage.src}
                     data-index={allImages.activeImage.index}
                     width={250}
                     height={500}
                   />
                 </figure>
 
-                <div className={styles.galeryImages}>
+                <div className={styles['galery-images']}>
                   {allImages.images.map(({ src, titulo, index }, i) => (
                     <picture
                       key={i}
                       className={allImages.activeImage.index === i ? 'active' : ''}
                     >
-                      <img
-                        src={src}
+                      <Image
                         alt={titulo}
+                        src={src}
                         width={44}
                         height={44}
                         data-index={index}
@@ -109,14 +108,14 @@ const Product = () => {
             ) : (
               <CarouselImages images={allImages.images} />
             )}
-            <ul className={styles.productInfos}>
-              <li className={styles.productName}>{dataProduct.nome}</li>
+            <ul className={styles['product-infos-fields']}>
+              <li className={styles['product-name']}>{dataProduct.nome}</li>
               <li>Frete</li>
-              <li className={styles.productPrice}>
+              <li className={styles['product-price']}>
                 <p>R$ {dataProduct.preco}</p>
                 <span>12x de R$ {portionPrice} sem juros</span>
               </li>
-              <li className={styles.productBtns}>
+              <li className={styles['product-btns']}>
                 <Button>Comprar</Button>
                 <Button>Fazer Oferta</Button>
               </li>
@@ -125,7 +124,7 @@ const Product = () => {
             </ul>
           </article>
 
-          <article className={styles.productDescription}>
+          <article className={styles['product-description']}>
             <h2>Descrição</h2>
             <p>{dataProduct.descricao}</p>
           </article>

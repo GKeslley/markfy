@@ -9,7 +9,7 @@
   white-space: nowrap;
 }
 
-.headerContent .headerItem {
+.header-content .header-item {
   display: grid;
   grid-template-columns: auto 2fr auto;
   width: 100%;
@@ -17,13 +17,13 @@
   align-items: center;
 }
 
-.headerContent {
+.header-content {
   display: grid;
   color: #fff;
   gap: 1rem;
 }
 
-.headerItem input {
+.header-item input {
   width: 100%;
   border: none;
   padding: 0.5rem;
@@ -46,12 +46,12 @@
     color: initial;
   }
 
-  .headerContent .headerItem {
+  .header-content .header-item {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
 
-  .headerItem form {
+  .header-item form {
     grid-column: 1/-1;
   }
 }

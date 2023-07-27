@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { debounce } from 'lodash';
 import styles from '../../Css/ReusablesCss/Slide.module.css';
+import Image from '../Helper/Image';
 
 const Slide = ({ imgs }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -28,19 +29,16 @@ const Slide = ({ imgs }) => {
     setTouchCoordinates({ touchStartX: coord, touchMoveX: null, coord: null });
   }, []);
 
-  const handleTouchEnd = useCallback(
-    (event) => {
-      SlideContentRef.current.style.transition = transformStyle;
-
-      if (touchCoordinates.coord === 'right' && slideTransform % 100 !== 0) {
-        setCurrentSlideIndex((prev) => prev + 1);
-      } else if (touchCoordinates.coord === 'left' && slideTransform % 100 !== 0) {
-        setCurrentSlideIndex((prev) => prev - 1);
-      }
-      setTouchMoveEnabled(false);
-    },
-    [slideTransform, touchCoordinates],
-  );
+  const handleTouchEnd = useCallback(() => {
+    SlideContentRef.current.style.transition = transformStyle;
+    setTouchMoveEnabled(false);
+    if (slideTransform % 100 === 0) return null;
+    if (touchCoordinates.coord === 'right') {
+      setCurrentSlideIndex((prev) => prev + 1);
+    } else if (touchCoordinates.coord === 'left') {
+      setCurrentSlideIndex((prev) => prev - 1);
+    }
+  }, [slideTransform, touchCoordinates]);
 
   const handleTouchMove = useCallback(
     (event) => {
@@ -65,7 +63,6 @@ const Slide = ({ imgs }) => {
         });
 
         if (slideTransform >= maxMove) {
-          console.log('aq');
           setSlideTransform(maxMove);
         }
       }
@@ -83,9 +80,8 @@ const Slide = ({ imgs }) => {
   useEffect(() => {
     const handleSlideTimeout = debounce(() => {
       setCurrentSlideIndex((prev) => {
-        if (prev < imagesLength + 1) {
-          return prev + 1;
-        } else return 0;
+        if (prev < imagesLength + 1) return prev + 1;
+        return 0;
       });
     }, 3000);
 
@@ -145,7 +141,7 @@ const Slide = ({ imgs }) => {
         ref={SlideContentRef}
       >
         <li data-index="-1">
-          <img src={imagesSrc[0].src} alt="imagem" className="container" />
+          <Image alt="imagem" src={imagesSrc[0].src} className="container" />
         </li>
 
         {imagesSrc.slice(1, -1).map(({ id, src }, i) => (
@@ -159,9 +155,9 @@ const Slide = ({ imgs }) => {
         ))}
 
         <li data-index={imagesSrc[imagesSrc.length - 1].id}>
-          <img
-            src={imagesSrc[imagesSrc.length - 1].src}
+          <Image
             alt="imagem"
+            src={imagesSrc[imagesSrc.length - 1].src}
             className="container"
           />
         </li>

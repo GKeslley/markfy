@@ -4,22 +4,21 @@ import Subcategory from './Subcategory';
 import styles from '../../../../Css/User/ProductCategory.module.css';
 import { allCategories } from './allCategories';
 
-const categories = allCategories();
-
-const ProductCategory = ({ setCategory, category, setGetSubcategory }) => {
+const ProductCategory = ({ setCategory, category, setSubcategory }) => {
   const [activeIndex, setActiveIndex] = React.useState(null);
 
+  const categories = allCategories();
   const handleClick = (index) => {
     setActiveIndex(index);
     setCategory(categories[index]);
   };
 
   React.useEffect(() => {
-    setGetSubcategory(null);
-  }, [category, setGetSubcategory]);
+    setSubcategory(null);
+  }, [category, setSubcategory]);
 
   return (
-    <section className={`${styles.categoriesContainer} animeLeft`}>
+    <section className={`${styles['categories-container']} animeLeft`}>
       <h1>O que você está anunciando?</h1>
       <div>
         <p>Categorias*</p>
@@ -28,8 +27,9 @@ const ProductCategory = ({ setCategory, category, setGetSubcategory }) => {
             <li
               key={name}
               className={`${styles.category} ${activeIndex === i ? 'active' : ''} ${
-                subcategories.length ? 'link_item' : ''
-              }`}
+                subcategories.length ? styles['link_item'] : ''
+              }      
+              `}
             >
               <div onClick={() => handleClick(i)}>
                 <Category name={name} subcategories={subcategories} />
@@ -38,7 +38,8 @@ const ProductCategory = ({ setCategory, category, setGetSubcategory }) => {
               {subcategories.length > 0 && (
                 <Subcategory
                   subcategories={subcategories}
-                  setGetSubcategory={setGetSubcategory}
+                  setSubcategory={setSubcategory}
+                  active={activeIndex === i}
                 />
               )}
             </li>

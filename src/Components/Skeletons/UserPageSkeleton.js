@@ -6,16 +6,16 @@ import Skeleton from 'react-loading-skeleton';
 const UserProductsSkeleton = () => {
   return (
     <section className="container">
-      <div className={styles.userContent}>
+      <div className={styles['user-content']}>
         <ul>
           <li>
             <Skeleton className={skeletonCss['skeleton-img-round']} />
           </li>
-          <li className={styles.userInfos}>
+          <li className={styles['user-infos']}>
             <p>
               <Skeleton className={skeletonCss['skeleton-text-m']} />
             </p>
-            <div className={styles.userData}>
+            <div className={styles['user-data']}>
               <address>
                 <p>
                   <Skeleton className={skeletonCss['skeleton-text-m']} />

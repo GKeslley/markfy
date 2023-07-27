@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LIKE_PRODUCTS_GET, LOGIN_USER_POST, USER_GET, VALIDATE_TOKEN } from '../Api/api';
-import useFetch from './useFetch';
+import { LIKE_PRODUCTS_GET, LOGIN_USER_POST, USER_GET, VALIDATE_TOKEN } from './Api/api';
+import useFetch from './Hooks/useFetch';
 
 export const GlobalContext = React.createContext();
 

@@ -1,20 +1,20 @@
-.paginationBtns {
+.pagination-btns {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
-.paginationBtns li {
+.pagination-btns li {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.paginationBtns .btnAnt,
-.paginationBtns .btnProx {
+.pagination-btns .btnAnt,
+.pagination-btns .btn-prox {
   cursor: pointer;
 }
 
-.paginationBtns li svg {
+.pagination-btns li svg {
   margin-top: 2px;
 }

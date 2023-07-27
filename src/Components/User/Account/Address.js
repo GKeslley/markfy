@@ -104,9 +104,7 @@ const Address = ({ userData }) => {
       numberHouse.validate() &&
       neighborhood.validate()
     ) {
-      const { response, json } = await request(url, options);
-      console.log(json);
-      console.log(response);
+      await request(url, options);
     }
   };
 

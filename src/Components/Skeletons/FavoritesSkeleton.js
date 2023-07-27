@@ -8,12 +8,12 @@ const FavoritesSkeleton = () => {
   const mobileMatch = useMedia('(max-width: 600px)');
 
   return (
-    <section className={`${styles.productsContent} container`}>
+    <section className={`${styles['products-content']} container`}>
       <h1>
         <Skeleton />
       </h1>
       <div>
-        <ul className={styles.sections}>
+        <ul className={styles['product-section']}>
           <li>
             <Skeleton />
           </li>
@@ -34,8 +34,8 @@ const FavoritesSkeleton = () => {
                 </p>
 
                 {!mobileMatch ? (
-                  <div className={styles.productItems}>
-                    <div className={styles.productInfos}>
+                  <div className={styles['product-items']}>
+                    <div className={styles['product-infos']}>
                       <picture>
                         <Skeleton className={skeletonsCss['skeleton-image-p']} />
                       </picture>
@@ -53,8 +53,8 @@ const FavoritesSkeleton = () => {
                     </p>
                   </div>
                 ) : (
-                  <div className={styles.productItems}>
-                    <div className={styles.productInfos}>
+                  <div className={styles['product-items']}>
+                    <div className={styles['product-infos']}>
                       <picture>
                         <Skeleton />
                       </picture>
