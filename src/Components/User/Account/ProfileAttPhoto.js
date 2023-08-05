@@ -5,7 +5,6 @@ import { BsArrowLeft } from 'react-icons/bs';
 import useOutsideClick from '../../../Hooks/useOutsideClick';
 import { UPDATE_PROFILE_PHOTO } from '../../../Api/api';
 import useFetch from '../../../Hooks/useFetch';
-import Image from '../../Helper/Image';
 
 const ProfileAttPhoto = ({ preview, setPreview }) => {
   const { request, loading } = useFetch();
@@ -29,7 +28,7 @@ const ProfileAttPhoto = ({ preview, setPreview }) => {
       <div className={styles['profile-dialog']} ref={refDialog}>
         <div className={styles['profile-dialog-text']}>
           <div>
-            <span onClick={() => setPreview(null)}>
+            <span onClick={() => setPreview({ url: false, open: false })}>
               <BsArrowLeft strokeWidth={0.8} />
             </span>
             <p>Editar mídia</p>
@@ -42,11 +41,12 @@ const ProfileAttPhoto = ({ preview, setPreview }) => {
         </div>
         <div className={styles['profile-dialog-photo']}>
           <picture className={styles['profile-dialog-att-photo']}>
-            <Image alt={preview.name} src={preview.url} />
+            <img src={preview.url} alt={preview.name} />
           </picture>
-          <Image
-            alt={preview.name}
+
+          <img
             src={preview.url}
+            alt={preview.name}
             className={styles['profile-dialog-full-photo']}
           />
         </div>
