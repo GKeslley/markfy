@@ -10,6 +10,7 @@ import Product from './Components/Products/Product';
 import UserPage from './Components/User/UserPage/UserPage';
 import Products from './Components/Products/Products';
 import Favorites from './Components/User/FavoriteProducts/Favorites';
+import Transaction from './Components/Products/Transaction';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="produtos" element={<Products />}></Route>
           <Route path="favoritos" element={<Favorites />}></Route>
           <Route path="usuario/:user/*" element={<UserPage />}></Route>
+          <Route path="transacao/:slug" element={<Transaction />}></Route>
         </Routes>
       </UserContext>
     </BrowserRouter>
