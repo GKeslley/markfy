@@ -1,0 +1,90 @@
+.transaction-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.infos {
+  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+}
+
+.infos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.infos li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-bottom: 1rem;
+}
+
+.infos li:not(:last-child) {
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.infos li svg {
+  width: 24px;
+  height: 24px;
+  fill: #272727;
+}
+
+.infos li div {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.infos li div p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.infos li p {
+  white-space: break-spaces;
+}
+
+.form-content {
+  padding-top: 1.5rem;
+}
+
+.form-content form div {
+  margin-bottom: 1rem;
+}
+
+.form-content form button {
+  width: 100%;
+}
+
+.payment {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.payment picture {
+  width: 100%;
+  background: rgb(236, 236, 236);
+  padding: 0.5rem 0;
+  border-bottom: 5px solid #689f38;
+  transition: 0.3s;
+}
+
+.payment svg {
+  width: 100%;
+  height: 40px;
+  fill: #bbbbbb;
+  transition: 0.3s;
+}
+
+@media (max-width: 830px) {
+  .transaction-container {
+    grid-template-columns: 1fr;
+  }
+}

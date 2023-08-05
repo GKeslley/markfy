@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from '../../Css/Products/Product.module.css';
 import useFetch from '../../Hooks/useFetch';
 import useMedia from '../../Hooks/useMedia';
@@ -22,6 +22,7 @@ const Product = () => {
   const { slug } = useParams();
   const { userData } = React.useContext(GlobalContext);
   const match = useMedia('(max-width: 830px)');
+  const navigate = useNavigate();
 
   const images = React.useCallback((arr) => {
     const imagesData = arr.reduce((acc, val, i) => {
@@ -63,7 +64,6 @@ const Product = () => {
   if (!dataProduct || !userData || !allImages.activeImage) {
     return <ProductSkeleton />;
   }
-  console.log(allImages.activeImage);
   const portion = +dataProduct.preco.replace(/\D/g, '') / 12;
   const portionPrice = Number.isInteger(portion)
     ? portion
@@ -116,7 +116,9 @@ const Product = () => {
                 <span>12x de R$ {portionPrice} sem juros</span>
               </li>
               <li className={styles['product-btns']}>
-                <Button>Comprar</Button>
+                <Button onClick={() => navigate(`/transacao/${dataProduct.slug}`)}>
+                  Comprar
+                </Button>
                 <Button>Fazer Oferta</Button>
               </li>
 
