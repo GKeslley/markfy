@@ -16,7 +16,20 @@ const types = {
   },
   phone: {
     regex: /(\(?\d{2}\)?\s)?(\d{4,5}-\d{4})/,
-    message: 'Digite um número valido',
+    message: 'Digite um número válido',
+  },
+  card: {
+    regex:
+      /^(?:4[0-9]{3}(?: [0-9]{4}){3}(?: [0-9]{3})?|5[1-5][0-9]{2}(?: [0-9]{4}){3}|6(?:011|5[0-9][0-9])(?: [0-9]{4}){3}|3[47][0-9]{2}(?: [0-9]{4}){2}(?: [0-9]{3})?|3(?:0[0-5]|[68][0-9])[0-9](?: [0-9]{4}){2}(?: [0-9]{3})?|(?:2131|1800|35\d{2})(?: [0-9]{4}){2}(?: [0-9]{3})?)$/,
+    message: 'Digite um número válido',
+  },
+  cardExpire: {
+    regex: /^(0[1-9]|1[0-2])\/\d{2}$/,
+    message: 'Digite uma data válida',
+  },
+  cardCvv: {
+    regex: /^\d{3}$/,
+    message: 'Digite um valor válido',
   },
 };
 

@@ -6,11 +6,28 @@ const formatter = {
   },
   phone: {
     format: (value) => {
-      console.log(value);
       if (!value) return '';
       value = value.replace(/\D/g, '');
       value = value.replace(/(\d{2})(\d)/, '($1) $2');
       value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+      return value;
+    },
+  },
+  card: {
+    format: (value) => {
+      value = value.replace(/\D/g, '');
+      value = value.replace(/^(\d{4})(\d)/g, '$1 $2');
+      value = value.replace(/^(\d{4})\s(\d{4})(\d)/g, '$1 $2 $3');
+      value = value.replace(/^(\d{4})\s(\d{4})\s(\d{4})(\d)/g, '$1 $2 $3 $4');
+      return value;
+    },
+  },
+  cardExpire: {
+    format: (value) => {
+      value = value.replace(/\D/g, '');
+      if (value.length > 2) {
+        value = value.replace(/(\d{2})(\d)/, '$1/$2');
+      }
       return value;
     },
   },
