@@ -234,6 +234,20 @@ export const LIKE_PRODUCT_GET = ({ slug, token }) => {
   };
 };
 
+export const TRANSACTION_POST = ({ body, token, slug }) => {
+  return {
+    url: API_URL + `/api/transacao`,
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+};
+
 // FORM
 
 export const GET_STATES = () => {
