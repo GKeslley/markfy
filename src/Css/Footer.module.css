@@ -1,0 +1,69 @@
+.footer-bg {
+  display: flex;
+  flex-direction: column;
+  height: 10rem;
+}
+
+.footer {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  padding: 3rem 2rem;
+  background: #0e9162;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer div,
+.footer div ul {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 0.8rem;
+}
+
+.footer div p,
+.footer div label {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.footer div a {
+  font-weight: 500;
+  color: #eee;
+}
+
+.footer .personal-infos > a {
+  margin-bottom: 0.5rem;
+}
+
+.footer .logo {
+  flex-direction: row;
+}
+
+.footer .logo svg {
+  width: 28px;
+  height: 28px;
+  background: #0ea16b;
+  padding: 0.2rem;
+  transition: 0.3s;
+}
+
+.footer .logo li:hover svg {
+  fill: #0ea16b;
+  background: #fff;
+}
+
+@media (max-width: 500px) {
+  .footer {
+    display: grid;
+    justify-content: center;
+  }
+
+  .footer div {
+    flex-grow: 0;
+    text-align: center;
+    justify-self: center;
+  }
+}
