@@ -120,6 +120,16 @@ export const PRODUCTS_GET = ({ page, total, user }) => {
   };
 };
 
+export const PRODUCTS_SOLD_GET = ({ page, total, user }) => {
+  return {
+    url: `${API_URL}/api/produtos/vendidos/?_page=${page}&_total=${total}&_user=${user}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
+
 export const PRODUCTS_GET_BY_CATEGORY = ({
   category,
   subcategory,
@@ -151,6 +161,20 @@ export const PRODUCTS_GET_BY_CATEGORY_SUBCATEGORY = ({ category, subcategory, us
     }`,
     options: {
       method: 'GET',
+      cache: 'no-store',
+    },
+  };
+};
+
+export const PRODUCT_DELETE = ({ slug, token }) => {
+  return {
+    url: `${API_URL}/api/produto/${slug}`,
+    options: {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
       cache: 'no-store',
     },
   };
