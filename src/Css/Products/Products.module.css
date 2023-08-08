@@ -2,13 +2,14 @@
   display: grid;
   padding-top: 3rem;
   padding-bottom: 3rem;
+  flex: 1;
 }
 
 .filter {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  align-items: center;
+  align-items: start;
 }
 
 .filter p {

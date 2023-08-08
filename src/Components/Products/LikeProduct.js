@@ -6,6 +6,7 @@ import useFetch from '../../Hooks/useFetch';
 import { LIKE_PRODUCT_GET, LIKE_PRODUCT_POST } from '../../Api/api';
 import RequestMessage from '../Reusable/RequestMessage';
 import useUnlikeProduct from '../../Hooks/useUnlikeProduct';
+import Spinner from '../Reusable/Spinner';
 
 const LikeProduct = ({ slug, userID }) => {
   const [isLiked, setIsLiked] = React.useState(false);
@@ -54,11 +55,13 @@ const LikeProduct = ({ slug, userID }) => {
         <RequestMessage notification={notification} setNotification={setNotification} />
       )}
       <picture
-        className={`${styles['product-like']} ${isLiked ? 'active' : ''}`}
+        className={`${styles['product-like']} ${isLiked ? 'active' : ''} ${
+          unlikeLoading || loading ? 'rotate' : ''
+        }`}
         title="Favoritar"
         onClick={saveProduct}
       >
-        {unlikeLoading || loading ? <p>carregano</p> : <AiOutlineHeart />}
+        {unlikeLoading || loading ? <Spinner width="8px" /> : <AiOutlineHeart />}
       </picture>
     </>
   );

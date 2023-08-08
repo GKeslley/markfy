@@ -1,4 +1,5 @@
 .products-content {
+  flex: 1;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
@@ -111,6 +112,15 @@
 
 .product-infos picture {
   max-width: 3rem;
+}
+
+.product-infos a {
+  height: max-content;
+  margin-top: 1rem;
+}
+
+.sell {
+  filter: grayscale(1);
 }
 
 @media (max-width: 600px) {

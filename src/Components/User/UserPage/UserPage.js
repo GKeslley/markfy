@@ -10,15 +10,16 @@ import UserPageSkeleton from '../../Skeletons/UserPageSkeleton';
 
 const UserPage = () => {
   const [user, setUser] = React.useState(null);
-
   const username = useLocation().pathname.split('/')[2].trim();
   const { request, data } = useFetch();
 
   React.useEffect(() => {
     const getUser = async () => {
       const { url, options } = USER_OTHER_GET(username.replace('@', ''));
-      const { json } = await request(url, options);
-      setUser(json);
+      const { response, json } = await request(url, options);
+      if (response.ok) {
+        setUser(json);
+      }
     };
     getUser();
   }, [request, username]);
@@ -61,7 +62,7 @@ const UserPage = () => {
 
           <Routes>
             <Route path="/" element={<ProductsForSale username={username} />}></Route>
-            <Route path="vendidos" element={<ProductsSold />}></Route>
+            <Route path="vendidos" element={<ProductsSold username={username} />}></Route>
           </Routes>
         </section>
       )}

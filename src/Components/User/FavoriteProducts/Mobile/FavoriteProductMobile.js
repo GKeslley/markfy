@@ -7,7 +7,7 @@ const FavoriteProductMobile = ({ produtos, unlikeProduct }) => {
   return (
     <div className={styles['product-items']}>
       <div className={styles['product-infos']}>
-        <picture>
+        <picture className={`${produtos.vendido === 'true' ? styles.sell : ''}`}>
           <Image alt={produtos.fotos[0].titulo} src={produtos.fotos[0].src} />
         </picture>
 

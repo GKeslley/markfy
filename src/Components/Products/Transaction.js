@@ -8,6 +8,7 @@ import Input from '../Form/Input';
 import styles from '../../Css/Products/Transaction.module.css';
 import { FaCreditCard } from 'react-icons/fa';
 import TransactionPayment from './TransactionPayment';
+import TransactionSkeleton from '../Skeletons/TransactionSkeleton';
 
 const Transaction = () => {
   const { userData } = React.useContext(GlobalContext);
@@ -39,7 +40,7 @@ const Transaction = () => {
     productExist();
   }, [request, slug, userData]);
 
-  if (!data) return null;
+  if (!data) return <TransactionSkeleton />;
   return (
     <section className={`container ${styles['transaction-container']}`}>
       <div className={styles['form-content']}>

@@ -11,6 +11,7 @@ import UserPage from './Components/User/UserPage/UserPage';
 import Products from './Components/Products/Products';
 import Favorites from './Components/User/FavoriteProducts/Favorites';
 import Transaction from './Components/Products/Transaction';
+import Footer from './Components/Footer';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="usuario/:user/*" element={<UserPage />}></Route>
           <Route path="transacao/:slug" element={<Transaction />}></Route>
         </Routes>
+        <Footer />
       </UserContext>
     </BrowserRouter>
   );

@@ -9,7 +9,7 @@ import Input from '../Form/Input';
 import useValidate from '../../Hooks/useValidate';
 import Button from '../Reusable/Button';
 
-const Comments = ({ userData, allComments, authorPost, slug }) => {
+const Comments = ({ userData, allComments, authorPost, slug, sellProduct }) => {
   const { request, loading } = useFetch();
   const [commentActive, setCommentActive] = React.useState(null);
 
@@ -59,14 +59,18 @@ const Comments = ({ userData, allComments, authorPost, slug }) => {
     <article className={styles['product-asks']}>
       <h2>Perguntas e Respostas</h2>
       <form className={styles['ask-section']} onSubmit={postComments}>
-        <Input
-          type="text"
-          label="Pergunte ao vendedor"
-          name="ask"
-          id="ask"
-          {...commentValue}
-        />
-        {loading ? <Button>Carregando...</Button> : <Button>Perguntar</Button>}
+        {sellProduct === 'false' && (
+          <>
+            <Input
+              type="text"
+              label="Pergunte ao vendedor"
+              name="ask"
+              id="ask"
+              {...commentValue}
+            />
+            {loading ? <Button>Carregando...</Button> : <Button>Perguntar</Button>}
+          </>
+        )}
         <p>Últimas perguntas feitas</p>
       </form>
 

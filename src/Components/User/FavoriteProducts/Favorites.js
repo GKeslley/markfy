@@ -9,16 +9,23 @@ import useMedia from '../../../Hooks/useMedia';
 import FavoritesSkeleton from '../../Skeletons/FavoritesSkeleton';
 import Image from '../../Helper/Image';
 import FavoriteProductMobile from './Mobile/FavoriteProductMobile';
+import Spinner from '../../Reusable/Spinner';
 
 const Favorites = () => {
+  const [index, setIndex] = React.useState(null);
   const { favoriteProducts, getFavoriteProducts } = React.useContext(GlobalContext);
-  const { unlikeProduct } = useUnlikeProduct({ getFavoriteProducts });
+  const { unlikeProduct, loading } = useUnlikeProduct({ getFavoriteProducts });
   const mobileMatch = useMedia('(max-width: 600px)');
+
+  const unlike = (slug, i) => {
+    setIndex(i);
+    unlikeProduct(slug);
+  };
 
   if (favoriteProducts === false) return <p>N tem itens</p>;
   if (!favoriteProducts) return <FavoritesSkeleton />;
   return (
-    <section className={`${styles['products-content']} container`}>
+    <main className={`${styles['products-content']} container`}>
       <h1>Favoritos</h1>
       {favoriteProducts.length && (
         <div>
@@ -28,7 +35,7 @@ const Favorites = () => {
             <li className={styles.remove}>Remover</li>
           </ul>
           <ul className={styles.product}>
-            {favoriteProducts.map(({ produtos }) => (
+            {favoriteProducts.map(({ produtos }, i) => (
               <li key={produtos.slug}>
                 <Link className={styles.user} to={`/usuario/${produtos.usuario_id}`}>
                   <BiStore />
@@ -37,7 +44,11 @@ const Favorites = () => {
 
                 {!mobileMatch ? (
                   <div className={styles['product-items']}>
-                    <div className={styles['product-infos']}>
+                    <div
+                      className={`${styles['product-infos']} ${
+                        produtos.vendido === 'true' ? styles.sell : ''
+                      }`}
+                    >
                       <picture>
                         <Image
                           alt={produtos.fotos[0].titulo}
@@ -45,16 +56,22 @@ const Favorites = () => {
                         />
                       </picture>
 
-                      <p>{`${produtos.nome.slice(0, 40)}...`}</p>
+                      <Link
+                        to={`/produto/${produtos.categoria}/${produtos.slug}`}
+                      >{`${produtos.nome.slice(0, 40)}...`}</Link>
                     </div>
 
                     <p className={styles.price}>R$ {produtos.preco}</p>
-                    <p
-                      onClick={() => unlikeProduct(produtos.slug)}
-                      className={styles.remove}
-                    >
-                      <AiFillHeart />
-                    </p>
+                    {loading && i === index ? (
+                      <Spinner />
+                    ) : (
+                      <p
+                        onClick={() => unlike(produtos.slug, i)}
+                        className={styles.remove}
+                      >
+                        <AiFillHeart />
+                      </p>
+                    )}
                   </div>
                 ) : (
                   <FavoriteProductMobile
@@ -67,7 +84,7 @@ const Favorites = () => {
           </ul>
         </div>
       )}
-    </section>
+    </main>
   );
 };
 

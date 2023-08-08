@@ -51,6 +51,10 @@
   fill: #e54;
 }
 
+.product-like:global(.rotate) {
+  transform: rotate(90deg);
+}
+
 .product-images {
   display: grid;
   grid-template-columns: 5rem max-content;

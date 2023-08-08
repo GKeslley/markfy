@@ -116,9 +116,13 @@ const Product = () => {
                 <span>12x de R$ {portionPrice} sem juros</span>
               </li>
               <li className={styles['product-btns']}>
-                <Button onClick={() => navigate(`/transacao/${dataProduct.slug}`)}>
-                  Comprar
-                </Button>
+                {dataProduct.vendido === 'true' ? (
+                  <Button>Indisponível</Button>
+                ) : (
+                  <Button onClick={() => navigate(`/transacao/${dataProduct.slug}`)}>
+                    Comprar
+                  </Button>
+                )}
                 <Button>Fazer Oferta</Button>
               </li>
 
@@ -136,6 +140,7 @@ const Product = () => {
             allComments={dataProduct.comentarios}
             authorPost={dataProduct.usuario_id}
             slug={slug}
+            sellProduct={dataProduct.vendido}
           />
         </div>
       </section>

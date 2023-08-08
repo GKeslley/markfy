@@ -11,6 +11,8 @@ import { GlobalContext } from '../../UserContext';
 import { AiFillHome, AiFillProfile } from 'react-icons/ai';
 import { BsFillBagCheckFill } from 'react-icons/bs';
 import { IoSettingsSharp } from 'react-icons/io5';
+import { FaClipboardList } from 'react-icons/fa';
+import Adverts from './Account/Adverts';
 
 const User = () => {
   const { userData } = React.useContext(GlobalContext);
@@ -19,7 +21,7 @@ const User = () => {
   const params = useParams();
 
   return (
-    <section className={styles.user}>
+    <main className={styles.user}>
       <Aside>
         <ul>
           <li>
@@ -32,6 +34,12 @@ const User = () => {
             <NavLink to="endereco">
               <AiFillHome />
               <p>Endereço</p>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="anuncios">
+              <FaClipboardList />
+              <p>Meus anúncios</p>
             </NavLink>
           </li>
           <li>
@@ -55,6 +63,7 @@ const User = () => {
       <Routes>
         <Route path="perfil" element={<Profile userData={userData} />}></Route>
         <Route path="endereco" element={<Address userData={userData} />}></Route>
+        <Route path="anuncios" element={<Adverts userData={userData} />}></Route>
         <Route
           path="produto/categoria"
           element={
@@ -71,7 +80,7 @@ const User = () => {
         ></Route>
         <Route path="configuracoes" element={<Settings />}></Route>
       </Routes>
-    </section>
+    </main>
   );
 };
 
