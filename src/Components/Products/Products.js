@@ -79,7 +79,11 @@ const Products = () => {
     <section className={`${styles['products-bg']} container`}>
       <ul className={styles.filter}>
         <li className={styles.search}>
-          <h1>{searchParam ? searchParam : subcategory.name || category.name}</h1>
+          <h1>
+            {searchParam
+              ? searchParam
+              : (subcategory && subcategory.name) || category.name}
+          </h1>
           <p>{`${totalItems || 'Carregando'} resultados`}</p>
         </li>
 

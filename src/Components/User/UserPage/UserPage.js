@@ -28,7 +28,7 @@ const UserPage = () => {
   return (
     <>
       {Object.values(user).length && (
-        <section className="container">
+        <section className={`${styles['user-container']} container`}>
           <div className={styles['user-content']}>
             <ul>
               <li>

@@ -23,7 +23,7 @@ const User = () => {
   return (
     <main className={styles.user}>
       <Aside>
-        <ul>
+        <ul className={styles['aside-elements']}>
           <li>
             <NavLink to="perfil" className={styles['user-element']}>
               <AiFillProfile />

@@ -1,16 +1,18 @@
 import React from 'react';
-import Category from './Category';
 import Subcategory from './Subcategory';
 import styles from '../../../../Css/User/ProductCategory.module.css';
 import { allCategories } from './allCategories';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCategory = ({ setCategory, category, setSubcategory }) => {
   const [activeIndex, setActiveIndex] = React.useState(null);
-
   const categories = allCategories();
-  const handleClick = (index) => {
+  const navigate = useNavigate();
+
+  const handleClick = (index, newUrl = null) => {
     setActiveIndex(index);
     setCategory(categories[index]);
+    if (newUrl) navigate(newUrl);
   };
 
   React.useEffect(() => {
@@ -20,29 +22,42 @@ const ProductCategory = ({ setCategory, category, setSubcategory }) => {
   return (
     <section className={`${styles['categories-container']} animeLeft`}>
       <h1>O que você está anunciando?</h1>
-      <div>
+      <div className={styles['categories-content']}>
         <p>Categorias*</p>
         <ul className={styles.categories}>
           {categories.map(({ name, subcategories }, i) => (
-            <li
-              key={name}
-              className={`${styles.category} ${activeIndex === i ? 'active' : ''} ${
-                subcategories.length ? styles['link_item'] : ''
-              }      
+            <>
+              {subcategories.length ? (
+                <li
+                  key={name}
+                  className={`${styles.category} ${activeIndex === i ? 'active' : ''} ${
+                    styles.arrow
+                  }                 
               `}
-            >
-              <div onClick={() => handleClick(i)}>
-                <Category name={name} subcategories={subcategories} />
-              </div>
+                  onClick={() => handleClick(i)}
+                >
+                  <div>
+                    <p>{name}</p>
+                  </div>
 
-              {subcategories.length > 0 && (
-                <Subcategory
-                  subcategories={subcategories}
-                  setSubcategory={setSubcategory}
-                  active={activeIndex === i}
-                />
+                  <Subcategory
+                    subcategories={subcategories}
+                    setSubcategory={setSubcategory}
+                    active={activeIndex === i}
+                  />
+                </li>
+              ) : (
+                <li
+                  key={name}
+                  className={`${styles['category-link']}`}
+                  onClick={() => handleClick(i, '../form')}
+                >
+                  <div>
+                    <p>{name}</p>
+                  </div>
+                </li>
               )}
-            </li>
+            </>
           ))}
         </ul>
       </div>
