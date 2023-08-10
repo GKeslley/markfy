@@ -8,6 +8,8 @@ import Image from '../../Helper/Image';
 import styles from '../../../Css/User/Adverts.module.css';
 import DeleteAdvert from './Advert/DeleteAdvert';
 import { Link } from 'react-router-dom';
+import AdvertsSkeleton from '../../Skeletons/AdvertsSkeleton';
+import ErrorRequest from '../../Helper/ErrorRequest';
 
 const Adverts = ({ userData }) => {
   const [value, setValue] = React.useState('venda');
@@ -54,7 +56,7 @@ const Adverts = ({ userData }) => {
     { value: 'vendido', name: 'Vendidos' },
   ];
 
-  if (loading) return <p>carregano</p>;
+  if (loading) return <AdvertsSkeleton />;
   return (
     <article className={`${styles['adverts-container']} container`}>
       <Select options={options} handleClick={handleClick} value={value} />
@@ -63,7 +65,7 @@ const Adverts = ({ userData }) => {
           <p>Produto</p>
           <p>Deletar</p>
         </div>
-        {products &&
+        {products ? (
           products.map(({ id, fotos, nome, preco, categoria, slug }, i) => (
             <li key={id} className={styles.adverts}>
               <Link
@@ -84,7 +86,12 @@ const Adverts = ({ userData }) => {
                 getProducts={() => getProducts(userData.usuario_id)}
               />
             </li>
-          ))}
+          ))
+        ) : (
+          <ErrorRequest>{`Você não possui produtos ${
+            value === 'vendido' ? 'VENDIDOS' : 'A VENDA'
+          }`}</ErrorRequest>
+        )}
         <Pagination maxPage={maxPage} actualPage={actualPage} />
       </ul>
     </article>

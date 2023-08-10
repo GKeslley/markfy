@@ -10,6 +10,7 @@ import FavoritesSkeleton from '../../Skeletons/FavoritesSkeleton';
 import Image from '../../Helper/Image';
 import FavoriteProductMobile from './Mobile/FavoriteProductMobile';
 import Spinner from '../../Reusable/Spinner';
+import ErrorRequest from '../../Helper/ErrorRequest';
 
 const Favorites = () => {
   const [index, setIndex] = React.useState(null);
@@ -22,7 +23,19 @@ const Favorites = () => {
     unlikeProduct(slug);
   };
 
-  if (favoriteProducts === false) return <p>N tem itens</p>;
+  if (favoriteProducts === false)
+    return (
+      <div
+        className={`${styles['products-content']}`}
+        style={{
+          display: 'grid',
+          placeContent: 'center',
+          gridTemplateRows: 'repeat(3, max-content)',
+        }}
+      >
+        <ErrorRequest>Você não possui produtos favoritos</ErrorRequest>
+      </div>
+    );
   if (!favoriteProducts) return <FavoritesSkeleton />;
   return (
     <main className={`${styles['products-content']} container`}>
