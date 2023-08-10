@@ -12,6 +12,7 @@ import Products from './Components/Products/Products';
 import Favorites from './Components/User/FavoriteProducts/Favorites';
 import Transaction from './Components/Products/Transaction';
 import Footer from './Components/Footer';
+import Error404 from './Components/Helper/Error404';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="favoritos" element={<Favorites />}></Route>
           <Route path="usuario/:user/*" element={<UserPage />}></Route>
           <Route path="transacao/:slug" element={<Transaction />}></Route>
+          <Route path="*" element={<Error404 />}></Route>
         </Routes>
         <Footer />
       </UserContext>
