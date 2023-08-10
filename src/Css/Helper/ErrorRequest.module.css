@@ -1,0 +1,21 @@
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.error svg {
+  fill: #bbb;
+  width: 80px;
+  height: 80px;
+}
+
+.error p {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #bbb;
+  text-align: center;
+}
