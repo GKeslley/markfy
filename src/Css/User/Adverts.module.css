@@ -2,6 +2,7 @@
   display: grid;
   grid-template-rows: auto 1fr;
   margin-top: 1.5rem;
+  width: 100%;
 }
 
 .adverts-container select {

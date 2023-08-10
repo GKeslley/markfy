@@ -1,3 +1,8 @@
+.user-container {
+  width: 100%;
+  flex: 1;
+}
+
 .user-content {
   padding: 2rem 0;
 }
