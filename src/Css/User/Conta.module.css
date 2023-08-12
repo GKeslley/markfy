@@ -7,7 +7,7 @@
 .user a svg {
   width: 24px;
   height: 24px;
-  fill: #272727;
+  fill: var(--c-b2);
   left: 1rem;
 }
 

@@ -23,7 +23,7 @@ const formFields = {
 
 const selectStyle = (state) => {
   return {
-    border: '1px solid #2dd096',
+    border: '1px solid var(--c-g2)',
     minHeight: '34px',
     maxHeight: '34px',
     boxShadow: state.isFocused && '0 0 0 1px #0e9162, 0 0 0 2px #1aeea4',

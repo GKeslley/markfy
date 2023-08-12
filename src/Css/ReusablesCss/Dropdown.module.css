@@ -11,8 +11,8 @@
   flex-direction: column;
   position: absolute;
   margin-top: 10px;
-  background: #272727;
-  color: #fff;
+  background: var(--c-b2);
+  color: var(--c-w1);
   top: 25px;
   white-space: nowrap;
   animation: show-up 0.3s forwards;

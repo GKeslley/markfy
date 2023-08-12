@@ -7,15 +7,14 @@
 }
 
 .error svg {
-  fill: #bbb;
+  fill: var(--c-w3);
   width: 80px;
   height: 80px;
 }
 
 .error p {
-  font-size: 1.6rem;
+  font: var(--font-l-600);
   text-transform: uppercase;
-  font-weight: 600;
-  color: #bbb;
+  color: var(--c-w3);
   text-align: center;
 }

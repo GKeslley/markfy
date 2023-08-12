@@ -8,7 +8,7 @@
 .user-menu-content li a {
   display: flex;
   align-items: center;
-  color: #fff;
+  color: var(--c-w1);
 }
 
 @media (max-width: 830px) {
@@ -20,7 +20,7 @@
 
   .user-menu-content li a {
     display: flex;
-    color: #272727;
+    color: var(--c-b2);
     align-items: center;
     gap: 1rem;
     border: none !important;

@@ -21,7 +21,7 @@ const User = () => {
   const params = useParams();
 
   return (
-    <main className={styles.user}>
+    <section className={styles.user}>
       <Aside>
         <ul className={styles['aside-elements']}>
           <li>
@@ -80,7 +80,7 @@ const User = () => {
         ></Route>
         <Route path="configuracoes" element={<Settings />}></Route>
       </Routes>
-    </main>
+    </section>
   );
 };
 

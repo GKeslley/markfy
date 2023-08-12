@@ -17,7 +17,7 @@
 }
 
 .error svg {
-  fill: #2dd096;
+  fill: var(--c-g2);
   width: 60px;
   height: 60px;
 }
@@ -39,14 +39,13 @@
 }
 
 .error-bg p:first-child {
-  font-size: 3rem;
-  font-weight: 300;
+  font: var(--font-m-300);
 }
 
 .error-bg a {
   display: block;
   max-width: max-content;
   background: #818181;
-  font-size: 1.2rem;
+  font: var(--font-pl);
   margin-top: 1rem;
 }

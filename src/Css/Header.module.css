@@ -1,5 +1,5 @@
 .header {
-  background: #0e9162;
+  background: var(--c-g1);
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,7 +19,7 @@
 
 .header-content {
   display: grid;
-  color: #fff;
+  color: var(--c-w1);
   gap: 1rem;
 }
 
@@ -39,7 +39,7 @@
 @media (max-width: 830px) {
   .header {
     padding-bottom: 1rem;
-    background: #0e9162;
+    background: var(--c-g1);
   }
 
   .header input::placeholder {

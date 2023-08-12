@@ -1,10 +1,12 @@
 .user-container {
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
   width: 100%;
   flex: 1;
 }
 
 .user-content {
-  padding: 2rem 0;
+  padding-bottom: var(--padding-bottom-page);
 }
 
 .user-content ul {
@@ -31,7 +33,7 @@
 .user-infos address,
 .date {
   font-style: normal;
-  font-size: 0.8rem;
+  font: var(--font-pp);
 }
 
 .date {
@@ -77,7 +79,7 @@
   content: '';
   width: 100%;
   height: 2px;
-  background: #2dd096;
+  background: var(--c-g2);
   position: absolute;
   display: block;
   top: 0px;

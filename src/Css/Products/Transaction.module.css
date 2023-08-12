@@ -4,12 +4,14 @@
   gap: 1.5rem;
   flex: 1;
   width: 100%;
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
 }
 
 .infos {
-  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow-pattern);
+  -webkit-box-shadow: var(--box-shadow-pattern);
+  -moz-box-shadow: var(--box-shadow-pattern);
 }
 
 .infos {
@@ -30,12 +32,6 @@
   border-bottom: 1px solid #e4e4e4;
 }
 
-.infos li svg {
-  width: 24px;
-  height: 24px;
-  fill: #272727;
-}
-
 .infos li div {
   display: flex;
   align-items: center;
@@ -43,16 +39,11 @@
 }
 
 .infos li div p {
-  font-size: 1.2rem;
-  font-weight: 500;
+  font: var(--font-pl-500);
 }
 
 .infos li p {
   white-space: break-spaces;
-}
-
-.form-content {
-  padding-top: 1.5rem;
 }
 
 .form-content form div {
@@ -74,14 +65,14 @@
   width: 100%;
   background: rgb(236, 236, 236);
   padding: 0.5rem 0;
-  border-bottom: 5px solid #689f38;
+  border-bottom: 5px solid var(--c-g2);
   transition: 0.3s;
 }
 
 .payment svg {
   width: 100%;
   height: 40px;
-  fill: #bbbbbb;
+  fill: var(--c-w3);
   transition: 0.3s;
 }
 

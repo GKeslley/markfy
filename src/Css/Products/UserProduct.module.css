@@ -9,7 +9,7 @@
 .user-content li {
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
+  font: var(--font-pp);
 }
 
 .user-content p:not(:last-child),

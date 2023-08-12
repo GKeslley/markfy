@@ -15,7 +15,7 @@
 
 .product-asks label {
   display: block;
-  font-size: 1rem;
+  font: var(--font-p);
   margin-bottom: 1rem;
   grid-column: 1/-1;
 }
@@ -58,7 +58,7 @@
 .comment-author a,
 span {
   margin: 0;
-  font-size: 0.8rem;
+  font: var(--font-pp);
 }
 
 .comment-content {
@@ -89,7 +89,7 @@ span {
 
 .reply p {
   color: rgba(0, 0, 0, 0.55);
-  font-size: 0.9rem;
+  font: var(--font-pp);
 }
 
 .reply-comment {

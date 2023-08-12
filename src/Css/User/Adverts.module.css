@@ -1,7 +1,8 @@
 .adverts-container {
   display: grid;
   grid-template-rows: auto 1fr;
-  margin-top: 1.5rem;
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
   width: 100%;
 }
 
@@ -21,10 +22,10 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  background: #fff;
-  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  background: var(--c-w1);
+  box-shadow: var(--box-shadow-pattern);
+  -webkit-box-shadow: var(--box-shadow-pattern);
+  -moz-box-shadow: var(--box-shadow-pattern);
   padding: 1rem;
   min-height: 11rem;
   max-height: 11rem;
@@ -45,11 +46,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
+  background: var(--c-w1);
   padding: 1rem;
-  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow-pattern);
+  -webkit-box-shadow: var(--box-shadow-pattern);
+  -moz-box-shadow: var(--box-shadow-pattern);
 }
 
 .advert-infos {
@@ -59,12 +60,12 @@
 }
 
 .advert-infos p {
-  font-size: 1.3rem;
+  font: var(--font-pl);
 }
 
 .advert-infos span {
   display: block;
-  font-size: 1rem;
+  font: var(--font-p);
 }
 
 .advert-infos > div {

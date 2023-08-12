@@ -17,10 +17,10 @@
 
 .products-content li {
   width: 100%;
-  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  background: #fff;
+  box-shadow: var(--box-shadow-pattern);
+  -webkit-box-shadow: var(--box-shadow-pattern);
+  -moz-box-shadow: var(--box-shadow-pattern);
+  background: var(--c-w1);
   border-radius: 4px;
   cursor: pointer;
   transition: 0.3s;
@@ -44,12 +44,11 @@
 }
 
 .price {
-  font-size: 0.8rem;
-  font-weight: 600;
   position: absolute;
   bottom: 10px;
-  background: #272727;
-  color: #fff;
+  font: var(--font-pp-600);
+  background: var(--c-b2);
+  color: var(--c-w1);
   padding: 0.4rem;
   border-radius: 4px;
   left: 10px;

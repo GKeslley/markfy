@@ -2,15 +2,14 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #fff;
+  color: var(--c-w1);
   font-weight: 900;
 }
 
 .logo p {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font: var(--font-pl-600);
 }
 
 .logo svg {
-  fill: #fff;
+  fill: var(--c-w1);
 }

@@ -20,7 +20,7 @@ const ProductCategory = ({ setCategory, category, setSubcategory }) => {
   }, [category, setSubcategory]);
 
   return (
-    <section className={`${styles['categories-container']} animeLeft`}>
+    <section className={`${styles['categories-container']} animeLeft container`}>
       <h1>O que você está anunciando?</h1>
       <div className={styles['categories-content']}>
         <p>Categorias*</p>

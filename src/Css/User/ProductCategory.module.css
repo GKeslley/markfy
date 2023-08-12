@@ -1,12 +1,13 @@
 .categories-container {
-  padding: 2rem;
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
+  width: 100%;
 }
 
 .categories-container h1 {
   text-align: center;
   margin-bottom: 2rem;
-  font-size: 2.2rem;
-  font-weight: 400;
+  font: var(--font-ll);
   position: relative;
 }
 

@@ -13,7 +13,7 @@
 
 .profile-dialog {
   display: grid;
-  background: white;
+  background: var(--c-w1);
   padding: 20px;
   box-shadow: 0 0 0 10px white;
   position: relative;
@@ -62,7 +62,7 @@
 
 .profile-dialog-text {
   font-weight: 500;
-  font-size: 1.1rem;
+  font: var(--font-p);
 }
 
 .profile-dialog-text div {

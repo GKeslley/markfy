@@ -9,11 +9,11 @@
 body {
   font-family: 'Roboto', sans-serif;
   width: 100%;
-  background: #fff;
-  color: #272727;
+  background: var(--c-w1);
+  color: var(--c-b2);
 }
 
-#root {
+.App {
   display: flex;
   flex-direction: column;
   min-height: calc(100vh + 10rem);
@@ -26,7 +26,7 @@ li {
 
 a {
   text-decoration: none;
-  color: #272727;
+  color: var(--c-b2);
 }
 
 img {

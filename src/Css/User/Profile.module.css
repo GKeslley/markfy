@@ -1,6 +1,6 @@
 .profile {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
   width: 100%;
   height: 100%;
 }
@@ -11,12 +11,12 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 1.5rem;
-  border-bottom: 2px solid #ebebeb;
+  border-bottom: 2px solid var(--c-w2);
 }
 
 .profile-att-photo button {
   padding: 0.5rem 1rem;
-  font-size: 0.8rem;
+  font: var(--font-pp);
 }
 
 .profile-att-photo input[type='file'] {

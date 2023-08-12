@@ -71,7 +71,7 @@ const Product = () => {
 
   return (
     <>
-      <section className="container">
+      <section className={`${styles['product-container']} container`}>
         <div className={styles['product-content']}>
           <article className={styles['product-infos']}>
             <LikeProduct slug={slug} userID={userData.usuario_id} />

@@ -1,19 +1,19 @@
 .product-content {
-  padding-top: 2rem;
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
 }
 
 .product-content h1 {
-  color: #272727;
+  color: var(--c-b2);
   margin-bottom: 1.5rem;
-  font-weight: 500;
-  font-size: 2.2rem;
+  font: var(--font-ll-500);
   position: relative;
 }
 
 .product-content h1::before {
   content: '';
   display: inline-block;
-  background: #2dd096;
+  background: var(--c-g2);
   width: 18px;
   height: 18px;
   position: absolute;
@@ -34,7 +34,7 @@
 
 .product-form input {
   padding: 0.3rem 0.4rem;
-  font-size: 1rem;
+  font: var(--font-p);
 }
 
 .product-form textarea {
@@ -74,7 +74,7 @@
 }
 
 .imgs-content picture {
-  border: 1px solid black;
+  border: 1px solid var(--c-b2);
   margin: 0.5rem;
 }
 

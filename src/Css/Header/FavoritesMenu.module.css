@@ -3,13 +3,13 @@
   align-items: center;
   gap: 0.5rem;
   position: relative;
-  color: #fff;
+  color: var(--c-w1);
 }
 
 .sections svg {
   width: 26px;
   height: 26px;
-  fill: #fff;
+  fill: var(--c-w1);
 }
 
 .count {
@@ -22,8 +22,9 @@
   position: relative;
   top: -10px;
   right: 0;
-  background: #e54;
-  color: #fff;
+  font: var(--font-pp-600);
+  background: var(--c-r1);
+  color: var(--c-w1);
   border-radius: 2.75rem;
   min-width: 0.6875rem;
   padding: 0 0.3125rem;

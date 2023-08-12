@@ -1,5 +1,6 @@
 .address {
-  margin-top: 1.5rem;
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
   width: 100%;
 }
 

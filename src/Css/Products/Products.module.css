@@ -1,7 +1,7 @@
 .products-bg {
   display: grid;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
   flex: 1;
   width: 100%;
 }
@@ -14,13 +14,13 @@
 }
 
 .filter p {
-  font-size: 0.8rem;
+  font: var(--font-pp);
 }
 
 .filter select {
   background: none;
   border-radius: 4px;
-  font-size: 1rem;
+  font: var(--font-p);
   border: none;
   cursor: pointer;
 }
@@ -32,8 +32,7 @@
 }
 
 .search h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font: var(--font-l-600);
   margin-bottom: 0.3rem;
 }
 
@@ -65,17 +64,17 @@
 }
 
 .products .product-infos .price {
-  font-size: 1.3rem;
+  font: var(--font-pl);
 }
 
 .products .product-infos .user {
-  font-size: 0.8rem;
+  font: var(--font-pp);
   margin-bottom: 1rem;
 }
 
 .products .product-infos .portion {
-  font-size: 0.8rem;
-  color: #2dd096;
+  font: var(--font-pp);
+  color: var(--c-g2);
   font-weight: 600;
 }
 

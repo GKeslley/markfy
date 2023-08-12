@@ -1,14 +1,13 @@
 .products-content {
   flex: 1;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
   width: 100%;
 }
 
 .products-content h1 {
   margin-bottom: 1rem;
-  font-size: 2rem;
-  font-weight: 600;
+  font: var(--font-ll-600);
 }
 
 .product-section {
@@ -18,10 +17,10 @@
 
 .product-section,
 .product li {
-  background: #fff;
-  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  background: var(--c-w1);
+  box-shadow: var(--box-shadow-pattern);
+  -webkit-box-shadow: var(--box-shadow-pattern);
+  -moz-box-shadow: var(--box-shadow-pattern);
   padding: 1rem;
 }
 
@@ -73,7 +72,7 @@
 .remove svg {
   width: 24px;
   height: 24px;
-  fill: #e54;
+  fill: var(--c-r1);
   cursor: pointer;
   transition: 0.3s;
 }

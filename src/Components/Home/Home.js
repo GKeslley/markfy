@@ -6,15 +6,16 @@ import Imagem3 from '../../Assets/Slide/foto3.png';
 import Smartphones from './Smartphones';
 import ExtraInfos from './ExtraInfos';
 import CategoriesHome from '../Header/CategoriesHome';
+import styles from '../../Css/Home/Home.module.css';
 
 const Home = () => {
   return (
-    <main>
+    <section className={styles.home}>
       <Slide imgs={[Imagem3, Imagem1, Imagem2, Imagem3, Imagem1]} />
       <ExtraInfos />
       <Smartphones />
       <CategoriesHome />
-    </main>
+    </section>
   );
 };
 

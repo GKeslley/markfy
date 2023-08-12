@@ -1,4 +1,11 @@
 @import './Fonts.css';
+@import './Colors.css';
+
+:root {
+  --padding-top-page: 1.5rem;
+  --padding-bottom-page: 1.5rem;
+  --box-shadow-pattern: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+}
 
 .container {
   max-width: 75rem;
@@ -8,19 +15,18 @@
 }
 
 .button {
-  background: #2dd096;
+  background: var(--c-g2);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-size: 1rem;
   cursor: pointer;
-  font-weight: 600;
-  color: #fff;
+  font: var(--font-p-600);
+  color: var(--c-w1);
   transition: 0.2s;
 }
 
 .button:hover {
-  background: #0e9162;
+  background: var(--c-g1);
 }
 
 .button:disabled {
@@ -28,15 +34,14 @@
 }
 
 .button-outline {
-  border: 1px solid #2dd096;
+  border: 1px solid var(--c-g2);
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-size: 1rem;
   cursor: pointer;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  font-weight: 600;
-  color: #fff;
+  font: var(--font-p-600);
+  color: var(--c-w1);
   transition: 0.2s;
 }
 

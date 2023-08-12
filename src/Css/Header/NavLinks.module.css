@@ -1,12 +1,12 @@
 .nav {
   grid-column: 1/-1;
-  color: #fff;
+  color: var(--c-w1);
 }
 
 .nav .nav-elements {
-  background: #fff;
+  background: var(--c-w1);
   position: relative;
-  color: #000;
+  color: var(--c-b2);
   z-index: 80;
   box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
   text-transform: uppercase;
@@ -14,5 +14,5 @@
 }
 
 .nav a {
-  color: #fff;
+  color: var(--c-w1);
 }

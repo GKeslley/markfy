@@ -24,10 +24,10 @@
   width: 25%;
   min-width: 13rem;
   flex-shrink: 0;
-  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  background: #fff;
+  box-shadow: var(--box-shadow-pattern);
+  -webkit-box-shadow: var(--box-shadow-pattern);
+  -moz-box-shadow: var(--box-shadow-pattern);
+  background: var(--c-w1);
   border-radius: 4px;
   min-height: 18rem;
   cursor: pointer;
@@ -65,12 +65,12 @@
 
 .smartphones li span {
   display: block;
-  font-size: 1.5rem;
+  font: var(--font-l);
   margin-bottom: 0.4rem;
 }
 
 .smartphones li p {
-  font-size: 0.8rem;
+  font: var(--font-pp);
 }
 
 .buttons {
@@ -89,7 +89,7 @@
   top: 40%;
   display: flex;
   align-self: center;
-  background: #fff;
+  background: var(--c-w1);
   border-radius: 50%;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   padding: 12px;

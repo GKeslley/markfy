@@ -29,12 +29,12 @@
 
 .form input:hover {
   outline: none;
-  border-bottom-color: #2dd096;
+  border-bottom-color: var(--c-g2);
 }
 
 .form input:focus {
   outline: none;
-  border-bottom-color: #2dd096;
+  border-bottom-color: var(--c-g2);
   background: #f0f0f0;
 }
 
@@ -47,22 +47,21 @@
 }
 
 .contentLoginRegister p {
-  font-size: 1.2rem;
+  font: var(--font-pl-600);
   color: #a5a5a5;
-  font-weight: 600;
 }
 
 .contentLoginRegister a {
-  border: 2px solid #2dd096;
+  border: 2px solid var(--c-g2);
   max-width: max-content;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  color: #2dd096;
+  color: var(--c-g2);
   font-weight: 600;
   transition: 0.2s;
 }
 
 .contentLoginRegister a:hover {
-  background: #2dd096;
-  color: #fff;
+  background: var(--c-g2);
+  color: var(--c-w1);
 }

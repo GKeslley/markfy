@@ -38,7 +38,7 @@ const Favorites = () => {
     );
   if (!favoriteProducts) return <FavoritesSkeleton />;
   return (
-    <main className={`${styles['products-content']} container`}>
+    <section className={`${styles['products-content']} container`}>
       <h1>Favoritos</h1>
       {favoriteProducts.length && (
         <div>
@@ -97,7 +97,7 @@ const Favorites = () => {
           </ul>
         </div>
       )}
-    </main>
+    </section>
   );
 };
 

@@ -9,7 +9,7 @@
   flex: 1;
   flex-wrap: wrap;
   padding: 3rem 2rem;
-  background: #0e9162;
+  background: var(--c-g1);
   justify-content: space-between;
   gap: 2rem;
 }
@@ -24,9 +24,8 @@
 
 .footer div p,
 .footer div label {
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 800;
+  color: var(--c-w1);
+  font: var(--font-p-800);
 }
 
 .footer div a {
@@ -52,7 +51,7 @@
 
 .footer .logo li:hover svg {
   fill: #0ea16b;
-  background: #fff;
+  background: var(--c-w1);
 }
 
 @media (max-width: 500px) {

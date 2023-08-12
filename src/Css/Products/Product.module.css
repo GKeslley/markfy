@@ -1,12 +1,17 @@
+.product-container {
+  padding-top: var(--padding-top-page);
+  padding-bottom: var(--padding-bottom-page);
+  width: 100%;
+}
+
 .product-content {
   display: flex;
   flex-direction: column;
-  padding: 1rem 3rem;
   gap: 2rem;
-  background: #fff;
-  box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 1px 0 rgb(0, 0, 0, 0.1), 0 -1px 2px 0 rgb(0, 0, 0, 0.1);
+  background: var(--c-w1);
+  box-shadow: var(--box-shadow-pattern);
+  -webkit-box-shadow: var(--box-shadow-pattern);
+  -moz-box-shadow: var(--box-shadow-pattern);
   width: 100%;
 }
 
@@ -49,7 +54,7 @@
 
 .product-like:hover svg,
 .product-like:global(.active) svg {
-  fill: #e54;
+  fill: var(--c-r1);
 }
 
 .product-like:global(.rotate) {
@@ -83,12 +88,12 @@
 }
 
 .galery-images picture {
-  border: 2px solid #2dd096;
+  border: 2px solid var(--c-g2);
   border-radius: 6px;
 }
 
 .galery-images picture:global(.active) {
-  border: 2px solid #0e9162;
+  border: 2px solid var(--c-g1);
 }
 
 .galery-images picture img {
@@ -105,8 +110,7 @@
 }
 
 .product-infos-fields .product-name {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font: var(--font-l-500);
 }
 
 .product-infos-fields .product-price {
@@ -115,14 +119,13 @@
 }
 
 .product-infos-fields .product-price p {
-  font-size: 2rem;
+  font: var(--font-ll);
 }
 
 .product-infos-fields .product-price span {
-  font-size: 0.8rem;
+  font: var(--font-pp-600);
   margin-left: 2px;
-  color: #0e9162;
-  font-weight: 600;
+  color: var(--c-g1);
 }
 
 .product-btns {
@@ -137,20 +140,20 @@
 
 .product-btns button:nth-child(2) {
   background: transparent;
-  border: 2px solid #2dd096;
-  color: #2dd096;
+  border: 2px solid var(--c-g2);
+  color: var(--c-g2);
 }
 
 .product-btns button:nth-child(2):hover {
-  background: #0e9162;
-  border: 2px solid #0e9162;
-  color: #fff;
+  background: var(--c-g1);
+  border: 2px solid var(--c-g1);
+  color: var(--c-w1);
 }
 
 .product-description p {
   white-space: break-spaces;
-  line-height: 1.5;
   font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 @media (min-width: 63.75rem) {
