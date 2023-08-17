@@ -22,20 +22,23 @@ const LoginForm = () => {
 
   return (
     <div className="animeLeft">
-      <h1 className="title">OLÁ NOVAMENTE</h1>
+      <h1>OLÁ NOVAMENTE</h1>
       <form className={styles.form} onSubmit={sendValuesLogin}>
         <Input label="Email" type="email" name="email" {...email} />
         <Input label="Senha" type="password" name="senha" {...password} />
         {loading ? (
           <Button disabled="disabled">Carregando...</Button>
         ) : (
-          <Button>Confirmar</Button>
+          <Button>Entrar</Button>
         )}
       </form>
       {error && <Error>{error}</Error>}
-      <div className={styles.contentLoginRegister}>
-        <p>Não possui cadastro?</p>
-        <Link to="criar">Cadastre-se</Link>
+      <Link className={styles['lost-password']} to="/esqueceu">
+        Perdeu a Senha?
+      </Link>
+      <div className={styles['content-register']}>
+        <p>Cadastre-se</p>
+        <Link to="criar">Cadastro</Link>
       </div>
     </div>
   );

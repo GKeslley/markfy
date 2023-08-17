@@ -33,7 +33,7 @@ const Login = () => {
 
   return (
     <div className="animeLeft">
-      <h1 className="title">BEM VINDO</h1>
+      <h1>CADASTRE-SE</h1>
       <form className={styles.form} onSubmit={sendValuesLogin}>
         <Input label="Nome" type="text" name="nome" {...name} />
         <Input label="Email" type="email" name="email" {...email} />
@@ -41,7 +41,7 @@ const Login = () => {
         {loading ? (
           <Button disabled="disabled">Carregando...</Button>
         ) : (
-          <Button>Confirmar</Button>
+          <Button>Cadastrar</Button>
         )}
       </form>
       {error && <Error>{error}</Error>}

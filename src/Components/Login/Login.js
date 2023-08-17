@@ -1,22 +1,23 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
-import { ReactComponent as Wave } from '../../Assets/waves.svg';
 import styles from '../../Css/Login/Login.module.css';
-import ProtectedRoute from '../Helper/ProtectedRoute';
+import Error404 from '../Helper/Error404';
+import { GlobalContext } from '../../UserContext';
 
 const Login = () => {
+  const { userData } = React.useContext(GlobalContext);
+
+  if (userData) return <Navigate to="/" />;
   return (
     <section className={styles['register-bg']}>
-      <Wave />
       <div className={`${styles['form-content']} container`}>
-        <ProtectedRoute>
-          <Routes>
-            <Route path="/" element={<LoginForm />}></Route>
-            <Route path="/criar" element={<RegisterForm />}></Route>
-          </Routes>
-        </ProtectedRoute>
+        <Routes>
+          <Route path="/" element={<LoginForm />}></Route>
+          <Route path="/criar" element={<RegisterForm />}></Route>
+          <Route path="*" element={<Error404 />}></Route>
+        </Routes>
       </div>
     </section>
   );

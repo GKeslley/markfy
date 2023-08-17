@@ -24,7 +24,7 @@
 
 .form label {
   font-weight: 600;
-  color: #a5a5a5;
+  color: var(--c-b3);
 }
 
 .form input:hover {
@@ -38,20 +38,41 @@
   background: #f0f0f0;
 }
 
-.contentLoginRegister {
+.form button {
+  margin-top: 1rem;
+}
+
+.lost-password {
+  display: block;
+  color: var(--c-b3);
+  font: var(--font-p-600);
+  margin: 1.5rem 0;
+  border-bottom: 2px solid var(--c-b3);
+  max-width: max-content;
+}
+
+.content-register {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #ebe8e8;
 }
 
-.contentLoginRegister p {
-  font: var(--font-pl-600);
-  color: #a5a5a5;
+.content-register p {
+  font: var(--font-ll-500);
+  color: var(--c-b3);
 }
 
-.contentLoginRegister a {
+.content-register p::after {
+  content: '';
+  display: block;
+  background: var(--c-b3);
+  height: 0.3rem;
+  width: 3rem;
+  border-radius: 0.2rem;
+}
+
+.content-register a {
   border: 2px solid var(--c-g2);
   max-width: max-content;
   padding: 0.5rem 1rem;
@@ -61,7 +82,7 @@
   transition: 0.2s;
 }
 
-.contentLoginRegister a:hover {
+.content-register a:hover {
   background: var(--c-g2);
   color: var(--c-w1);
 }
