@@ -1,59 +1,61 @@
 import React from 'react';
 import useFetch from '../../Hooks/useFetch';
 import { COMMENT_PRODUCT_POST } from '../../Api/api';
-import { Link } from 'react-router-dom';
 import styles from '../../Css/Products/Comments.module.css';
-import ReplyComment from './ReplyComment';
-import { ReactComponent as Seta } from '../../Assets/seta.svg';
 import Input from '../Form/Input';
 import useValidate from '../../Hooks/useValidate';
 import Button from '../Reusable/Button';
+import Modal from './Modal';
+import AllComments from './Comments/AllComments';
+import { GlobalContext } from '../../UserContext';
+import { useNavigate } from 'react-router-dom';
 
-const Comments = ({ userData, allComments, authorPost, slug, sellProduct }) => {
-  const { request, loading } = useFetch();
-  const [commentActive, setCommentActive] = React.useState(null);
-
-  const [allReplies, setAllReplies] = React.useState([]);
+const Comments = ({ allComments, authorPost, slug, sellProduct }) => {
   const [newComment, setNewComment] = React.useState([]);
+  const [allReplies, setAllReplies] = React.useState([]);
+  const [openModal, setOpenModal] = React.useState(false);
+  const { userData } = React.useContext(GlobalContext);
+  const { request, loading } = useFetch();
+  const navigate = useNavigate();
 
   const commentValue = useValidate(false);
 
   const commentData = {
-    data: () => {
-      return userData
-        ? {
-            author: userData.nome,
-            content: commentValue.value,
-            idPost: slug,
-            idUser: userData.usuario_id,
-          }
-        : null;
-    },
+    data: userData
+      ? {
+          author: userData.nome,
+          content: commentValue.value,
+          idPost: slug,
+          idUser: userData.usuario_id,
+        }
+      : null,
   };
 
-  const sendNewComment = (commentData) => {
-    const { comment_date } = commentData;
+  const sendNewComment = (comment) => {
+    const { comment_date } = comment;
     const date = comment_date.split(' ')[0].split('-').reverse().join('/');
-    commentData.comment_date = date;
-    setNewComment([...newComment, commentData]);
+    comment.comment_date = date;
+    setNewComment([...newComment, comment]);
   };
 
   const postComments = async (event) => {
     event.preventDefault();
+    if (!userData) {
+      navigate('/login');
+      return null;
+    }
     if (commentValue.validate(true) && userData) {
       const token = localStorage.getItem('token');
-      const { url, options } = COMMENT_PRODUCT_POST(commentData.data(), token);
+      const { url, options } = COMMENT_PRODUCT_POST({
+        body: commentData.data,
+        token,
+        total: '9',
+      });
       const { json } = await request(url, options);
       commentValue.setValue('');
       sendNewComment(json);
     }
   };
-
-  const handleReplyComment = (index) => {
-    setCommentActive(index);
-  };
-
-  const ownerOfThePost = userData && authorPost === userData.usuario_id;
 
   return (
     <article className={styles['product-asks']}>
@@ -66,6 +68,7 @@ const Comments = ({ userData, allComments, authorPost, slug, sellProduct }) => {
               label="Pergunte ao vendedor"
               name="ask"
               id="ask"
+              placeholder="Faça sua pergunta"
               {...commentValue}
             />
             {loading ? <Button>Carregando...</Button> : <Button>Perguntar</Button>}
@@ -74,7 +77,7 @@ const Comments = ({ userData, allComments, authorPost, slug, sellProduct }) => {
         <p>Últimas perguntas feitas</p>
       </form>
 
-      {userData && (
+      {
         <ul className={styles['comments-content']}>
           {newComment.length > 0 &&
             newComment.map(({ comment_content, comment_date }, i) => (
@@ -86,69 +89,36 @@ const Comments = ({ userData, allComments, authorPost, slug, sellProduct }) => {
               </li>
             ))}
 
-          {allComments.slice(0, 7).map((comment, i) => (
-            <li
-              className={`${styles.comment} ${
-                typeof commentActive === 'number'
-                  ? commentActive === i
-                    ? 'active'
-                    : 'none'
-                  : ''
-              }`}
-              key={comment.comment_id}
-            >
-              <div className={styles['comment-author']}>
-                {userData.usuario_id === authorPost && (
-                  <Link to={`/usuario/${comment.comment_author_ID}`}>
-                    {comment.comment_author}
-                  </Link>
-                )}
-                <span>
-                  {comment.comment_date.split(' ')[0].split('-').reverse().join('/')}
-                </span>
-              </div>
-
-              <div className={styles['comment-content']}>
-                <p>{comment.comment_content}</p>
-                {comment.comment_reply ||
-                allReplies.find((reply) => reply.parent_id === +comment.comment_id) ? (
-                  <div className={styles.reply}>
-                    <Seta />
-                    <p>
-                      {comment.comment_reply}
-                      {allReplies
-                        .filter((reply) => reply.parent_id === +comment.comment_id)
-                        .map((reply) => reply.comment_reply)}
-                    </p>
-                  </div>
-                ) : null}
-
-                {ownerOfThePost &&
-                  !comment.comment_reply &&
-                  !allReplies.find(
-                    (reply) => reply.parent_id === +comment.comment_id,
-                  ) && (
-                    <span
-                      className={styles['reply-comment']}
-                      onClick={() => handleReplyComment(i)}
-                    >
-                      Responder
-                    </span>
-                  )}
-              </div>
-
-              {commentActive === i && (
-                <ReplyComment
-                  setCommentActive={setCommentActive}
-                  setAllReplies={setAllReplies}
-                  commentID={comment.comment_id}
-                  userData={userData}
-                  slug={slug}
-                />
-              )}
-            </li>
-          ))}
+          <AllComments
+            allComments={allComments}
+            userData={userData}
+            authorPost={authorPost}
+            slug={slug}
+            allReplies={allReplies}
+            setAllReplies={setAllReplies}
+          />
         </ul>
+      }
+
+      {openModal && (
+        <Modal
+          slug={slug}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          userData={userData}
+          authorPost={authorPost}
+          allReplies={allReplies}
+          setAllReplies={setAllReplies}
+        />
+      )}
+
+      {allComments.length > 6 && (
+        <p
+          className={`${styles.questions} ignore-click-outside`}
+          onClick={() => setOpenModal(true)}
+        >
+          Ver Todas as Perguntas
+        </p>
       )}
     </article>
   );

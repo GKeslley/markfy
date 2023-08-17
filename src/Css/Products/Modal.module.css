@@ -1,0 +1,44 @@
+.modal {
+  z-index: 100;
+}
+
+.modal .modal-content {
+  max-height: 30rem;
+  overflow-y: auto;
+  min-width: 80vw;
+  max-width: max-content;
+}
+
+.modal ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal h1 {
+  font: var(--font-ll-500);
+}
+
+.modal .title {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal .title svg {
+  width: 18px;
+  height: 18px;
+}
+
+.modal .title span {
+  display: block;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.element-questions {
+  cursor: pointer;
+  padding: 0.5rem 0.5rem 0.5rem 0rem;
+  max-width: max-content;
+}
