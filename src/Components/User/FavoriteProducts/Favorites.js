@@ -25,14 +25,7 @@ const Favorites = () => {
 
   if (favoriteProducts === false)
     return (
-      <div
-        className={`${styles['products-content']}`}
-        style={{
-          display: 'grid',
-          placeContent: 'center',
-          gridTemplateRows: 'repeat(3, max-content)',
-        }}
-      >
+      <div className={`${styles['products-content']}`} style={{ display: 'grid' }}>
         <ErrorRequest>Você não possui produtos favoritos</ErrorRequest>
       </div>
     );

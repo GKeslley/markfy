@@ -13,6 +13,7 @@ import { BsFillBagCheckFill } from 'react-icons/bs';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { FaClipboardList } from 'react-icons/fa';
 import Adverts from './Account/Adverts';
+import Error404 from '../Helper/Error404';
 
 const User = () => {
   const { userData } = React.useContext(GlobalContext);
@@ -79,6 +80,7 @@ const User = () => {
           element={<ProductForm category={category} subcategory={subcategory} />}
         ></Route>
         <Route path="configuracoes" element={<Settings />}></Route>
+        <Route path="*" element={<Error404 />}></Route>
       </Routes>
     </section>
   );

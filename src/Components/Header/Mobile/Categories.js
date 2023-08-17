@@ -2,8 +2,9 @@ import React from 'react';
 import styles from '../../../Css/Header/Mobile/Categories.module.css';
 import { allCategories } from '../../User/PostProducts/CategoryPage/allCategories';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
-const Categories = () => {
+const Categories = ({ handleOpenMenu }) => {
   const categories = allCategories();
   const [Allwidth, setAllWidth] = React.useState(0);
   const carousel = React.useRef();
@@ -22,8 +23,10 @@ const Categories = () => {
         >
           {categories.map(({ name, endpoint, img }) => (
             <motion.li key={endpoint} className={styles.item}>
-              <picture>{img.src}</picture>
-              <p>{name}</p>
+              <Link to={`/produtos/${endpoint}`} onClick={handleOpenMenu}>
+                <picture>{img.src}</picture>
+                <p>{name}</p>
+              </Link>
             </motion.li>
           ))}
         </motion.div>

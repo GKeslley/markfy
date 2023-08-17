@@ -55,3 +55,9 @@
     grid-column: 1/-1;
   }
 }
+
+@media (max-width: 340px) {
+  .header-item .header-logo svg {
+    display: none;
+  }
+}

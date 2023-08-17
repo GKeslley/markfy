@@ -13,7 +13,7 @@ const FavoritesMenu = ({ mobileMatch }) => {
         {!mobileMatch && <p>Favoritos</p>}
         <div className={styles.count}>
           <AiFillHeart />
-          <span>{favoriteProducts && (favoriteProducts.length || '0')}</span>
+          <span>{favoriteProducts ? favoriteProducts.length : '0'}</span>
         </div>
       </Link>
     </>

@@ -136,12 +136,13 @@ export const PRODUCTS_GET_BY_CATEGORY = ({
   actualPage,
   order,
   search,
+  total,
 }) => {
   const categoryPath = category ? `${category}/` : '';
   const subcategoryPath = subcategory ? subcategory + '/' : '';
   const searchQuery = search && !categoryPath ? `&q=${search}` : '';
 
-  const url = `${API_URL}/api/produtos/${categoryPath}${subcategoryPath}?_page=${actualPage}${searchQuery}&_order=${order}`;
+  const url = `${API_URL}/api/produtos/${categoryPath}${subcategoryPath}?_page=${actualPage}${searchQuery}&_order=${order}&_total=${total}`;
 
   const options = {
     method: 'GET',
@@ -180,7 +181,7 @@ export const PRODUCT_DELETE = ({ slug, token }) => {
   };
 };
 
-export const COMMENT_PRODUCT_POST = (body, token) => {
+export const COMMENT_PRODUCT_POST = ({ body, token }) => {
   return {
     url: API_URL + '/api/comentario',
     options: {
@@ -190,6 +191,16 @@ export const COMMENT_PRODUCT_POST = (body, token) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
+    },
+  };
+};
+
+export const COMMENTS_GET = ({ page, total, slug }) => {
+  return {
+    url: `${API_URL}/api/comentarios/${slug}/?_page=${page}&_total=${total}`,
+    options: {
+      method: 'GET',
+      cache: 'no-store',
     },
   };
 };

@@ -26,10 +26,14 @@ const ReplyComment = ({ setCommentActive, setAllReplies, commentID, userData, sl
     };
 
     const token = localStorage.getItem('token');
-    const { url, options } = COMMENT_PRODUCT_POST(commentData, token);
-    const { json } = await request(url, options);
-    setAllReplies((prev) => [...prev, json]);
-    handleCancelReply();
+    const { url, options } = COMMENT_PRODUCT_POST({ body: commentData, token });
+    const { response, json } = await request(url, options);
+    console.log(response);
+    console.log(json);
+    if (response && response.ok) {
+      setAllReplies((prev) => [...prev, json]);
+      handleCancelReply();
+    }
   };
 
   return (
@@ -43,7 +47,9 @@ const ReplyComment = ({ setCommentActive, setAllReplies, commentID, userData, sl
         {...replyInput}
       />
       <div>
-        <p onClick={handleCancelReply}>Cancelar</p>
+        <p onClick={handleCancelReply} className="ignore-click-outside">
+          Cancelar
+        </p>
         {loading ? <Button>Carregando...</Button> : <Button>Responder</Button>}
       </div>
     </form>

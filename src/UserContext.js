@@ -6,10 +6,10 @@ import useFetch from './Hooks/useFetch';
 export const GlobalContext = React.createContext();
 
 export const UserContext = ({ children }) => {
-  const navigate = useNavigate();
-  const { request, loading, error } = useFetch();
   const [userData, setUserData] = React.useState(null);
   const [favoriteProducts, setFavoriteProducts] = React.useState(null);
+  const { request, loading, error } = useFetch();
+  const navigate = useNavigate();
 
   console.log(userData);
   const userLogin = async (email, password) => {
@@ -17,9 +17,9 @@ export const UserContext = ({ children }) => {
       username: email,
       password: password,
     });
-    const register = await request(url, options);
-    if (register.response.ok) {
-      localStorage.setItem('token', register.json.token);
+    const { response, json } = await request(url, options);
+    if (response.ok) {
+      localStorage.setItem('token', json.token);
       await getUser(localStorage.getItem('token'));
       navigate('/');
     }
@@ -28,9 +28,9 @@ export const UserContext = ({ children }) => {
   const getUser = React.useCallback(
     async (token) => {
       const { url, options } = USER_GET(token);
-      const getUser = await request(url, options);
-      if (getUser.response.ok) {
-        setUserData(getUser.json);
+      const { response, json } = await request(url, options);
+      if (response.ok) {
+        setUserData(json);
       }
     },
     [request],
@@ -57,14 +57,10 @@ export const UserContext = ({ children }) => {
     const autoLogin = async () => {
       const token = localStorage.getItem('token');
       if (token) {
-        try {
-          const { url, options } = VALIDATE_TOKEN(token);
-          const validate = await request(url, options);
-          if (!validate.response.ok) throw new Error('Token inválido');
-          await getUser(token);
-        } catch (Error) {
-          userLogout();
-        }
+        const { url, options } = VALIDATE_TOKEN(token);
+        const validate = await request(url, options);
+        if (!validate.response.ok) throw new Error('Token inválido');
+        await getUser(token);
       } else {
         navigate('/login');
       }

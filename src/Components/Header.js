@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
   const { userData } = React.useContext(GlobalContext);
   const username = userData && userData['nome'];
-  const { pathname } = window.location;
   const navigate = useNavigate();
   const mobileMatch = useMedia('(max-width: 830px)');
 
@@ -24,12 +23,12 @@ const Header = () => {
 
   return (
     <>
-      {!pathname.includes('login') && (
+      {
         <header className={`${styles.header}`}>
           <nav>
             <article className={styles['header-content']}>
               <div className={`${styles['header-item']} container`}>
-                <Logo />
+                <Logo className={styles['header-logo']} />
                 <form onSubmit={handleSubmit}>
                   <Input
                     type="text"
@@ -48,7 +47,7 @@ const Header = () => {
             </article>
           </nav>
         </header>
-      )}
+      }
     </>
   );
 };

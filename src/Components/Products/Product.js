@@ -5,7 +5,6 @@ import useFetch from '../../Hooks/useFetch';
 import useMedia from '../../Hooks/useMedia';
 import { PRODUCT_GET } from '../../Api/api';
 import Button from '../Reusable/Button';
-import { GlobalContext } from '../../UserContext';
 import UserProduct from './UserProduct';
 import Comments from './Comments';
 import LikeProduct from './LikeProduct';
@@ -20,7 +19,6 @@ const Product = () => {
   });
   const { request, data: dataProduct } = useFetch();
   const { slug } = useParams();
-  const { userData } = React.useContext(GlobalContext);
   const match = useMedia('(max-width: 830px)');
   const navigate = useNavigate();
 
@@ -61,7 +59,7 @@ const Product = () => {
     setAllImages({ images: changeImages, activeImage: changeImages[+index] });
   };
 
-  if (!dataProduct || !userData || !allImages.activeImage) {
+  if (!dataProduct || !allImages.activeImage) {
     return <ProductSkeleton />;
   }
   const portion = +dataProduct.preco.replace(/\D/g, '') / 12;
@@ -74,7 +72,7 @@ const Product = () => {
       <section className={`${styles['product-container']} container`}>
         <div className={styles['product-content']}>
           <article className={styles['product-infos']}>
-            <LikeProduct slug={slug} userID={userData.usuario_id} />
+            <LikeProduct slug={slug} />
             {!match ? (
               <div className={styles['product-images']}>
                 <figure>
@@ -136,7 +134,6 @@ const Product = () => {
           </article>
 
           <Comments
-            userData={userData}
             allComments={dataProduct.comentarios}
             authorPost={dataProduct.usuario_id}
             slug={slug}

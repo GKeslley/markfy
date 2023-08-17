@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   font: var(--font-pp);
+  gap: 1rem;
 }
 
 .user-content p:not(:last-child),

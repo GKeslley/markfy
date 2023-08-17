@@ -29,7 +29,7 @@ const ProductCategory = ({ setCategory, category, setSubcategory }) => {
             <>
               {subcategories.length ? (
                 <li
-                  key={name}
+                  key={i}
                   className={`${styles.category} ${activeIndex === i ? 'active' : ''} ${
                     styles.arrow
                   }                 

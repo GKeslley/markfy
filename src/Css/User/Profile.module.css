@@ -19,6 +19,11 @@
   font: var(--font-pp);
 }
 
+.profile-att-photo label {
+  color: var(--c-g1);
+  margin: 0;
+}
+
 .profile-att-photo input[type='file'] {
   display: none;
 }
@@ -27,6 +32,21 @@
   display: flex;
   gap: 1rem;
   align-items: start;
+  width: 100%;
+}
+
+.profile-photo-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profile-photo-content label {
+  display: flex;
+  align-self: flex-end;
 }
 
 .profile-form {

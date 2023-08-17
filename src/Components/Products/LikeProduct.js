@@ -7,16 +7,18 @@ import { LIKE_PRODUCT_GET, LIKE_PRODUCT_POST } from '../../Api/api';
 import RequestMessage from '../Reusable/RequestMessage';
 import useUnlikeProduct from '../../Hooks/useUnlikeProduct';
 import Spinner from '../Reusable/Spinner';
+import { useNavigate } from 'react-router-dom';
 
-const LikeProduct = ({ slug, userID }) => {
+const LikeProduct = ({ slug }) => {
+  const { userData } = React.useContext(GlobalContext);
   const [isLiked, setIsLiked] = React.useState(false);
   const [notification, setNotification] = React.useState(false);
   const { getFavoriteProducts } = React.useContext(GlobalContext);
-
   const { request, loading } = useFetch();
   const { unlikeProduct, loading: unlikeLoading } = useUnlikeProduct({
     getFavoriteProducts,
   });
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
 
@@ -32,8 +34,12 @@ const LikeProduct = ({ slug, userID }) => {
   }, [request, slug, token]);
 
   const saveProduct = async () => {
+    if (!userData) {
+      navigate('/login');
+      return null;
+    }
     if (!isLiked) {
-      const body = { slug, usuario_id: userID };
+      const body = { slug, usuario_id: userData.usuario_id };
       const { url, options } = LIKE_PRODUCT_POST({ body, token });
       const { response, json } = await request(url, options);
       console.log(response, json);

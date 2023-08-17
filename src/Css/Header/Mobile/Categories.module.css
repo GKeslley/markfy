@@ -12,7 +12,7 @@
   gap: 1rem;
 }
 
-.item {
+.item a {
   display: flex;
   align-items: center;
   flex-direction: column;

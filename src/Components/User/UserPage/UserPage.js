@@ -7,6 +7,7 @@ import ProductsForSale from '../Account/ProductsForSale';
 import ProductsSold from '../Account/ProductsSold';
 import ProfilePhoto from '../ProfilePhoto';
 import UserPageSkeleton from '../../Skeletons/UserPageSkeleton';
+import Error404 from '../../Helper/Error404';
 
 const UserPage = () => {
   const [user, setUser] = React.useState(null);
@@ -63,6 +64,7 @@ const UserPage = () => {
           <Routes>
             <Route path="/" element={<ProductsForSale username={username} />}></Route>
             <Route path="vendidos" element={<ProductsSold username={username} />}></Route>
+            <Route path="*" element={<Error404 />}></Route>
           </Routes>
         </section>
       )}

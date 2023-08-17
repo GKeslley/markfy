@@ -16,7 +16,7 @@ const UserMenu = ({ username, mobileMatch }) => {
         {username ? (
           <Link to="/conta/perfil" className="user">
             <UserImg />
-            <p>{username}</p>
+            <p>{username.length > 7 ? `${username.slice(0, 7)}...` : username}</p>
           </Link>
         ) : (
           <Link to="/login">Login/Criar</Link>

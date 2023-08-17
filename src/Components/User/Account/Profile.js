@@ -83,20 +83,23 @@ const Profile = ({ userData }) => {
       <div className={styles['profile-att-photo']}>
         <div className={styles['profile-photo']}>
           <ProfilePhoto img={preview.url ? preview.url : userData.foto_perfil} />
-          <p>Carregue Uma Nova Foto</p>
+          <div className={styles['profile-photo-content']}>
+            <div>
+              <p>Carregue uma nova foto</p>
+            </div>
+            <label htmlFor="file" className="button-outline">
+              Selecionar
+            </label>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              accept="image/*"
+              onChange={imagesPreview}
+            />
+          </div>
         </div>
         {preview.open && <ProfileAttPhoto preview={preview} setPreview={setPreview} />}
-
-        <label htmlFor="file" className="button">
-          Selecionar
-        </label>
-        <input
-          type="file"
-          name="file"
-          id="file"
-          accept="image/*"
-          onChange={imagesPreview}
-        />
       </div>
       <form
         className={styles['profile-form']}

@@ -70,6 +70,9 @@
 .products .product-infos .user {
   font: var(--font-pp);
   margin-bottom: 1rem;
+  color: var(--c-b3);
+  margin-top: 0.2rem;
+  max-width: max-content;
 }
 
 .products .product-infos .portion {
@@ -92,5 +95,14 @@
   .sort {
     gap: 0rem;
     flex-direction: column;
+  }
+
+  .products li {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .products .product-infos {
+    width: 100%;
   }
 }

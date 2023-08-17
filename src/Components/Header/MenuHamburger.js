@@ -9,6 +9,7 @@ import { BsBag } from 'react-icons/bs';
 import { RxGear } from 'react-icons/rx';
 import { RxHome } from 'react-icons/rx';
 import Button from '../Reusable/Button';
+import { Link } from 'react-router-dom';
 
 const MenuHamburger = ({ username, mobileMatch }) => {
   const [activeMenu, setActiveMenu] = React.useState(false);
@@ -36,19 +37,25 @@ const MenuHamburger = ({ username, mobileMatch }) => {
         {activeMenu && (
           <div className={styles['menu-content']}>
             <UserMenu username={username} mobileMatch={mobileMatch} />
-            <Categories />
+            <Categories handleOpenMenu={handleOpenMenu} />
             <ul className={styles['nav-links']}>
               <li>
                 <RxHome />
-                <p>Início</p>
+                <Link to="/" onClick={handleOpenMenu}>
+                  Início
+                </Link>
               </li>
               <li>
                 <RxDashboard />
-                <p>Meus Anúncios</p>
+                <Link to="/conta/anuncios" onClick={handleOpenMenu}>
+                  Meus Anúncios
+                </Link>
               </li>
               <li>
                 <AiOutlineTag />
-                <p>Vender</p>
+                <Link to="/conta/produto/categoria" onClick={handleOpenMenu}>
+                  Vender
+                </Link>
               </li>
               <li>
                 <BsBag />
@@ -56,7 +63,9 @@ const MenuHamburger = ({ username, mobileMatch }) => {
               </li>
               <li>
                 <RxGear />
-                <p>Configurações</p>
+                <Link to="/conta/configuracoes" onClick={handleOpenMenu}>
+                  Configurações
+                </Link>
               </li>
             </ul>
           </div>
