@@ -14,6 +14,7 @@ import Transaction from './Components/Products/Transaction';
 import Footer from './Components/Footer';
 import Error404 from './Components/Helper/Error404';
 import ScrollToTop from './Components/Helper/ScrollToTop';
+import ProtectedRoute from './Components/Helper/ProtectedRoute';
 
 const App = () => {
   return (
@@ -25,13 +26,34 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="login/*" element={<Login />}></Route>
-            <Route path="conta/*" element={<User />}></Route>
+            <Route
+              path="conta/*"
+              element={
+                <ProtectedRoute>
+                  <User />
+                </ProtectedRoute>
+              }
+            ></Route>
             <Route path="produto/:categoria/:slug" element={<Product />}></Route>
             <Route path="produtos/:categoria/*" element={<Products />}></Route>
             <Route path="produtos" element={<Products />}></Route>
-            <Route path="favoritos" element={<Favorites />}></Route>
+            <Route
+              path="favoritos"
+              element={
+                <ProtectedRoute>
+                  <Favorites />
+                </ProtectedRoute>
+              }
+            ></Route>
             <Route path="usuario/:user/*" element={<UserPage />}></Route>
-            <Route path="transacao/:slug" element={<Transaction />}></Route>
+            <Route
+              path="transacao/:slug"
+              element={
+                <ProtectedRoute>
+                  <Transaction />
+                </ProtectedRoute>
+              }
+            ></Route>
             <Route path="*" element={<Error404 />}></Route>
           </Routes>
         </main>

@@ -3,9 +3,9 @@ import { Navigate } from 'react-router-dom';
 import { GlobalContext } from '../../UserContext';
 
 const ProtectedRoute = ({ children }) => {
-  const verifyLoginUser = React.useContext(GlobalContext);
+  const { userData } = React.useContext(GlobalContext);
 
-  return verifyLoginUser.userData ? <Navigate to="/" /> : children;
+  return userData ? children : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
