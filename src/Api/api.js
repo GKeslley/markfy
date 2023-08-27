@@ -138,11 +138,10 @@ export const PRODUCTS_GET_BY_CATEGORY = ({
   search,
   total,
 }) => {
-  const categoryPath = category ? `${category}/` : '';
   const subcategoryPath = subcategory ? subcategory + '/' : '';
-  const searchQuery = search && !categoryPath ? `&q=${search}` : '';
+  const searchQuery = search && !category ? `&q=${search}` : '';
 
-  const url = `${API_URL}/api/produtos/${categoryPath}${subcategoryPath}?_page=${actualPage}${searchQuery}&_order=${order}&_total=${total}`;
+  const url = `${API_URL}/api/produtos/${category}/${subcategoryPath}?_page=${actualPage}${searchQuery}&_order=${order}&_total=${total}`;
 
   const options = {
     method: 'GET',
@@ -279,6 +278,19 @@ export const TRANSACTION_POST = ({ body, token, slug }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
+    },
+  };
+};
+
+export const TRANSACTION_GET = ({ page, total, token }) => {
+  return {
+    url: `${API_URL}/api/transacao/?_page=${page}&_total=${total}`,
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      cache: 'no-store',
     },
   };
 };
