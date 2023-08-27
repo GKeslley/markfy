@@ -39,6 +39,7 @@
 .adverts img {
   max-width: 9rem;
   max-height: 9rem;
+  height: 100%;
 }
 
 .advert-row {
@@ -55,11 +56,14 @@
 .advert-infos {
   display: flex;
   gap: 1rem;
-  height: max-content;
+  height: 100%;
+  align-items: center;
 }
 
 .advert-infos picture {
-  max-width: max-content;
+  max-width: 9rem;
+  min-width: 9rem;
+  height: 100%;
 }
 
 .advert-infos p {
@@ -78,6 +82,10 @@
 }
 
 @media (max-width: 830px) {
+  .advert-infos {
+    align-items: start;
+  }
+
   .advert-infos p {
     font: var(--font-p);
   }

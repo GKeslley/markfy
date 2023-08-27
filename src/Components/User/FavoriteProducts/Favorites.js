@@ -23,12 +23,9 @@ const Favorites = () => {
     unlikeProduct(slug);
   };
 
-  if (favoriteProducts === false)
-    return (
-      <div className={`${styles['products-content']}`} style={{ display: 'grid' }}>
-        <ErrorRequest>Você não possui produtos favoritos</ErrorRequest>
-      </div>
-    );
+  if (favoriteProducts === false) {
+    return <ErrorRequest>Você não possui produtos favoritos</ErrorRequest>;
+  }
   if (!favoriteProducts) return <FavoritesSkeleton />;
   return (
     <section className={`${styles['products-content']} container`}>

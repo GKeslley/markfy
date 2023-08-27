@@ -4,7 +4,21 @@
   flex: 1;
 }
 
-.user a svg {
+.user a,
+.user .logout {
+  display: flex;
+  color: var(--c-b2);
+  font: var(--font-p-600);
+  gap: 0.5rem;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  border-left: 4px solid transparent;
+  width: 100%;
+  max-width: 100%;
+}
+
+.user a svg,
+.user .logout svg {
   width: 24px;
   height: 24px;
   fill: var(--c-b2);
@@ -31,7 +45,8 @@
     max-width: 10rem;
   }
 
-  .user a {
+  .user a,
+  .user .logout {
     flex-direction: column;
     border: none;
   }

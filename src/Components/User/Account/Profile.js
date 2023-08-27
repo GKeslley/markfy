@@ -10,12 +10,13 @@ import ProfilePhoto from '../ProfilePhoto';
 import ProfileAttPhoto from './ProfileAttPhoto';
 import ProfileSkeleton from '../../Skeletons/ProfileSkeleton';
 import Button from '../../Reusable/Button';
+import Error from '../../Helper/Error';
 
 const Profile = ({ userData }) => {
   const [userInfos, setUserInfos] = React.useState(null);
-  const [notification, setNotification] = React.useState(null);
+  const [notification, setNotification] = React.useState({ error: false, message: '' });
   const [preview, setPreview] = React.useState({ url: false, open: false });
-  const { request, loading } = useFetch();
+  const { request, loading, error } = useFetch();
   const { formatValue } = useFormatter();
 
   const name = useValidate();
@@ -56,7 +57,7 @@ const Profile = ({ userData }) => {
       const { url, options } = UPDATE_USER({ body: userInfos, token });
       const { response } = await request(url, options);
       if (response.ok) {
-        setNotification('Usuário atualizado com sucesso!');
+        setNotification({ error: false, message: 'Usuário atualizado com sucesso!' });
       }
     }
   };
@@ -77,7 +78,7 @@ const Profile = ({ userData }) => {
   if (!userInfos) return <ProfileSkeleton />;
   return (
     <div className={`${styles.profile} container`}>
-      {notification && (
+      {notification.message && (
         <RequestMessage notification={notification} setNotification={setNotification} />
       )}
       <div className={styles['profile-att-photo']}>
@@ -124,6 +125,7 @@ const Profile = ({ userData }) => {
         ) : (
           <Button type="submit">Atualizar Informações</Button>
         )}
+        {error && <Error>Erro ao realizar a ação, tente novamente</Error>}
       </form>
     </div>
   );

@@ -1,32 +1,37 @@
-.profile-dialog-bg {
-  height: 100vh;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 80;
-  display: grid;
-  justify-content: center;
-  align-items: center;
+.profile-dialog {
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr 1fr;
 }
 
-.profile-dialog {
+.profile-dialog-text {
   display: grid;
-  background: var(--c-w1);
-  padding: 20px;
-  box-shadow: 0 0 0 10px white;
-  position: relative;
-  min-width: 40vw;
-  max-width: 600px;
-  border-radius: 4px;
+  justify-content: right;
+  font: var(--font-p);
+  height: max-content;
+}
+
+.profile-dialog-text div {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-dialog-text div span {
+  cursor: pointer;
+  padding: 0.5rem 0.5rem 0.5rem 0rem;
+}
+
+.profile-dialog-text div svg {
+  width: 15px;
+  height: 15px;
 }
 
 .profile-dialog-photo {
   max-height: 16rem;
-  max-width: 16rem;
+  max-width: max-content;
   justify-self: center;
   position: relative;
+  grid-column: 1/-1;
 }
 
 .profile-dialog-photo picture img {
@@ -51,32 +56,22 @@
 .profile-dialog-full-photo {
   opacity: 0.5;
   height: 100%;
+  object-fit: cover;
+  min-height: 8rem;
 }
 
-.profile-dialog-text {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-}
+@media (max-width: 400px) {
+  .profile-dialog {
+    grid-template-columns: 1fr;
+  }
 
-.profile-dialog-text {
-  font-weight: 500;
-  font: var(--font-p);
-}
+  .profile-dialog-text {
+    grid-row: 3;
+    margin-top: 1rem;
+    justify-content: center;
+  }
 
-.profile-dialog-text div {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.profile-dialog-text div span {
-  cursor: pointer;
-  padding: 0.5rem 0.5rem 0.5rem 0rem;
-}
-
-.profile-dialog-text div svg {
-  width: 15px;
-  height: 15px;
+  .profile-dialog button {
+    padding: 0.5rem 3rem;
+  }
 }

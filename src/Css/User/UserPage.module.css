@@ -73,6 +73,7 @@
 
 .links li a {
   position: relative;
+  z-index: 1;
 }
 
 .links li a:global(.active)::after {

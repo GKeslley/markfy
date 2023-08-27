@@ -7,16 +7,19 @@ import usePagination from '../../../Hooks/usePagination';
 import Pagination from '../../Reusable/Pagination';
 import ProductsForSaleSkeleton from '../../Skeletons/ProductsForSaleSkeleton';
 import Image from '../../Helper/Image';
+import ErrorRequest from '../../Helper/ErrorRequest';
 
 const ProductsForSale = ({ username }) => {
-  const { request, data } = useFetch();
-  const { actualPage, setTotalItems, totalItems, maxPage } = usePagination(20);
+  const maxTotalProducts = 20;
+  const { request, data, loading, error } = useFetch();
+  const { actualPage, setTotalItems, totalItems, maxPage } =
+    usePagination(maxTotalProducts);
 
   React.useEffect(() => {
     const getProducts = async () => {
       const { url, options } = PRODUCTS_GET({
         page: actualPage,
-        total: '20',
+        total: maxTotalProducts,
         user: username,
       });
       const { response } = await request(url, options);
@@ -27,7 +30,9 @@ const ProductsForSale = ({ username }) => {
     getProducts();
   }, [request, username, actualPage, setTotalItems]);
 
-  if (!data) return <ProductsForSaleSkeleton />;
+  if (loading) return <ProductsForSaleSkeleton />;
+  if (error) return <ErrorRequest>{error}</ErrorRequest>;
+  if (!data) return null;
   return (
     <>
       <div className={styles.product}>

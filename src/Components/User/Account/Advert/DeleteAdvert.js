@@ -2,33 +2,29 @@ import React from 'react';
 import { FaTrash } from 'react-icons/fa';
 import useFetch from '../../../../Hooks/useFetch';
 import { PRODUCT_DELETE } from '../../../../Api/api';
-import Spinner from '../../../Reusable/Spinner';
 
-const DeleteAdvert = ({ slug, index: indexElement, getProducts }) => {
-  const [index, setIndex] = React.useState(null);
-  const { request, loading } = useFetch();
+const DeleteAdvert = ({ slug, setDeleteIndex, setNotification }) => {
+  const { request, error } = useFetch();
 
   const deletePost = async () => {
-    setIndex(indexElement);
-    const token = localStorage.getItem('token');
-    const { url, options } = PRODUCT_DELETE({ slug, token });
-    const { response, json } = await request(url, options);
-    if (response.ok) {
-      getProducts();
+    if (window.confirm('Você realmente deseja deletar o anúncio?')) {
+      setDeleteIndex();
+      const token = localStorage.getItem('token');
+      const { url, options } = PRODUCT_DELETE({ slug, token });
+      const { response } = await request(url, options);
+      if (response.ok) {
+        setNotification({ error: false, message: 'Anúncio deletado com sucesso' });
+        return null;
+      }
+      setNotification({ error: true, message: error });
     }
-    console.log(response);
-    console.log(json);
   };
 
   return (
     <>
-      {loading && index === indexElement ? (
-        <Spinner width="8px" />
-      ) : (
-        <picture onClick={deletePost}>
-          <FaTrash fill="#e54" />
-        </picture>
-      )}
+      <picture onClick={deletePost} style={{ cursor: 'pointer' }} title="Deletar">
+        <FaTrash fill="#e54" />
+      </picture>
     </>
   );
 };

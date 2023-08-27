@@ -9,6 +9,7 @@ import Button from '../../Reusable/Button';
 import { POST_USER_ADDRESS } from '../../../Api/api';
 import useFetch from '../../../Hooks/useFetch';
 import AddressSkeleton from '../../Skeletons/AddressSkeleton';
+import Error from '../../Helper/Error';
 
 const formFields = {
   cep: '',
@@ -36,7 +37,7 @@ const Address = ({ userData }) => {
   const [dataAddress, setDataAddress] = React.useState(formFields);
   const [states, setStates] = React.useState([]);
   const { formatValue } = useFormatter();
-  const { request, loading } = useFetch();
+  const { request, loading, error } = useFetch();
 
   const cep = useValidate('cep');
   const address = useValidate();
@@ -180,6 +181,7 @@ const Address = ({ userData }) => {
         ) : (
           <Button>Atualizar Endereço</Button>
         )}
+        {error && <Error>{error}</Error>}
       </form>
     </div>
   );

@@ -10,11 +10,13 @@ import DeleteAdvert from './Advert/DeleteAdvert';
 import { Link } from 'react-router-dom';
 import AdvertsSkeleton from '../../Skeletons/AdvertsSkeleton';
 import ErrorRequest from '../../Helper/ErrorRequest';
+import RequestMessage from '../../Reusable/RequestMessage';
 
 const Adverts = ({ userData }) => {
   const [value, setValue] = React.useState('venda');
-  const [products, setProducts] = React.useState(null);
-  const { request, loading } = useFetch();
+  const [deleteIndex, setDeleteIndex] = React.useState(null);
+  const [notification, setNotification] = React.useState({ error: false, message: '' });
+  const { request, data, loading, error } = useFetch();
   const { actualPage, maxPage, setTotalItems } = usePagination(20);
 
   const handleClick = ({ target }) => {
@@ -23,10 +25,9 @@ const Adverts = ({ userData }) => {
 
   const requestProduct = React.useCallback(
     async (url, options) => {
-      const { response, json } = await request(url, options);
+      const { response } = await request(url, options);
       const total = response.headers.get('x-total-count');
       setTotalItems(total);
-      setProducts(json);
     },
     [request, setTotalItems],
   );
@@ -65,32 +66,35 @@ const Adverts = ({ userData }) => {
           <p>Produto</p>
           <p>Deletar</p>
         </div>
-        {products ? (
-          products.map(({ id, fotos, nome, preco, categoria, slug }, i) => (
-            <li key={id} className={styles.adverts}>
-              <Link
-                to={`/produto/${categoria}/${slug}`}
-                className={styles['advert-infos']}
-              >
-                <picture>
-                  <Image alt={fotos[0].alt} src={fotos[0].src} />
-                </picture>
-                <div>
-                  <p>{nome}</p>
-                  <span>R$ {preco}</span>
-                </div>
-              </Link>
-              <DeleteAdvert
-                slug={slug}
-                index={i}
-                getProducts={() => getProducts(userData.usuario_id)}
-              />
-            </li>
-          ))
-        ) : (
-          <ErrorRequest>{`Você não possui produtos ${
-            value === 'vendido' ? 'VENDIDOS' : 'A VENDA'
-          }`}</ErrorRequest>
+        {data &&
+          data.map(({ id, fotos, nome, preco, categoria, slug }, i) => (
+            <>
+              {deleteIndex !== i && (
+                <li key={id} className={styles.adverts}>
+                  <Link
+                    to={`/produto/${categoria}/${slug}`}
+                    className={styles['advert-infos']}
+                  >
+                    <picture>
+                      <Image alt={fotos[0].alt} src={fotos[0].src} />
+                    </picture>
+                    <div>
+                      <p>{nome}</p>
+                      <span>R$ {preco}</span>
+                    </div>
+                  </Link>
+                  <DeleteAdvert
+                    slug={slug}
+                    setDeleteIndex={() => setDeleteIndex(i)}
+                    setNotification={setNotification}
+                  />
+                </li>
+              )}
+            </>
+          ))}
+        {error && <ErrorRequest>{error}</ErrorRequest>}
+        {notification.message && (
+          <RequestMessage notification={notification} setNotification={setNotification} />
         )}
         <Pagination maxPage={maxPage} actualPage={actualPage} />
       </ul>

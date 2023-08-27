@@ -1,6 +1,8 @@
 .product-content {
   padding-top: var(--padding-top-page);
   padding-bottom: var(--padding-bottom-page);
+  width: 100%;
+  flex: 1;
 }
 
 .product-content h1 {
@@ -27,12 +29,16 @@
 .product-form {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  max-width: 30rem;
-  min-width: 30rem;
 }
 
-.product-form input {
+.product-form label:not(:first-child),
+.imgs-content,
+.product-form input[type='file'] {
+  margin-top: 1.3rem;
+}
+
+.product-form input:disabled,
+.product-form input[type='file'] {
   padding: 0.3rem 0.4rem;
   font: var(--font-p);
 }
@@ -49,19 +55,19 @@
 }
 
 .imgs-content {
-  max-width: 30rem;
-  width: 100%;
   display: flex;
-  flex: 1;
   flex-wrap: wrap;
+  flex: 1;
   justify-content: space-between;
   text-align: center;
   align-items: center;
-  border: 2px dashed #a5a5a5;
+  border: 2px dashed var(--c-b3);
+  width: 100%;
   max-height: 7rem;
   min-height: 7rem;
   overflow-y: auto;
   position: relative;
+  margin-bottom: 1.3rem;
 }
 
 .imgs-content span {
@@ -80,4 +86,12 @@
 
 .imgs-content img {
   max-height: 5rem;
+}
+
+@media (max-width: 320px) {
+  .product-form input:disabled,
+  .product-form input[type='file'] {
+    padding: 0.3rem 0.4rem;
+    font: var(--font-pp);
+  }
 }
