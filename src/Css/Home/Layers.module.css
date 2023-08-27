@@ -1,0 +1,52 @@
+.layer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  flex: 1;
+  margin-top: 2rem;
+  background: var(--c-w1);
+  box-shadow: var(--box-shadow-pattern);
+  padding: 2rem 1rem;
+  align-items: center;
+}
+
+.layer li {
+  display: flex;
+  flex: 1;
+  gap: 2rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.layer div {
+  display: flex;
+  gap: 0.5rem;
+  flex-grow: 1;
+  max-width: max-content;
+  align-items: center;
+  min-width: 10rem;
+  min-width: 13rem;
+  width: 13rem;
+}
+
+.layer li div svg {
+  width: 3rem;
+  height: 3rem;
+  fill: var(--c-b3);
+}
+
+.layer li div p {
+  font: var(--font-p-500);
+}
+
+@media (max-width: 830px) {
+  .layer li div {
+    flex-direction: column;
+  }
+
+  .layer li div svg {
+    width: 3rem;
+    height: 3rem;
+  }
+}

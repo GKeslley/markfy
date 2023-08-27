@@ -1,4 +1,12 @@
 .home {
-  padding-top: var(--padding-top-page);
   padding-bottom: var(--padding-bottom-page);
+}
+
+.img {
+  display: block;
+  background: url('../../Assets/moda.jpg') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 15rem;
+  border-radius: 6px;
 }

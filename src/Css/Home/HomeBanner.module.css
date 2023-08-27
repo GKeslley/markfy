@@ -1,0 +1,53 @@
+.banners {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  padding-top: 4rem;
+}
+
+.banners li {
+  padding: 5rem 5rem 5rem 2rem;
+  border-radius: 4px;
+}
+
+.banners li p,
+.banners li span {
+  color: var(--c-w1);
+}
+
+.banners li p {
+  font: var(--font-m-500);
+}
+
+.banners li span {
+  font: var(--font-pl);
+}
+
+.banners li:first-child {
+  background: url('../../Assets/phone.png') no-repeat center center;
+  background-size: cover;
+}
+
+.banners li:last-child {
+  background: url('../../Assets/basket2.png') no-repeat center center;
+  background-size: cover;
+}
+
+@media (max-width: 31.25rem) {
+  .banners {
+    grid-template-columns: 1fr;
+  }
+  .banners li {
+    padding: 2rem;
+  }
+
+  .banners li p {
+    font: var(--font-ll-500);
+    word-wrap: break-word;
+  }
+
+  .banners li span {
+    font: var(--font-p);
+  }
+}
