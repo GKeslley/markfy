@@ -24,6 +24,10 @@
   fill: var(--c-w1);
 }
 
+.error {
+  background: var(--c-b3);
+}
+
 @keyframes animation {
   from {
     transform: translateY(20px);

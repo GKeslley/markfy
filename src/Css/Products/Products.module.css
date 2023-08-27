@@ -1,5 +1,6 @@
 .products-bg {
   display: grid;
+  grid-template-rows: auto 1fr;
   padding-top: var(--padding-top-page);
   padding-bottom: var(--padding-bottom-page);
   flex: 1;

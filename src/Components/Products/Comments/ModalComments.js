@@ -1,7 +1,7 @@
 import React from 'react';
 import useFetch from '../../../Hooks/useFetch';
 import { COMMENTS_GET } from '../../../Api/api';
-import AllComments from './AllComments';
+import Comments from './Comments';
 import Skeleton from 'react-loading-skeleton';
 
 const ModalComments = ({
@@ -13,14 +13,13 @@ const ModalComments = ({
   allReplies,
   setAllReplies,
 }) => {
-  const { request, data } = useFetch();
+  const { request, data, loading } = useFetch();
 
   React.useEffect(() => {
     const getComments = async () => {
       const total = 5;
       const { url, options } = COMMENTS_GET({ page, total, slug });
       const { response, json } = await request(url, options);
-      console.log(json);
       if (response && response.ok && json.length < total) {
         setInfinite(false);
       }
@@ -34,9 +33,10 @@ const ModalComments = ({
       .map((e, i) => <Skeleton key={i} />);
   };
 
-  if (!data) return skeletonComments();
+  if (loading) return skeletonComments();
+  if (!data) return null;
   return (
-    <AllComments
+    <Comments
       allComments={data}
       slug={slug}
       userData={userData}

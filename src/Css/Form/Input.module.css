@@ -5,14 +5,24 @@
   outline: none;
   width: 100%;
   transition: 0.1s;
-  font-size: 1rem;
+  font: var(--font-p);
+  position: relative;
 }
 
 .input:focus {
   outline: none;
-  box-shadow: 0 0 0 1px #0e9162, 0 0 0 2px #1aeea4;
+  box-shadow: 0 0 0 1px var(--c-g1), 0 0 0 2px var(--c-g2);
 }
 
 .input:hover {
   border-color: var(--c-g1);
+}
+
+.maxSize {
+  position: absolute;
+  right: 1rem;
+  top: 0.6rem;
+  font: var(--font-pp);
+  color: var(--c-b3);
+  z-index: 1;
 }

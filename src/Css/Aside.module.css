@@ -11,18 +11,6 @@
   text-align: start;
 }
 
-.aside a {
-  display: flex;
-  color: var(--c-b2);
-  font: var(--font-p-600);
-  gap: 0.5rem;
-  align-items: center;
-  padding: 1rem 0.5rem;
-  border-left: 4px solid transparent;
-  width: 100%;
-  max-width: 100%;
-}
-
 .aside a:global(.active) {
   background: var(--c-w2);
   animation: animation 0.5s forwards;

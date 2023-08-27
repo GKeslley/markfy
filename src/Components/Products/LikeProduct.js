@@ -12,10 +12,14 @@ import { useNavigate } from 'react-router-dom';
 const LikeProduct = ({ slug }) => {
   const { userData } = React.useContext(GlobalContext);
   const [isLiked, setIsLiked] = React.useState(false);
-  const [notification, setNotification] = React.useState(false);
+  const [notification, setNotification] = React.useState({ error: false, message: '' });
   const { getFavoriteProducts } = React.useContext(GlobalContext);
   const { request, loading } = useFetch();
-  const { unlikeProduct, loading: unlikeLoading } = useUnlikeProduct({
+  const {
+    unlikeProduct,
+    loading: unlikeLoading,
+    error,
+  } = useUnlikeProduct({
     getFavoriteProducts,
   });
   const navigate = useNavigate();
@@ -41,23 +45,25 @@ const LikeProduct = ({ slug }) => {
     if (!isLiked) {
       const body = { slug, usuario_id: userData.usuario_id };
       const { url, options } = LIKE_PRODUCT_POST({ body, token });
-      const { response, json } = await request(url, options);
-      console.log(response, json);
+      const { response } = await request(url, options);
       if (response.ok) {
         getFavoriteProducts();
         setIsLiked(true);
-        setNotification('Produto favoritado com sucesso');
+        setNotification({ error: false, message: 'Produto favoritado com sucesso' });
       }
       return null;
     }
     await unlikeProduct(slug);
     setIsLiked(false);
-    setNotification('Produto desfavoritado com sucesso');
+    setNotification({ error: false, message: 'Produto desfavoritado com sucesso' });
   };
 
+  if (error && !notification.error) {
+    setNotification({ error: true, message: 'Erro ao realizar a ação, tente novamente' });
+  }
   return (
     <>
-      {notification && (
+      {notification.message && (
         <RequestMessage notification={notification} setNotification={setNotification} />
       )}
       <picture

@@ -3,9 +3,10 @@ import styles from '../../Css/Products/UserProduct.module.css';
 import useFetch from '../../Hooks/useFetch';
 import { USER_OTHER_GET } from '../../Api/api';
 import { Link } from 'react-router-dom';
+import Error from '../Helper/Error';
 
 const UserProduct = ({ keyUser }) => {
-  const { request, data } = useFetch();
+  const { request, data, error } = useFetch();
 
   React.useEffect(() => {
     const getUserInfos = async () => {
@@ -38,12 +39,12 @@ const UserProduct = ({ keyUser }) => {
     }
   };
 
+  if (error) return <Error>Usuário não encontrado</Error>;
   if (!data) return null;
-  const dateRegistered = data.data_registro.split(' ')[0].split('-');
 
+  const dateRegistered = data.data_registro.split(' ')[0].split('-');
   const month = getMonthName(+dateRegistered[1]).slice(0, 3);
   const year = dateRegistered[0];
-
   return (
     <>
       <ul className={styles['user-content']}>

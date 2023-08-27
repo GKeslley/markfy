@@ -10,8 +10,8 @@ import { GlobalContext } from '../../UserContext';
 const LoginForm = () => {
   const email = useValidate('email');
   const password = useValidate('password');
-  const globalContext = React.useContext(GlobalContext);
-  const { userLogin, loading, error } = globalContext;
+  const { userLogin, loading, error } = React.useContext(GlobalContext);
+  let modifyError = null;
 
   const sendValuesLogin = async (event) => {
     event.preventDefault();
@@ -19,6 +19,10 @@ const LoginForm = () => {
       userLogin(email.value, password.value);
     }
   };
+
+  if (error && error.includes('Perdeu a senha?')) {
+    modifyError = 'A senha fornecida para o email está incorreta.';
+  }
 
   return (
     <div className="animeLeft">
@@ -32,7 +36,7 @@ const LoginForm = () => {
           <Button>Entrar</Button>
         )}
       </form>
-      {error && <Error>{error}</Error>}
+      {error && <Error>{!modifyError ? error : modifyError}</Error>}
       <Link className={styles['lost-password']} to="/esqueceu">
         Perdeu a Senha?
       </Link>

@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useFetch from '../../Hooks/useFetch';
 import Button from '../Reusable/Button';
 import { TRANSACTION_POST } from '../../Api/api';
 import styles from '../../Css/Products/Transaction.module.css';
+import Error from '../Helper/Error';
 
 const TransactionPayment = ({ dataTransaction, slug, userData, dataProduct, inputs }) => {
-  const { request, loading } = useFetch();
+  const { request, loading, error } = useFetch();
+  const navigate = useNavigate()
 
   const confirmPayment = async (event) => {
     event.preventDefault();
@@ -14,8 +16,11 @@ const TransactionPayment = ({ dataTransaction, slug, userData, dataProduct, inpu
     if (validInputs.length === inputs.length) {
       const token = localStorage.getItem('token');
       const { url, options } = TRANSACTION_POST({ body: dataTransaction, token, slug });
-      const { json } = await request(url, options);
-      console.log(json);
+      const { response } = await request(url, options);
+      if (response.ok) {
+        alert("Compra feita com sucesso")
+        navigate('/usuario/compras')
+      }
     }
   };
 
@@ -48,6 +53,7 @@ const TransactionPayment = ({ dataTransaction, slug, userData, dataProduct, inpu
         ) : (
           <Button onClick={confirmPayment}>Fazer Pedido</Button>
         )}
+        {error && <Error>Erro ao realizar transação</Error>}
       </ul>
     </>
   );

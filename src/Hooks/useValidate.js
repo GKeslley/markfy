@@ -52,7 +52,7 @@ const useValidate = (type) => {
       const format = currencyBRL(+formatNumber);
       target.value = 'R$ ' + format;
     }
-    setValue(formatValue({ format: type, value: target.value }));
+    setValue(formatValue({ format: type, value: target.value.trimStart() }));
     if (error) {
       validate(value);
     }
@@ -75,6 +75,7 @@ const useValidate = (type) => {
     value,
     onChange,
     error,
+    setError,
     setValue,
     validate: () => validate(value),
     onBlur: () => validate(value),

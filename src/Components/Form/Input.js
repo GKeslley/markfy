@@ -16,6 +16,7 @@ const Input = ({
   inputMode,
   maxLength,
   required,
+  maxSize,
 }) => {
   return (
     <>
@@ -25,19 +26,39 @@ const Input = ({
           {required && <RequiredInput />}
         </label>
       )}
-      <input
-        type={type}
-        name={name}
-        id={name}
-        className={className}
-        placeholder={placeholder}
-        onChange={onChange}
-        onBlur={onBlur}
-        value={value}
-        inputMode={inputMode}
-        maxLength={maxLength}
-        required={required}
-      />
+      {maxSize ? (
+        <div style={{ position: 'relative' }}>
+          <span className={styles.maxSize}>{maxSize}</span>
+          <input
+            type={type}
+            name={name}
+            id={name}
+            className={className}
+            placeholder={placeholder}
+            onChange={onChange}
+            onBlur={onBlur}
+            value={value}
+            inputMode={inputMode}
+            maxLength={maxLength}
+            required={required}
+          />
+        </div>
+      ) : (
+        <input
+          type={type}
+          name={name}
+          id={name}
+          className={className}
+          placeholder={placeholder}
+          onChange={onChange}
+          onBlur={onBlur}
+          value={value}
+          inputMode={inputMode}
+          maxLength={maxLength}
+          required={required}
+        />
+      )}
+
       {error && <Error>{error}</Error>}
     </>
   );

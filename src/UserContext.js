@@ -11,7 +11,6 @@ export const UserContext = ({ children }) => {
   const { request, loading, error } = useFetch();
   const navigate = useNavigate();
 
-  console.log(userData);
   const userLogin = async (email, password) => {
     const { url, options } = LOGIN_USER_POST({
       username: email,
@@ -80,6 +79,7 @@ export const UserContext = ({ children }) => {
       value={{
         userLogin,
         userData,
+        userLogout,
         favoriteProducts,
         getFavoriteProducts,
         loading,

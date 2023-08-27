@@ -9,11 +9,12 @@ import { allCategories } from '../User/PostProducts/CategoryPage/allCategories';
 import Pagination from '../Reusable/Pagination';
 import Image from '../Helper/Image';
 import ProductsSkeleton from '../Skeletons/ProductsSkeleton';
+import ErrorRequest from '../Helper/ErrorRequest';
 
 const categories = allCategories();
 
 const Products = () => {
-  const { request, data } = useFetch();
+  const { request, loading, data, error } = useFetch();
   const { actualPage, setTotalItems, totalItems, maxPage, order, setOrder } =
     usePagination(9);
 
@@ -45,6 +46,7 @@ const Products = () => {
         actualPage,
         order: order.order,
         search: searchParam,
+        total: '9',
       });
       const { response } = await request(url, options);
       const total = response.headers.get('x-total-count');
@@ -74,7 +76,10 @@ const Products = () => {
     { value: 'DESC', name: 'Maior preço' },
   ];
 
-  if (!data && !maxPage > 0) return <ProductsSkeleton />;
+  console.log(data);
+  if (!category || error) return <ErrorRequest>PRODUTOS NÃO ENCONTRADOS</ErrorRequest>;
+  if (loading) return <ProductsSkeleton />;
+  if (!data) return null;
   return (
     <section className={`${styles['products-bg']} container`}>
       <ul className={styles.filter}>
@@ -106,7 +111,9 @@ const Products = () => {
                   <Image alt={fotos[0].titulo} src={fotos[0].src} />
                 </picture>
                 <div className={styles['product-infos']}>
-                  <Link to={`/produto/${categoria}/${slug}`}>{nome}</Link>
+                  <Link to={`/produto/${categoria}/${slug}`}>
+                    {nome.length > 60 ? `${nome.slice(0, 60)}...` : nome}
+                  </Link>
 
                   <Link
                     className={styles.user}

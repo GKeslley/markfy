@@ -6,18 +6,19 @@ import useMedia from '../../Hooks/useMedia';
 import { PRODUCT_GET } from '../../Api/api';
 import Button from '../Reusable/Button';
 import UserProduct from './UserProduct';
-import Comments from './Comments';
+import ProductComments from './ProductComments';
 import LikeProduct from './LikeProduct';
 import CarouselImages from './Mobile/CarouselImages';
 import ProductSkeleton from '../Skeletons/ProductSkeleton';
 import Image from '../Helper/Image';
+import ErrorRequest from '../Helper/ErrorRequest';
 
 const Product = () => {
   const [allImages, setAllImages] = React.useState({
     images: [],
     activeImage: null,
   });
-  const { request, data: dataProduct } = useFetch();
+  const { request, data: dataProduct, loading, error } = useFetch();
   const { slug } = useParams();
   const match = useMedia('(max-width: 830px)');
   const navigate = useNavigate();
@@ -59,9 +60,12 @@ const Product = () => {
     setAllImages({ images: changeImages, activeImage: changeImages[+index] });
   };
 
-  if (!dataProduct || !allImages.activeImage) {
-    return <ProductSkeleton />;
-  }
+  console.log(dataProduct);
+
+  if (loading) return <ProductSkeleton />;
+  if (error) return <ErrorRequest>{error}</ErrorRequest>;
+  if (!dataProduct || !allImages.activeImage) return null;
+
   const portion = +dataProduct.preco.replace(/\D/g, '') / 12;
   const portionPrice = Number.isInteger(portion)
     ? portion
@@ -78,6 +82,7 @@ const Product = () => {
                 <figure>
                   <Image
                     alt={allImages.activeImage.titulo}
+                    style={{ display: 'block' }}
                     src={allImages.activeImage.src}
                     data-index={allImages.activeImage.index}
                     width={250}
@@ -133,7 +138,7 @@ const Product = () => {
             <p>{dataProduct.descricao}</p>
           </article>
 
-          <Comments
+          <ProductComments
             allComments={dataProduct.comentarios}
             authorPost={dataProduct.usuario_id}
             slug={slug}

@@ -34,6 +34,15 @@ img {
   max-width: 100%;
 }
 
+label,
+a {
+  max-width: max-content;
+}
+
+textarea {
+  resize: vertical;
+}
+
 @keyframes animeLeft {
   from {
     transform: translateX(-60px);

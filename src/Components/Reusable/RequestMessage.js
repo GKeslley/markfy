@@ -8,7 +8,7 @@ const RequestMessage = ({ notification, setNotification }) => {
   const handleClick = () => {
     clearTimeout(time.current);
     time.current = setTimeout(() => {
-      setNotification(null);
+      setNotification({ error: false, message: '' });
     }, 3000);
   };
   handleClick();
@@ -16,8 +16,10 @@ const RequestMessage = ({ notification, setNotification }) => {
   return (
     <>
       {
-        <div className={styles.notification}>
-          <p>{notification}</p>
+        <div
+          className={`${styles.notification} ${notification.error ? styles.error : ''}`}
+        >
+          <p>{notification.message}</p>
           <BsFillBagCheckFill />
         </div>
       }

@@ -90,3 +90,9 @@
 .skeleton-right {
   justify-self: right;
 }
+
+@media (max-width: 500px) {
+  .skeleton-text-gg {
+    min-width: 15rem;
+  }
+}

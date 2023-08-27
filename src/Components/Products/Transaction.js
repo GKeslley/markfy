@@ -9,12 +9,13 @@ import styles from '../../Css/Products/Transaction.module.css';
 import { FaCreditCard } from 'react-icons/fa';
 import TransactionPayment from './TransactionPayment';
 import TransactionSkeleton from '../Skeletons/TransactionSkeleton';
+import ErrorRequest from '../Helper/ErrorRequest';
 
 const Transaction = () => {
   const { userData } = React.useContext(GlobalContext);
   const [dataTransaction, setDataTransaction] = React.useState(null);
   const { slug } = useParams();
-  const { request, data } = useFetch();
+  const { request, data, loading, error } = useFetch();
 
   const cardName = useValidate(true);
   const cardNumber = useValidate('card');
@@ -40,7 +41,9 @@ const Transaction = () => {
     productExist();
   }, [request, slug, userData]);
 
-  if (!data) return <TransactionSkeleton />;
+  if (loading) return <TransactionSkeleton />;
+  if (error) return <ErrorRequest>ERRO DE TRANSAÇÃO</ErrorRequest>;
+  if (!data) return null;
   return (
     <section className={`container ${styles['transaction-container']}`}>
       <div className={styles['form-content']}>
