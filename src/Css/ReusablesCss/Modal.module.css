@@ -1,0 +1,38 @@
+.modal-bg {
+  height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 80;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.modal {
+  display: grid;
+  background: var(--c-w1);
+  padding: 20px;
+  box-shadow: 0 0 0 10px var(--c-w1);
+  position: relative;
+  min-width: 40vw;
+  max-width: 600px;
+  border-radius: 4px;
+}
+
+.title {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  white-space: nowrap;
+}
+
+.title span {
+  display: block;
+  padding: 0.5rem;
+  cursor: pointer;
+}
